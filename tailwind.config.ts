@@ -55,6 +55,56 @@ const config: Config = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			},
+  			float: {
+  				'0%, 100%': { transform: 'translateY(0) translateX(0)' },
+  				'25%': { transform: 'translateY(-20px) translateX(10px)' },
+  				'50%': { transform: 'translateY(0) translateX(20px)' },
+  				'75%': { transform: 'translateY(20px) translateX(10px)' },
+  			},
+  			'drive-across': {
+  				'0%': { transform: 'translateX(0)' },
+  				'100%': { transform: 'translateX(1200px)' }
+  			},
+  			'float-box': {
+  				'0%, 100%': { transform: 'translateY(0) rotate(45deg)' },
+  				'50%': { transform: 'translateY(-20px) rotate(45deg)' }
+  			},
+  			'dash': {
+  				'0%': { strokeDashoffset: '0px' },
+  				'100%': { strokeDashoffset: '100px' }
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'spin-slow': 'spin 20s linear infinite',
+  			'spin-slower': 'spin 30s linear infinite',
+  			'float-slow': 'float 15s ease-in-out infinite',
+  			'float-slow-delay': 'float 15s ease-in-out infinite 2s',
+  			'drive-across': 'drive-across 15s linear infinite',
+  			'drive-across-reverse': 'drive-across 15s linear infinite -7s',
+  			'float-box': 'float-box 4s ease-in-out infinite',
+  			'float-box-delay': 'float-box 4s ease-in-out infinite -2s',
+  			'dash': 'dash 20s linear infinite',
+  			'dash-reverse': 'dash 20s linear infinite reverse',
   		}
   	}
   },
