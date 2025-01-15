@@ -1,25 +1,20 @@
 "use client";
 
 import React, { createContext, useEffect, useState } from "react";
-import { signInWithPopup, GoogleAuthProvider, signOut as firebaseSignOut } from "firebase/auth";
-import { User } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { User, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "../firebase/firebase";
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  loading: true,
-  signInWithGoogle: async () => {},
-  signOut: async () => {},
-});
+export const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -29,31 +24,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
   const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      await firebaseSignInWithGoogle();
     } catch (error) {
-      console.error("Error signing in with Google", error);
+      console.error('Error signing in with Google:', error);
+      throw error;
     }
   };
 
-  const signOutUser = async () => {
+  const signIn = async (email: string, password: string) => {
     try {
-      await firebaseSignOut(auth);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.error("Error signing out", error);
+      console.error('Error signing in:', error);
+      throw error;
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      await auth.signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+      throw error;
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signOut: signOutUser }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
-}
-
-export { AuthContext };
+};

@@ -15,11 +15,11 @@ interface LoginDialogProps {
 
 export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
   const router = useRouter()
-  const { signIn } = useAuth()
+  const { signIn: signInWithEmail } = useAuth()
   
   const handleLogin = async (email: string, password: string) => {
     try {
-      await signIn(email, password)
+      await signInWithEmail(email, password)
       onOpenChange(false)
     } catch (error) {
       throw error
