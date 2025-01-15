@@ -4,6 +4,7 @@ import { Globe2, Truck, BarChart3, DollarSign } from 'lucide-react'
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import AnimatedBackground from "@/components/ui/animated-background"
 import { ScrollRevealStat } from "@/components/ui/scroll-reveal-stat"
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -21,56 +22,98 @@ export default function Home() {
             />
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-[#131F42] font-light rounded-[4px]">
+            <Button variant="ghost" className="text-[#131F42] font-light">
               Iniciar Sesión
             </Button>
-            <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[4px]">
-              Solicitar Demo
-            </Button>
+            <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
+                Solicitar Demo
+              </Button>
+            </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 min-h-[800px]">
-        {/* Background Rectangle with Decorative Elements */}
-        <div className="absolute top-24 left-0 right-0 bottom-0 mx-auto w-[95%]">
-          {/* Base Rectangle - Bottom Layer */}
-          <div className="absolute inset-0 bg-[#F1F6F9] rounded-[2.5rem] z-0" />
+      <section className="relative pt-32 pb-20 min-h-[90vh] flex items-center overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated gradient blobs */}
+          <div className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-100/40 to-purple-100/40 rounded-full blur-3xl 
+            -top-40 -right-40 animate-pulse-slow" />
+          <div className="absolute w-[600px] h-[600px] bg-gradient-to-r from-purple-100/40 to-blue-100/40 rounded-full blur-3xl 
+            -bottom-20 -left-20 animate-pulse-slow [animation-delay:1s]" />
           
-          {/* Dotted Pattern - Middle Layer */}
-          <div className="absolute inset-0 z-[1]">
-            <svg className="w-full h-full">
-              <pattern 
-                id="dotPattern" 
-                x="0" 
-                y="0" 
-                width="20" 
-                height="20" 
-                patternUnits="userSpaceOnUse"
-              >
-                <circle cx="2" cy="2" r="1" fill="#CBD5E1" fillOpacity="0.3" />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#dotPattern)" />
-            </svg>
-          </div>
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/80" />
         </div>
-        
-        {/* Content - Top Layer */}
-        <div className="relative container mx-auto max-w-4xl px-4 z-[2]">
-          <div className="flex flex-col items-center text-center pt-12">
-            <h1 className="text-3xl md:text-[4rem] font-normal text-[#131F42] leading-[1.15] mb-8 tracking-tight">
-              <span className="font-light">¡Vende tus productos</span><br />
-              <span className="font-medium">en Estados Unidos</span><br />
-              <span className="font-light">sin complicaciones!</span>
+
+        {/* Content */}
+        <div className="relative container mx-auto max-w-6xl px-4 z-[2]">
+          <div className="flex flex-col items-center text-center">
+            {/* Pre-title badge */}
+            <div className="mb-8 opacity-0 animate-fade-in-up [animation-delay:200ms]">
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r 
+                from-blue-50 to-purple-50 text-blue-600 border border-blue-100/50 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse mr-2" />
+                Expande tu negocio globalmente
+              </span>
+            </div>
+
+            {/* Main Title - with enhanced animations */}
+            <h1 className="flex flex-col gap-2 text-4xl md:text-[5rem] font-normal leading-[1.1] mb-8 tracking-tight">
+              <span className="text-[#131F42] font-light opacity-0 animate-fade-in-up [animation-delay:400ms]">
+                ¡Vende tus productos
+              </span>
+              <span className="relative font-medium opacity-0 animate-fade-in-up [animation-delay:600ms]">
+                <span className="absolute -inset-1 bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-lg" />
+                <span className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+                  en Estados Unidos
+                </span>
+              </span>
+              <span className="text-[#131F42] font-light opacity-0 animate-fade-in-up [animation-delay:800ms]">
+                sin complicaciones!
+              </span>
             </h1>
-            <p className="text-base md:text-lg font-light text-gray-600 mb-20 max-w-2xl mx-auto tracking-wide">
-              Nos encargamos de la logística, la entrega y los pagos en USD, para que tú solo te enfoques en hacer crecer tu negocio.
+
+            {/* Subtitle with animated highlight */}
+            <p className="relative text-lg md:text-xl font-light text-gray-600 mb-12 max-w-2xl mx-auto tracking-wide leading-relaxed 
+              opacity-0 animate-fade-in-up [animation-delay:1000ms]">
+              <span className="relative">
+                Nos encargamos de la logística, la entrega y los pagos en USD,
+                <span className="relative inline-block">
+                  <span className="absolute inset-x-0 bottom-0 h-[30%] bg-blue-100/30 -rotate-1" />
+                  <span className="relative text-blue-600 font-normal"> para que tú solo te enfoques en hacer crecer tu negocio.</span>
+                </span>
+              </span>
             </p>
-            <InteractiveHoverButton 
-              text="Comienza Ahora"
-              className="bg-[#131F42] text-white border-none"
-            />
+
+            {/* CTA Buttons with enhanced animations */}
+            <div className="flex justify-center opacity-0 animate-fade-in-up [animation-delay:1200ms] mb-20">
+              <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+                <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
+                  hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 
+                    transition-opacity duration-300" />
+                  <span className="relative flex items-center gap-2">
+                    Comienza Ahora
+                    <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" 
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </button>
+              </Link>
+            </div>
+
+            {/* Divider line */}
+            <div className="w-full border-t border-gray-100 opacity-0 animate-fade-in-up [animation-delay:1400ms]" />
           </div>
         </div>
       </section>
@@ -172,67 +215,105 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it Works Section */}
+      {/* How it Works Section - New Design */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-normal text-[#131F42] mb-6">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r 
+              from-gray-50 to-slate-50 text-blue-600 border border-slate-100 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse mr-2" />
+              PROCESO SIMPLE
+            </span>
+            <h2 className="text-4xl font-normal text-[#131F42] mt-6">
               ¿Cómo <span className="font-light">Funciona?</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+            {/* Decorative background elements - más sutil */}
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-50/0 via-slate-50/20 to-gray-50/0 rounded-3xl 
+              blur-3xl transform -rotate-1"></div>
+            
             {[
               {
-                id: 1,
+                step: "1",
+                icon: "🔄",
                 title: "Sincroniza Tu Tienda",
-                description: "Conecta tu e-commerce (Shopify, WooCommerce, Wix) con Exbordia en minutos."
+                description: "Conecta tu e-commerce (Shopify, WooCommerce, Wix) con Exbordia en minutos.",
+                bgColor: "from-white to-slate-50/40"
               },
               {
-                id: 2,
+                step: "2",
+                icon: "📦",
                 title: "Selecciona Tus Productos",
-                description: "Elige qué productos quieres exportar y recibe nuestra guía para cumplir los requisitos necesarios."
+                description: "Elige qué productos quieres exportar y recibe nuestra guía para cumplir los requisitos necesarios.",
+                bgColor: "from-slate-50/40 to-white"
               },
               {
-                id: 3,
+                step: "3",
+                icon: "🚢",
                 title: "Envía a EE. UU.",
-                description: "Coordinamos el transporte y despacho aduanal para que tus productos lleguen a nuestras bodegas."
+                description: "Coordinamos el transporte y despacho aduanal para que tus productos lleguen a nuestras bodegas.",
+                bgColor: "from-white to-slate-50/40"
               },
               {
-                id: 4,
+                step: "4",
+                icon: "🏪",
                 title: "Almacena y Vende",
-                description: "Tus productos estarán listos en nuestras bodegas en EE. UU. para entregas rápidas a clientes finales o empresas."
+                description: "Tus productos estarán listos en nuestras bodegas en EE. UU. para entregas rápidas a clientes finales o empresas.",
+                bgColor: "from-slate-50/40 to-white"
               },
               {
-                id: 5,
+                step: "5",
+                icon: "💳",
                 title: "Recibe Tus Pagos",
-                description: "Procesamos los pagos de tus clientes y te depositamos directamente en tu cuenta bancaria en México."
+                description: "Procesamos los pagos de tus clientes y te depositamos directamente en tu cuenta bancaria en México.",
+                bgColor: "from-white to-slate-50/40"
               }
-            ].map((step) => (
-              <div 
-                key={step.id} 
-                className="group relative bg-white rounded-2xl p-8 pt-16 transition-all duration-300 hover:bg-[#F1F6F9] cursor-pointer"
-              >
-                {/* Connecting Line */}
-                {step.id < 5 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-200 to-transparent transform -translate-y-1/2 z-0" />
+            ].map((item, index) => (
+              <div key={index} className="group relative">
+                {/* Connecting line - más fina y sutil */}
+                {index < 4 && (
+                  <div className="hidden md:block absolute top-1/2 left-[60%] w-full h-[0.5px] 
+                    bg-gradient-to-r from-slate-200/30 to-transparent z-0">
+                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-1 
+                      bg-slate-300 rounded-full animate-pulse"></div>
+                  </div>
                 )}
-                
-                {/* Step Number */}
-                <div className="absolute top-0 left-4">
-                  <span className="text-[8rem] font-black text-[#131F42]/5 group-hover:text-[#131F42]/10 transition-colors duration-300 font-mono leading-none">
-                    {step.id}
-                  </span>
-                </div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="text-xl font-medium text-[#131F42] mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {step.description}
-                  </p>
+                <div className={`relative h-full p-6 rounded-3xl transition-all duration-500
+                  bg-gradient-to-br ${item.bgColor}
+                  border border-slate-100/60 hover:shadow-sm hover:shadow-slate-100
+                  hover:-translate-y-1 group-hover:scale-[1.02]`}>
+                  
+                  {/* Step number */}
+                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full 
+                    bg-white shadow-sm
+                    flex items-center justify-center text-base font-medium text-slate-600
+                    border border-slate-100">
+                    {item.step}
+                  </div>
+
+                  {/* Content container */}
+                  <div className="relative">
+                    {/* Icon floating effect */}
+                    <div className="mb-6 mt-4 transform group-hover:-translate-y-0.5 transition-transform duration-300">
+                      <span className="text-3xl">{item.icon}</span>
+                    </div>
+
+                    <h3 className="text-xl font-medium text-[#131F42] mb-3">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-gray-600 leading-relaxed text-sm">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Hover effect - cambiado a borde y fondo sutil */}
+                  <div className="absolute inset-0 rounded-3xl border border-transparent
+                    group-hover:border-slate-200/50 group-hover:bg-slate-50/50 
+                    transition-all duration-300 -z-10"/>
                 </div>
               </div>
             ))}
@@ -240,7 +321,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Results Section - Add this after How it Works section */}
+      {/* Results Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-16">
@@ -259,15 +340,11 @@ export default function Home() {
               description="o menos en tiempo de entrega para cumplir las expectativas de tus clientes en E.E.U.U."
             />
             <ScrollRevealStat
-              stat="24/7"
-              description="soporte personalizado en español para resolver todas tus dudas"
-            />
-            <ScrollRevealStat
               stat="100%"
               description="transparencia total: Sin costos ocultos ni complicaciones"
             />
             <ScrollRevealStat
-              stat="0 riesgo"
+              stat="sin riesgo"
               description="prueba con un piloto para comenzar sin compromiso"
             />
           </div>
