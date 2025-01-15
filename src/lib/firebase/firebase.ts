@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -16,17 +17,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
 export const db = getFirestore(app)
-
-// Google Auth Provider
-const googleProvider = new GoogleAuthProvider()
-
-// Función de autenticación con Google
-export const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, googleProvider)
-    return result.user
-  } catch (error) {
-    console.error('Error signing in with Google:', error)
-    throw error
-  }
-}
+export const storage = getStorage(app)
