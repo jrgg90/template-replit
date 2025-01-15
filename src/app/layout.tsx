@@ -5,8 +5,11 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Exbordia - International Trade Made Simple',
+  title: 'Exbordia - Vende tus productos en Estados Unidos',
   description: 'Simplify Mexico-US trade with AI-powered solutions.',
+  icons: {
+    icon: '/snippet.ico',
+  },
 }
 
 export default function RootLayout({
