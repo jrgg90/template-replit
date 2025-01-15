@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Globe2, Truck, BarChart3, DollarSign } from 'lucide-react'
@@ -5,6 +6,9 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import AnimatedBackground from "@/components/ui/animated-background"
 import { ScrollRevealStat } from "@/components/ui/scroll-reveal-stat"
 import Link from 'next/link'
+import { useState } from "react"
+import { LoginDialog } from "@/components/auth/login-dialog"
+import { LoginButton } from "@/components/auth/login-button"
 
 export default function Home() {
   return (
@@ -22,9 +26,7 @@ export default function Home() {
             />
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-[#131F42] font-light">
-              Iniciar Sesión
-            </Button>
+            <LoginButton />
             <Link href="/contacto" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
                 Solicitar Demo
@@ -354,9 +356,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-[#131F42] text-white py-12">
         <div className="container mx-auto px-4">
-          {/* Main Footer Content */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
-            {/* Logo */}
             <div>
               <Image 
                 src="/exbordia-logo.png" 
@@ -366,8 +366,6 @@ export default function Home() {
                 className="brightness-0 invert object-contain"
               />
             </div>
-
-            {/* Contact */}
             <div className="text-right">
               <p className="text-sm">
                 <span className="text-white text-base font-medium mr-2">Contacto:</span>
@@ -378,21 +376,23 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
           <div className="border-t border-gray-700 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-gray-300">
                 © {new Date().getFullYear()} Exbordia. Todos los derechos reservados.
               </p>
               <div className="flex space-x-6">
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">Términos y Condiciones</a>
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">Política de Privacidad</a>
+                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+                  Términos y Condiciones
+                </a>
+                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+                  Política de Privacidad
+                </a>
               </div>
             </div>
           </div>
         </div>
       </footer>
-
     </div>
   )
 }
