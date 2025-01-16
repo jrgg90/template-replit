@@ -99,20 +99,25 @@ export default function Home() {
 
             {/* CTA Buttons with enhanced animations */}
             <div className="flex justify-center opacity-0 animate-fade-in-up [animation-delay:1200ms] mb-20">
-              <Link href="/contacto" target="_blank" rel="noopener noreferrer">
-                <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
-                  hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 
-                    transition-opacity duration-300" />
-                  <span className="relative flex items-center gap-2">
-                    Evalúa tu Potencial de Exportación ¡Gratis!
-                    <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" 
-                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </span>
-                </button>
-              </Link>
+              <div className="flex flex-col items-center">
+                <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+                  <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
+                    hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 
+                      transition-opacity duration-300" />
+                    <span className="relative flex items-center gap-2">
+                      Evalúa tu Potencial de Exportación ¡Gratis!
+                      <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" 
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </button>
+                </Link>
+                <p className="mt-4 text-sm text-gray-500 font-light">
+                  Sin importar el tamaño de tu negocio, exportar nunca fue tan fácil
+                </p>
+              </div>
             </div>
 
             {/* Divider line */}
