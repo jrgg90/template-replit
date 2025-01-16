@@ -29,7 +29,7 @@ export default function Home() {
             <LoginButton />
             <Link href="/contacto" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
-                Solicitar Demo
+                Solicitar Información
               </Button>
             </Link>
           </div>
@@ -104,7 +104,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 
                     transition-opacity duration-300" />
                   <span className="relative flex items-center gap-2">
-                    Comienza Ahora
+                    Evalúa tu Potencial de Exportación ¡Gratis!
                     <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" 
                       fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
