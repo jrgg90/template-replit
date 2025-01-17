@@ -1,42 +1,42 @@
-import { Input } from "@/components/ui/input"
+import { InputHTMLAttributes } from 'react'
 
-interface InputWithLabelProps {
-  label: string
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  id: string
-  placeholder?: string
-  type?: string
-  className?: string
+interface InputWithLabelProps extends InputHTMLAttributes<HTMLInputElement> {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
-function InputWithLabel({ 
-  label, 
-  value, 
-  onChange, 
-  id, 
-  placeholder = "", 
-  type = "text",
-  className = ""
-}: InputWithLabelProps) {
+export const InputWithLabel = ({
+  id,
+  label,
+  value,
+  onChange,
+  error,
+  className = '',
+  ...props
+}: InputWithLabelProps) => {
   return (
-    <div className="group relative w-full">
-      <label
-        htmlFor={id}
-        className="origin-start absolute top-1/2 block -translate-y-1/2 cursor-text px-1 text-base text-gray-500 transition-all group-focus-within:pointer-events-none group-focus-within:top-0 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium group-focus-within:text-[#131F42] has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-0 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium has-[+input:not(:placeholder-shown)]:text-[#131F42]"
-      >
-        <span className="inline-flex bg-white px-2">{label}</span>
-      </label>
-      <Input 
-        id={id} 
-        type={type} 
-        placeholder={placeholder}
+    <div className={`relative ${className}`}>
+      <input
+        id={id}
+        type="text"
         value={value}
         onChange={onChange}
-        className={`h-12 border-gray-200 focus:border-[#131F42] focus:ring-1 focus:ring-[#131F42] transition-colors text-base ${className}`}
+        className={`w-full h-12 px-4 border rounded-lg transition-colors
+          ${error ? 'border-red-500' : 'border-gray-300'}
+          focus:outline-none focus:ring-2 focus:ring-[#131F42] focus:border-transparent`}
+        placeholder=" "
+        {...props}
       />
+      <label
+        htmlFor={id}
+        className={`absolute left-4 -top-2.5 bg-white px-1 text-sm transition-all
+          ${error ? 'text-red-500' : 'text-gray-500'}`}
+      >
+        {label}
+      </label>
     </div>
   )
-}
-
-export { InputWithLabel } 
+} 
