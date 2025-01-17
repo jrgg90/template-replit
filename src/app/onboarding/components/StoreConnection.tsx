@@ -6,23 +6,21 @@ const StoreConnection = () => {
   const [storeUrl, setStoreUrl] = useState('')
 
   const handleConnect = () => {
-    // Here you would handle the store connection logic
     console.log('Connecting store:', storeUrl)
   }
 
   const handleFileUpload = () => {
-    // Here you would handle the file upload logic
     console.log('Opening file upload dialog')
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Main Section */}
       <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-900">
+        <h2 className="text-2xl font-light text-gray-900">
           Conecta tu tienda y sincroniza tus productos
         </h2>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-3 text-gray-600 font-light">
           Los necesitamos para comenzar tu proceso de pre-exportación
         </p>
       </div>
@@ -35,21 +33,21 @@ const StoreConnection = () => {
             value={storeUrl}
             onChange={(e) => setStoreUrl(e.target.value)}
             placeholder="Ingresa la URL de tu tienda"
-            className="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="flex-1 h-12 px-4 rounded-lg border border-gray-200 focus:border-[#131F42] focus:ring-1 focus:ring-[#131F42] transition-colors font-light"
           />
           <button
             onClick={handleConnect}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-8 h-12 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] transition-colors font-light"
           >
             Conecta tu tienda
           </button>
         </div>
 
         {/* Alternative Option */}
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <button
             onClick={handleFileUpload}
-            className="text-blue-600 hover:text-blue-800 text-sm"
+            className="text-[#131F42] hover:text-[#1c2b5d] text-sm font-light"
           >
             Si prefieres, sube tu CSV o PDF aquí
           </button>
@@ -57,12 +55,12 @@ const StoreConnection = () => {
       </div>
 
       {/* Step Indicators */}
-      <div className="flex justify-center gap-2 mt-16">
+      <div className="flex justify-center gap-3 mt-16">
         {[0, 1, 2].map((step) => (
           <div
             key={step}
-            className={`w-2 h-2 rounded-full ${
-              step === 0 ? 'bg-blue-600' : 'bg-gray-200'
+            className={`w-2 h-2 rounded-full transition-colors ${
+              step === 0 ? 'bg-[#131F42]' : 'bg-gray-200'
             }`}
           />
         ))}
