@@ -84,17 +84,30 @@ export async function GET(req: Request) {
     await setDoc(doc(db, "shopify_connections", state!), {
       shopDomain,
       accessToken: access_token,
-      connectedAt: new Date().toISOString()
+      timestamp: new Date().toISOString()
     });
 
-    // Clean up the temporary state
+    // Add console logs for debugging
+    console.log("Starting product sync for user:", state);
+    
+    // Trigger product sync
+    const syncResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/shopify/sync-products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: state })
+    });
+
+    const syncResult = await syncResponse.json();
+    console.log("Sync result:", syncResult);
+
+    // Delete the temporary state
     await deleteDoc(doc(db, "shopify_auth_states", state!));
 
     return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_APP_URL}/onboarding?success=true`
+      `${process.env.NEXT_PUBLIC_APP_URL}/onboarding/success`
     );
   } catch (error) {
-    console.error("Error in Shopify callback:", error);
+    console.error("Error in callback:", error);
     return NextResponse.redirect(
       `${process.env.NEXT_PUBLIC_APP_URL}/onboarding?error=unexpected_error`
     );

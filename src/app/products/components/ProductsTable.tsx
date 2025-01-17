@@ -1,6 +1,7 @@
 import { ShopifyProduct } from '@/types/product'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
-interface TableProps {
+interface ProductsTableProps {
   products: ShopifyProduct[];
   loading: boolean;
   currentPage: number;
@@ -16,32 +17,44 @@ export default function ProductsTable({
   totalProducts,
   productsPerPage,
   onPageChange
-}: TableProps) {
-  const totalPages = Math.ceil(totalProducts / productsPerPage)
-
+}: ProductsTableProps) {
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>
+    return (
+      <div className="bg-white rounded-lg shadow">
+        <div className="p-4 flex justify-center">
+          <LoadingSpinner className="w-8 h-8 text-blue-600" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!products?.length) {
+    return (
+      <div className="bg-white rounded-lg shadow p-4">
+        <p className="text-center text-gray-500">No hay productos disponibles</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <table className="min-w-full bg-white rounded-lg shadow">
-        <thead>
-          <tr className="bg-gray-50">
+    <div className="bg-white rounded-lg shadow overflow-hidden">
+      <table className="min-w-full">
+        <thead className="bg-gray-50">
+          <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Product
+              Producto
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
+              Estado
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Inventory
+              Inventario
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Type
+              Tipo
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Vendor
+              Vendedor
             </th>
           </tr>
         </thead>
@@ -89,28 +102,30 @@ export default function ProductsTable({
           ))}
         </tbody>
       </table>
-
+      
       {/* Pagination */}
-      <div className="flex justify-between items-center mt-4">
-        <div className="text-sm text-gray-700">
-          Showing {(currentPage - 1) * productsPerPage + 1} to {Math.min(currentPage * productsPerPage, totalProducts)} of {totalProducts} results
-        </div>
-        <div className="flex space-x-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => onPageChange(page)}
-              className={`px-3 py-1 rounded ${
-                currentPage === page
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {page}
-            </button>
-          ))}
+      <div className="px-6 py-4 border-t">
+        <div className="flex justify-between items-center mt-4">
+          <div className="text-sm text-gray-700">
+            Showing {(currentPage - 1) * productsPerPage + 1} to {Math.min(currentPage * productsPerPage, totalProducts)} of {totalProducts} results
+          </div>
+          <div className="flex space-x-2">
+            {Array.from({ length: Math.ceil(totalProducts / productsPerPage) }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => onPageChange(page)}
+                className={`px-3 py-1 rounded ${
+                  currentPage === page
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 } 

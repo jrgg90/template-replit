@@ -43,9 +43,12 @@ async function fetchAllProducts(shopDomain: string, accessToken: string) {
 export async function POST(req: Request) {
   try {
     const { userId } = await req.json();
+    console.log("Starting sync for user:", userId);
 
     // Get Shopify connection details
     const connectionDoc = await getDoc(doc(db, "shopify_connections", userId));
+    console.log("Connection exists:", connectionDoc.exists());
+    
     if (!connectionDoc.exists()) {
       return NextResponse.json(
         { error: "Shopify connection not found" },
@@ -53,37 +56,49 @@ export async function POST(req: Request) {
       );
     }
 
-    // Delete existing products for this user before syncing
+    const { shopDomain, accessToken } = connectionDoc.data();
+    console.log("Shop domain:", shopDomain);
+
+    // Fetch products from Shopify
+    console.log("Fetching products from Shopify...");
+    const products = await fetchAllProducts(shopDomain, accessToken);
+    console.log("Fetched products count:", products.length);
+
+    // Delete existing products
     const existingProducts = await getDocs(
       query(collection(db, "products"), where("userId", "==", userId))
     );
+    console.log("Existing products to delete:", existingProducts.size);
     
     const batch = writeBatch(db);
     existingProducts.docs.forEach((doc) => {
       batch.delete(doc.ref);
     });
-    
-    // Fetch and sync new products
-    const { shopDomain, accessToken } = connectionDoc.data();
-    const products = await fetchAllProducts(shopDomain, accessToken);
 
-    // Add new products to the same batch
+    // Add new products
     products.forEach((product: any) => {
       const mappedProduct = mapShopifyProduct(product, userId, shopDomain);
       batch.set(doc(db, "products", product.id.toString()), mappedProduct);
     });
 
-    // Commit all changes in one batch
+    // Commit changes
+    console.log("Committing batch with", products.length, "products");
     await batch.commit();
+    console.log("Sync completed successfully");
 
     return NextResponse.json({ 
       success: true, 
       productCount: products.length 
     });
-  } catch (error) {
+  } catch (err) {
+    // Properly type the error
+    const error = err as Error;
     console.error("Error syncing products:", error);
     return NextResponse.json(
-      { error: "Failed to sync products" },
+      { 
+        error: "Failed to sync products", 
+        details: error.message || 'Unknown error occurred' 
+      },
       { status: 500 }
     );
   }
