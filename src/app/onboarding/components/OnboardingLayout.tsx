@@ -34,7 +34,7 @@ const OnboardingLayout: FC<OnboardingLayoutProps> = ({ children }) => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="max-w-[1600px] mx-auto px-6 py-12">
         {children}
       </main>
     </div>

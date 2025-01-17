@@ -78,9 +78,9 @@ export default function ProductsPage() {
 
   return (
     <OnboardingLayout>
-      <div className="space-y-12">
-        {/* Main Section */}
-        <div className="text-left max-w-2xl">
+      <div className="max-w-[1400px] mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="text-left">
           <button
             onClick={() => router.back()}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
@@ -98,13 +98,17 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {/* Products Table Section */}
-        <div className="w-full">
-          <ProductFilters 
-            filters={filters} 
-            onFilterChange={setFilters}
-          />
+        {/* Products Section */}
+        <div className="space-y-4">
+          {/* Filters Box */}
+          <div className="bg-white rounded-lg shadow-sm border p-4">
+            <ProductFilters 
+              filters={filters} 
+              onFilterChange={setFilters}
+            />
+          </div>
 
+          {/* Table */}
           <ProductsTable 
             products={products}
             loading={loading}

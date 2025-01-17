@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useDebounce } from '@/lib/hooks/useDebounce';
+import { Search } from 'lucide-react';
 
 interface FilterProps {
   filters: {
@@ -56,64 +57,70 @@ export default function ProductFilters({ filters, onFilterChange }: FilterProps)
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-      <input
-        type="text"
-        placeholder="Search products..."
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        className="border rounded-lg px-3 py-2"
-      />
+    <div className="flex flex-col sm:flex-row gap-4">
+      {/* Search Bar */}
+      <div className="flex-1">
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <Search className="h-4 w-4 text-gray-400" />
+          </div>
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Buscar productos..."
+            className="block w-full rounded-md border-0 py-2.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm"
+          />
+        </div>
+      </div>
 
-      <select
-        value={filters.status}
-        onChange={(e) => handleChange('status', e.target.value)}
-        className="border rounded-lg px-3 py-2"
-      >
-        <option value="">All Status</option>
-        <option value="active">Active</option>
-        <option value="draft">Draft</option>
-        <option value="archived">Archived</option>
-      </select>
+      {/* Filters */}
+      <div className="flex flex-wrap gap-3">
+        <select
+          value={filters.status}
+          onChange={(e) => handleChange('status', e.target.value)}
+          className="min-w-[120px] rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm"
+        >
+          <option value="">Estado</option>
+          <option value="active">Activo</option>
+          <option value="draft">Borrador</option>
+        </select>
 
-      <select
-        value={filters.inventoryStatus}
-        onChange={(e) => handleChange('inventoryStatus', e.target.value)}
-        className="border rounded-lg px-3 py-2"
-      >
-        <option value="">All Inventory</option>
-        <option value="in_stock">In Stock</option>
-        <option value="low_stock">Low Stock</option>
-        <option value="out_of_stock">Out of Stock</option>
-      </select>
+        <select
+          value={filters.inventoryStatus}
+          onChange={(e) => handleChange('inventoryStatus', e.target.value)}
+          className="min-w-[120px] rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm"
+        >
+          <option value="">Inventario</option>
+          <option value="in_stock">En Stock</option>
+          <option value="low_stock">Stock Bajo</option>
+          <option value="out_of_stock">Sin Stock</option>
+        </select>
 
-      <select
-        value={filters.productType}
-        onChange={(e) => handleChange('productType', e.target.value)}
-        className="border rounded-lg px-3 py-2"
-        disabled={loadingOptions}
-      >
-        <option value="">All Types</option>
-        {options.productTypes.map(type => (
-          <option key={type} value={type}>
-            {type || 'Uncategorized'}
-          </option>
-        ))}
-      </select>
+        <select
+          value={filters.productType}
+          onChange={(e) => handleChange('productType', e.target.value)}
+          className="min-w-[120px] rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm disabled:bg-gray-50 disabled:text-gray-500"
+          disabled={loadingOptions}
+        >
+          <option value="">Tipo</option>
+          {options.productTypes.map((type) => (
+            <option key={type} value={type}>{type || 'Sin categoría'}</option>
+          ))}
+        </select>
 
-      <select
-        value={filters.vendor}
-        onChange={(e) => handleChange('vendor', e.target.value)}
-        className="border rounded-lg px-3 py-2"
-        disabled={loadingOptions}
-      >
-        <option value="">All Vendors</option>
-        {options.vendors.map(vendor => (
-          <option key={vendor} value={vendor}>
-            {vendor || 'No Vendor'}
-          </option>
-        ))}
-      </select>
+        <select
+          value={filters.vendor}
+          onChange={(e) => handleChange('vendor', e.target.value)}
+          className="min-w-[120px] rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm disabled:bg-gray-50 disabled:text-gray-500"
+          disabled={loadingOptions}
+        >
+          <option value="">Vendedor</option>
+          {options.vendors.map((vendor) => (
+            <option key={vendor} value={vendor}>{vendor || 'Sin vendedor'}</option>
+          ))}
+        </select>
+      </div>
     </div>
-  )
+  );
 } 
