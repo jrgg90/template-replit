@@ -19,7 +19,7 @@ const StoreConnection = () => {
       {/* Main Section */}
       <div className="text-left max-w-2xl">
         <h2 className="text-4xl tracking-tight">
-          <span className="font-light text-gray-600">Conecta tu tienda</span>
+          <span className="font-light text-gray-600">Conecta tu tienda Shopify</span>
           <span className="font-medium text-[#131F42]"> y sincroniza tus productos</span>
         </h2>
         <p className="mt-3 text-base text-gray-600 font-light">
@@ -32,14 +32,13 @@ const StoreConnection = () => {
         <div className="flex gap-4 w-full">
           <InputWithLabel
             id="store-url"
-            label="URL de tu tienda"
+            label="URL de tu tienda en Shopify (ej: store.myshopify.com)"
             value={storeUrl}
             onChange={(e) => setStoreUrl(e.target.value)}
-            className="text-sm"
           />
           <button
             onClick={handleConnect}
-            className="px-8 h-12 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] transition-colors font-normal whitespace-nowrap flex-shrink-0 text-sm"
+            className="px-8 h-12 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
           >
             Conecta tu tienda
           </button>
