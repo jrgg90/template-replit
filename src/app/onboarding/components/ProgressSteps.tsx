@@ -6,41 +6,45 @@ const ProgressSteps = () => {
   ]
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="w-full">
       <nav aria-label="Progress">
-        <ol className="flex items-center justify-between">
+        <ol className="grid grid-cols-3 gap-0">
           {steps.map((step, stepIdx) => (
             <li
               key={step.name}
-              className={`relative ${
-                stepIdx !== steps.length - 1 ? 'w-full' : ''
-              }`}
+              className="relative"
             >
+              {/* Connector Line */}
               {stepIdx !== steps.length - 1 && (
-                <div
-                  className="absolute top-4 left-0 -ml-px mt-0.5 w-full h-[1px] bg-gray-200"
+                <div 
+                  className="absolute left-[calc(50%+20px)] top-[14px] w-[calc(100%-40px)] h-[1px] bg-gray-200"
                   aria-hidden="true"
                 />
               )}
-              <div className="relative flex items-center group">
-                <span className="h-9 flex items-center">
-                  <span
-                    className={`relative z-10 w-8 h-8 flex items-center justify-center rounded-full text-sm font-light transition-colors
-                      ${
-                        step.status === 'current'
-                          ? 'bg-[#131F42] text-white'
-                          : 'bg-white border-2 border-gray-200 text-gray-400'
-                      }`}
-                  >
-                    {stepIdx + 1}
-                  </span>
+
+              {/* Step Content */}
+              <div className="flex flex-col items-center relative">
+                {/* Circle */}
+                <span 
+                  className={`w-7 h-7 flex items-center justify-center rounded-full text-xs transition-colors
+                    ${
+                      step.status === 'current'
+                        ? 'bg-[#131F42] text-white font-medium'
+                        : 'bg-white border border-gray-200 text-gray-400'
+                    }`}
+                >
+                  {stepIdx + 1}
                 </span>
-                <span className="ml-4 min-w-0 flex flex-col">
-                  <span className={`text-sm font-light ${
-                    step.status === 'current' ? 'text-gray-900' : 'text-gray-500'
-                  }`}>
-                    {step.name}
-                  </span>
+
+                {/* Label */}
+                <span 
+                  className={`mt-2 text-xs ${
+                    step.status === 'current' 
+                      ? 'text-[#131F42] font-medium' 
+                      : 'text-gray-400 font-light'
+                  }`}
+                >
+                  {step.name}
                 </span>
               </div>
             </li>
