@@ -12,17 +12,17 @@ import {
   Users,
 } from "lucide-react"
 
-import { NavMain } from "@/components/app/nav-main"
-import { NavProjects } from "@/components/app/nav-projects"
-import { NavUser } from "@/components/app/nav-user"
-import { TeamSwitcher } from "@/components/app/team-switcher"
+import { NavMain } from "../../components/navigation/nav-main"
+import { NavProjects } from "../../components/navigation/nav-projects"
+import { NavUser } from "../../components/navigation/nav-user"
+import { TeamSwitcher } from "../app/team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "../ui/sidebar"
 
 // Sample data for Exbordia dashboard
 const data = {
