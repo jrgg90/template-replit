@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { User, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "../firebase/firebase";
 import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from "firebase/auth";
 
 interface AuthContextType {
   user: User | null;
@@ -23,22 +24,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      setUser(user);
-      setLoading(false);
-      
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Get the token and set it in a cookie
+        setUser(user);
+        // Get and store the token
         const token = await user.getIdToken();
-        document.cookie = `firebase-token=${token}; path=/`;
-        router.push('/dashboard');
+        document.cookie = `token=${token}; path=/`;
+        router.push('/onboarding');
       } else {
-        // Clear the token cookie on sign out
-        document.cookie = 'firebase-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+        setUser(null);
+        // Clear the token
+        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+        router.push('/');
       }
+      setLoading(false);
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, [router]);
 
   const signInWithGoogle = async () => {
@@ -53,8 +55,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     try {
       setError(null);
-      await signInWithEmailAndPassword(auth, email, password);
-      // Navigation will be handled by onAuthStateChanged
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      document.cookie = `token=${token}; path=/`;
+      // The redirect will be handled by onAuthStateChanged
     } catch (error: any) {
       console.error('Error signing in:', error);
       setError(error.message || 'Failed to sign in');
