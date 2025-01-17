@@ -2,6 +2,7 @@ import { ShopifyProduct } from '@/types/product'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { Checkbox } from "@/components/ui/checkbox"
 
 interface ProductsTableProps {
   products: ShopifyProduct[];
@@ -10,16 +11,20 @@ interface ProductsTableProps {
   totalProducts: number;
   productsPerPage: number;
   onPageChange: (page: number) => void;
+  selectedProducts: string[];
+  onSelectionChange: (selectedIds: string[]) => void;
 }
 
-export default function ProductsTable({
+const ProductsTable: React.FC<ProductsTableProps> = ({
   products,
   loading,
   currentPage,
   totalProducts,
   productsPerPage,
-  onPageChange
-}: ProductsTableProps) {
+  onPageChange,
+  selectedProducts,
+  onSelectionChange
+}) => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-8">
@@ -46,6 +51,22 @@ export default function ProductsTable({
     return null;
   };
 
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      onSelectionChange(products.map(p => p.id));
+    } else {
+      onSelectionChange([]);
+    }
+  };
+
+  const handleSelectProduct = (productId: string, checked: boolean) => {
+    if (checked) {
+      onSelectionChange([...selectedProducts, productId]);
+    } else {
+      onSelectionChange(selectedProducts.filter(id => id !== productId));
+    }
+  };
+
   return (
     <div className="w-full space-y-4">
       <div className="relative w-full overflow-hidden rounded-lg border bg-white">
@@ -53,6 +74,13 @@ export default function ProductsTable({
           <table className="w-full min-w-[1400px] caption-bottom text-sm">
             <thead className="border-b bg-gray-50/75">
               <tr>
+                <th className="h-10 w-[50px] px-3 text-left align-middle">
+                  <Checkbox
+                    checked={selectedProducts.length === products.length}
+                    onCheckedChange={handleSelectAll}
+                    aria-label="Select all products"
+                  />
+                </th>
                 <th className="h-10 w-[80px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Imagen
                 </th>
@@ -79,6 +107,13 @@ export default function ProductsTable({
                   key={product.id}
                   className="transition-colors hover:bg-gray-50/50"
                 >
+                  <td className="p-3 align-middle w-[50px]">
+                    <Checkbox
+                      checked={selectedProducts.includes(product.id)}
+                      onCheckedChange={(checked) => handleSelectProduct(product.id, checked as boolean)}
+                      aria-label={`Select ${product.title}`}
+                    />
+                  </td>
                   <td className="p-3 align-middle w-[80px]">
                     <div className="relative h-10 w-10">
                       {product.images?.[0] && getImageUrl(product.images[0]) ? (
@@ -160,4 +195,6 @@ export default function ProductsTable({
       </div>
     </div>
   );
-} 
+}
+
+export default ProductsTable 

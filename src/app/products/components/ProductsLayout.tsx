@@ -1,13 +1,13 @@
 import { FC, ReactNode } from 'react'
-import UserMenu from './UserMenu'
-import ProgressSteps from './ProgressSteps'
+import UserMenu from '@/app/onboarding/components/UserMenu'
+import ProgressSteps from '@/app/onboarding/components/ProgressSteps'
 import Image from 'next/image'
 
-interface OnboardingLayoutProps {
+interface ProductsLayoutProps {
   children: ReactNode
 }
 
-const OnboardingLayout: FC<OnboardingLayoutProps> = ({ children }) => {
+const ProductsLayout: FC<ProductsLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
       {/* Header Section */}
@@ -34,11 +34,11 @@ const OnboardingLayout: FC<OnboardingLayoutProps> = ({ children }) => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="max-w-[1400px] mx-auto px-6 py-12"> {/* Wider container for products page */}
         {children}
       </main>
     </div>
   )
 }
 
-export default OnboardingLayout 
+export default ProductsLayout 

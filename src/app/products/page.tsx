@@ -9,7 +9,8 @@ import ProductFilters from './components/ProductFilters'
 import { ShopifyProduct } from '@/types/product'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import OnboardingLayout from '../onboarding/components/OnboardingLayout'
+import ProductsLayout from './components/ProductsLayout'
+import { Button } from '@/components/ui/button'
 
 const PRODUCTS_PER_PAGE = 10
 
@@ -27,6 +28,7 @@ export default function ProductsPage() {
     vendor: '',
     search: ''
   })
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([])
 
   useEffect(() => {
     if (user) {
@@ -76,11 +78,20 @@ export default function ProductsPage() {
     }
   }
 
+  const handleSaveSelection = async () => {
+    try {
+      // TODO: Implement save logic
+      console.log('Selected products:', selectedProducts)
+    } catch (error) {
+      console.error('Error saving selection:', error)
+    }
+  }
+
   return (
-    <OnboardingLayout>
-      <div className="max-w-[1400px] mx-auto space-y-8">
-        {/* Header Section */}
-        <div className="text-left">
+    <ProductsLayout>
+      <div className="space-y-8">
+        {/* Header Section with Save Button */}
+        <div>
           <button
             onClick={() => router.back()}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
@@ -89,13 +100,25 @@ export default function ProductsPage() {
             <span>Volver a la conexión</span>
           </button>
           
-          <h2 className="text-4xl tracking-tight">
-            <span className="font-light text-gray-600">Selecciona</span>
-            <span className="font-medium text-[#131F42]"> tus productos</span>
-          </h2>
-          <p className="mt-3 text-base text-gray-600 font-light">
-            Los necesitamos para comenzar tu proceso de pre-exportación
-          </p>
+          <div className="flex justify-between items-baseline">
+            <div className="text-left">
+              <h2 className="text-4xl tracking-tight">
+                <span className="font-light text-gray-600">Selecciona</span>
+                <span className="font-medium text-[#131F42]"> tus productos</span>
+              </h2>
+              <p className="mt-3 text-base text-gray-600 font-light">
+                Los necesitamos para comenzar tu proceso de pre-exportación
+              </p>
+            </div>
+
+            <Button
+              onClick={handleSaveSelection}
+              className="bg-[#131F42] hover:bg-[#0F1835] text-white -mb-0.5"
+              disabled={selectedProducts.length === 0}
+            >
+              Guardar Selección ({selectedProducts.length})
+            </Button>
+          </div>
         </div>
 
         {/* Products Section */}
@@ -116,9 +139,11 @@ export default function ProductsPage() {
             totalProducts={totalProducts}
             productsPerPage={PRODUCTS_PER_PAGE}
             onPageChange={setCurrentPage}
+            selectedProducts={selectedProducts}
+            onSelectionChange={setSelectedProducts}
           />
         </div>
       </div>
-    </OnboardingLayout>
+    </ProductsLayout>
   )
 } 
