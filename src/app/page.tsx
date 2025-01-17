@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useState } from "react"
 import { LoginDialog } from "@/components/auth/login-dialog"
 import { LoginButton } from "@/components/auth/login-button"
-import { CTA } from "@/components/ui/call-to-action"
+import { CTA } from "@/components/layout/call-to-action"
 
 export default function Home() {
   return (

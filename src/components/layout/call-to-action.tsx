@@ -1,8 +1,10 @@
-import { MoveRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from 'next/link';
+"use client"
 
-function CTA() {
+import { MoveRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from 'next/link'
+
+export function CTA() {
   return (
     <div className="w-full py-20 lg:py-32">
       <div className="container mx-auto">
@@ -31,7 +33,7 @@ function CTA() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export { CTA }; 
+export default CTA 
