@@ -1,6 +1,44 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
-import { doc, getDoc, collection, writeBatch } from "firebase/firestore";
+import { doc, getDoc, collection, writeBatch, getDocs, query, where } from "firebase/firestore";
+import { ShopifyProduct } from "@/types/product";
+import { mapShopifyProduct } from "@/lib/shopify/utils";
+
+const PRODUCTS_PER_PAGE = 250; // Shopify's max limit per request
+
+async function fetchAllProducts(shopDomain: string, accessToken: string) {
+  let allProducts: any[] = [];
+  let hasNextPage = true;
+  let nextPageInfo = '';
+
+  while (hasNextPage) {
+    const query = nextPageInfo 
+      ? `?limit=${PRODUCTS_PER_PAGE}&page_info=${nextPageInfo}`
+      : `?limit=${PRODUCTS_PER_PAGE}`;
+      
+    const response = await fetch(
+      `https://${shopDomain}/admin/api/2023-01/products.json${query}`,
+      {
+        headers: {
+          'X-Shopify-Access-Token': accessToken,
+        },
+      }
+    );
+
+    const data = await response.json();
+    allProducts = [...allProducts, ...data.products];
+
+    // Check pagination headers
+    const link = response.headers.get('Link');
+    if (link?.includes('rel="next"')) {
+      nextPageInfo = link.match(/page_info=([^>&]*)/)?.[1] || '';
+    } else {
+      hasNextPage = false;
+    }
+  }
+
+  return allProducts;
+}
 
 export async function POST(req: Request) {
   try {
@@ -15,41 +53,33 @@ export async function POST(req: Request) {
       );
     }
 
-    const { shopDomain, accessToken } = connectionDoc.data();
-
-    // Fetch products from Shopify
-    const productsResponse = await fetch(
-      `https://${shopDomain}/admin/api/2023-01/products.json`,
-      {
-        headers: {
-          "X-Shopify-Access-Token": accessToken,
-        },
-      }
+    // Delete existing products for this user before syncing
+    const existingProducts = await getDocs(
+      query(collection(db, "products"), where("userId", "==", userId))
     );
-
-    const { products } = await productsResponse.json();
-
-    // Batch write products to Firebase
+    
     const batch = writeBatch(db);
-    const productsRef = collection(db, "products");
+    existingProducts.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+    
+    // Fetch and sync new products
+    const { shopDomain, accessToken } = connectionDoc.data();
+    const products = await fetchAllProducts(shopDomain, accessToken);
 
+    // Add new products to the same batch
     products.forEach((product: any) => {
-      const docRef = doc(productsRef);
-      batch.set(docRef, {
-        userId,
-        productId: product.id,
-        title: product.title,
-        price: product.variants[0]?.price || 0,
-        inventoryQuantity: product.variants[0]?.inventory_quantity || 0,
-        sku: product.variants[0]?.sku || "",
-        imageUrl: product.images[0]?.src || "",
-        createdAt: new Date().toISOString(),
-      });
+      const mappedProduct = mapShopifyProduct(product, userId, shopDomain);
+      batch.set(doc(db, "products", product.id.toString()), mappedProduct);
     });
 
+    // Commit all changes in one batch
     await batch.commit();
 
-    return NextResponse.json({ success: true, productCount: products.length });
+    return NextResponse.json({ 
+      success: true, 
+      productCount: products.length 
+    });
   } catch (error) {
     console.error("Error syncing products:", error);
     return NextResponse.json(

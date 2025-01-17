@@ -2,6 +2,32 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 
+async function registerWebhooks(shopDomain: string, accessToken: string) {
+  const webhooks = [
+    { topic: 'products/create', address: `${process.env.NEXT_PUBLIC_APP_URL}/api/shopify/webhooks` },
+    { topic: 'products/update', address: `${process.env.NEXT_PUBLIC_APP_URL}/api/shopify/webhooks` },
+    { topic: 'products/delete', address: `${process.env.NEXT_PUBLIC_APP_URL}/api/shopify/webhooks` },
+    { topic: 'inventory_levels/update', address: `${process.env.NEXT_PUBLIC_APP_URL}/api/shopify/webhooks` },
+  ];
+
+  for (const webhook of webhooks) {
+    await fetch(`https://${shopDomain}/admin/api/2023-01/webhooks.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': accessToken,
+      },
+      body: JSON.stringify({
+        webhook: {
+          topic: webhook.topic,
+          address: webhook.address,
+          format: 'json',
+        },
+      }),
+    });
+  }
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get("code");
@@ -50,6 +76,9 @@ export async function GET(req: Request) {
     }
 
     const { access_token } = await tokenResponse.json();
+
+    // Register webhooks before storing the token
+    await registerWebhooks(shopDomain, access_token);
 
     // Store the access token
     await setDoc(doc(db, "shopify_connections", state!), {
