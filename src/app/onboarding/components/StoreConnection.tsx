@@ -24,6 +24,7 @@ export default function StoreConnection() {
   const { user } = useAuth()
   const [isConnected, setIsConnected] = useState(false)
   const router = useRouter()
+  const [syncComplete, setSyncComplete] = useState(false)
 
   // Check if store is already connected
   useEffect(() => {
@@ -31,6 +32,20 @@ export default function StoreConnection() {
       checkConnection();
     }
   }, [user]);
+
+  // Check URL params for sync status
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sync') === 'success') {
+      setSyncComplete(true);
+      // Clean URL
+      window.history.replaceState({}, '', '/onboarding');
+      // Wait a moment for products to be available
+      setTimeout(() => {
+        router.push('/products');
+      }, 1000);
+    }
+  }, []);
 
   const checkConnection = async () => {
     try {
@@ -179,7 +194,7 @@ export default function StoreConnection() {
                 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
-                <LoadingSpinner className="w-5 h-5" />
+                <LoadingSpinner className="w-4 h-4" />
               ) : (
                 'Conecta tu tienda'
               )}
@@ -191,6 +206,15 @@ export default function StoreConnection() {
           <p className="mt-2 text-sm text-red-600">{error}</p>
         )}
       </div>
+
+      {syncComplete && (
+        <div className="fixed inset-0 bg-white/80 flex items-center justify-center z-50">
+          <div className="flex flex-col items-center gap-2">
+            <LoadingSpinner className="w-4 h-4 text-blue-600" />
+            <p className="text-sm text-gray-600">Sincronizando productos...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

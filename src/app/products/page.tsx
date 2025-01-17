@@ -7,10 +7,14 @@ import { collection, query, where, getDocs } from 'firebase/firestore'
 import ProductsTable from './components/ProductsTable'
 import ProductFilters from './components/ProductFilters'
 import { ShopifyProduct } from '@/types/product'
+import { ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import OnboardingLayout from '../onboarding/components/OnboardingLayout'
 
 const PRODUCTS_PER_PAGE = 10
 
 export default function ProductsPage() {
+  const router = useRouter()
   const { user } = useAuth()
   const [products, setProducts] = useState<ShopifyProduct[]>([])
   const [loading, setLoading] = useState(true)
@@ -21,7 +25,7 @@ export default function ProductsPage() {
     inventoryStatus: '',
     productType: '',
     vendor: '',
-    search: '',
+    search: ''
   })
 
   useEffect(() => {
@@ -33,8 +37,6 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      
-      // Build query
       let baseQuery = query(
         collection(db, "products"),
         where("userId", "==", user?.uid)
@@ -75,22 +77,44 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold mb-6">Products</h1>
-      
-      <ProductFilters 
-        filters={filters} 
-        onFilterChange={setFilters}
-      />
+    <OnboardingLayout>
+      <div className="space-y-12">
+        {/* Main Section */}
+        <div className="text-left max-w-2xl">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            <span>Volver a la conexión</span>
+          </button>
+          
+          <h2 className="text-4xl tracking-tight">
+            <span className="font-light text-gray-600">Selecciona</span>
+            <span className="font-medium text-[#131F42]"> tus productos</span>
+          </h2>
+          <p className="mt-3 text-base text-gray-600 font-light">
+            Los necesitamos para comenzar tu proceso de pre-exportación
+          </p>
+        </div>
 
-      <ProductsTable 
-        products={products}
-        loading={loading}
-        currentPage={currentPage}
-        totalProducts={totalProducts}
-        productsPerPage={PRODUCTS_PER_PAGE}
-        onPageChange={setCurrentPage}
-      />
-    </div>
+        {/* Products Table Section */}
+        <div className="w-full">
+          <ProductFilters 
+            filters={filters} 
+            onFilterChange={setFilters}
+          />
+
+          <ProductsTable 
+            products={products}
+            loading={loading}
+            currentPage={currentPage}
+            totalProducts={totalProducts}
+            productsPerPage={PRODUCTS_PER_PAGE}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      </div>
+    </OnboardingLayout>
   )
 } 
