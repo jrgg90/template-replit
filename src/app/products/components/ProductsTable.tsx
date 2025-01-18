@@ -3,6 +3,8 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Checkbox } from "@/components/ui/checkbox"
+import { HelpCircle, Trash2 } from 'lucide-react'
+import * as Tooltip from '@radix-ui/react-tooltip'
 
 interface ProductsTableProps {
   products: ShopifyProduct[];
@@ -13,6 +15,7 @@ interface ProductsTableProps {
   onPageChange: (page: number) => void;
   selectedProducts: string[];
   onSelectionChange: (selectedIds: string[]) => void;
+  onDeselect?: (productId: string) => void;
 }
 
 const ProductsTable: React.FC<ProductsTableProps> = ({
@@ -23,7 +26,8 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   productsPerPage,
   onPageChange,
   selectedProducts,
-  onSelectionChange
+  onSelectionChange,
+  onDeselect
 }) => {
   if (loading) {
     return (
@@ -84,20 +88,41 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                 <th className="h-10 w-[80px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Imagen
                 </th>
-                <th className="h-10 w-[500px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <th className="h-10 w-[350px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Producto
                 </th>
-                <th className="h-10 w-[180px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <th className="h-10 w-[120px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Estado
                 </th>
-                <th className="h-10 w-[180px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <th className="h-10 w-[120px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Inventario
                 </th>
-                <th className="h-10 w-[220px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <th className="h-10 w-[150px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Tipo
                 </th>
-                <th className="h-10 w-[240px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <th className="h-10 w-[150px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
                   Vendedor
+                </th>
+                <th className="h-10 w-[200px] px-3 text-left align-middle font-medium text-gray-500 text-xs uppercase tracking-wider">
+                  <div className="flex items-center gap-1">
+                    Seleccionado
+                    <Tooltip.Root>
+                      <Tooltip.Trigger asChild>
+                        <button className="inline-flex items-center hover:text-gray-600">
+                          <HelpCircle className="h-3 w-3 text-gray-400 hover:text-gray-600" />
+                        </button>
+                      </Tooltip.Trigger>
+                      <Tooltip.Portal>
+                        <Tooltip.Content
+                          className="max-w-xs rounded-md bg-gray-900 px-3 py-2 text-xs text-gray-50 shadow-md animate-in fade-in-0 zoom-in-95"
+                          sideOffset={5}
+                        >
+                          Productos que has seleccionado para exportar a Estados Unidos
+                          <Tooltip.Arrow className="fill-gray-900" />
+                        </Tooltip.Content>
+                      </Tooltip.Portal>
+                    </Tooltip.Root>
+                  </div>
                 </th>
               </tr>
             </thead>
@@ -132,13 +157,13 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                       )}
                     </div>
                   </td>
-                  <td className="p-3 align-middle w-[500px]">
+                  <td className="p-3 align-middle w-[350px]">
                     <div className="flex flex-col">
                       <span className="font-medium text-gray-900 truncate">{product.title}</span>
                       <span className="text-xs text-gray-400">{product.id}</span>
                     </div>
                   </td>
-                  <td className="p-3 align-middle w-[180px]">
+                  <td className="p-3 align-middle w-[120px]">
                     <span className={cn(
                       "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
                       product.status === 'active' 
@@ -148,7 +173,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                       {product.status === 'active' ? 'Activo' : 'Borrador'}
                     </span>
                   </td>
-                  <td className="p-3 align-middle w-[180px]">
+                  <td className="p-3 align-middle w-[120px]">
                     <span className={cn(
                       "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
                       product.inventoryQuantity > 0
@@ -158,11 +183,27 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                       {product.inventoryQuantity} unidades
                     </span>
                   </td>
-                  <td className="p-3 align-middle w-[220px]">
+                  <td className="p-3 align-middle w-[150px]">
                     <span className="text-gray-600 text-sm">{product.productType || '-'}</span>
                   </td>
-                  <td className="p-3 align-middle w-[240px]">
+                  <td className="p-3 align-middle w-[150px]">
                     <span className="text-gray-600 text-sm">{product.vendor}</span>
+                  </td>
+                  <td className="p-3 align-middle w-[200px]">
+                    {product.selectedForExport && (
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-50 text-green-700 ring-1 ring-green-600/10">
+                          Seleccionado
+                        </span>
+                        <button
+                          onClick={() => onDeselect?.(product.id)}
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          title="Deseleccionar producto"
+                        >
+                          <Trash2 className="h-3.5 w-3.5 text-gray-400 hover:text-red-500" />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}

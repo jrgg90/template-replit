@@ -40,4 +40,7 @@ export interface ShopifyProduct {
     inventoryQuantity: number;
     options: Record<string, string>;
   }>;
+  
+  selectedForExport?: boolean;
+  selectedAt?: string | null;
 } 

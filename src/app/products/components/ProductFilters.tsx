@@ -10,6 +10,7 @@ interface FilterProps {
     productType: string;
     vendor: string;
     search: string;
+    selectedForExport: string;
   };
   onFilterChange: (filters: any) => void;
 }
@@ -95,6 +96,16 @@ export default function ProductFilters({ filters, onFilterChange }: FilterProps)
           <option value="in_stock">En Stock</option>
           <option value="low_stock">Stock Bajo</option>
           <option value="out_of_stock">Sin Stock</option>
+        </select>
+
+        <select
+          value={filters.selectedForExport}
+          onChange={(e) => handleChange('selectedForExport', e.target.value)}
+          className="min-w-[120px] rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#131F42] sm:text-sm"
+        >
+          <option value="">Selección</option>
+          <option value="selected">Seleccionados</option>
+          <option value="not_selected">No Seleccionados</option>
         </select>
 
         <select
