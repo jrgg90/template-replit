@@ -63,8 +63,6 @@ export default function ProductsPage() {
       if (filters.vendor) {
         baseQuery = query(baseQuery, where("vendor", "==", filters.vendor))
       }
-
-      // Add selectedForExport filter
       if (filters.selectedForExport) {
         baseQuery = query(
           baseQuery, 
@@ -72,17 +70,39 @@ export default function ProductsPage() {
         )
       }
 
-      // Get total count
+      // Get all products first
       const snapshot = await getDocs(baseQuery)
-      const totalCount = snapshot.size
-      setTotalProducts(totalCount)
+      let filteredProducts = snapshot.docs.map(doc => ({ 
+        id: doc.id, 
+        ...doc.data() 
+      })) as ShopifyProduct[]
 
-      // Get paginated results
+      // Apply search filter in memory
+      if (filters.search) {
+        const searchTerm = filters.search.toLowerCase()
+        filteredProducts = filteredProducts.filter(product => 
+          product.title.toLowerCase().includes(searchTerm) ||
+          product.productType.toLowerCase().includes(searchTerm) ||
+          product.vendor.toLowerCase().includes(searchTerm)
+        )
+      }
+
+      // Update total count after search filter
+      setTotalProducts(filteredProducts.length)
+
+      // Apply pagination
       const start = (currentPage - 1) * PRODUCTS_PER_PAGE
       const end = start + PRODUCTS_PER_PAGE
-      const paginatedProducts = snapshot.docs
-        .slice(start, end)
-        .map(doc => ({ id: doc.id, ...doc.data() })) as ShopifyProduct[]
+      const paginatedProducts = filteredProducts.slice(start, end)
+
+      // Sincronizar los checkboxes con los productos ya seleccionados
+      const selectedIds = paginatedProducts
+        .filter(product => product.selectedForExport)
+        .map(product => product.id)
+      setSelectedProducts(prevSelected => {
+        const uniqueSelected = new Set([...prevSelected, ...selectedIds])
+        return Array.from(uniqueSelected)
+      })
 
       setProducts(paginatedProducts)
     } catch (error) {
@@ -101,16 +121,25 @@ export default function ProductsPage() {
       setIsSaving(true)
       const batch = writeBatch(db)
 
-      // Get all currently selected products from the database
-      const currentlySelected = products.filter(p => p.selectedForExport).map(p => p.id)
-      
-      // Products to be deselected (were selected but not in the new selection)
-      const toDeselect = currentlySelected.filter(id => !selectedProducts.includes(id))
-      
-      // Products to be selected (in the new selection but weren't selected before)
-      const toSelect = selectedProducts.filter(id => !currentlySelected.includes(id))
+      // Obtener TODOS los productos seleccionados de la base de datos
+      const allProductsQuery = query(
+        collection(db, "products"),
+        where("userId", "==", user?.uid),
+        where("selectedForExport", "==", true)
+      )
+      const allSelectedSnapshot = await getDocs(allProductsQuery)
+      const allCurrentlySelected = allSelectedSnapshot.docs.map(doc => doc.id)
 
-      // Update products to be deselected
+      // Productos a ser deseleccionados (solo de los productos visibles actualmente)
+      const visibleProductIds = products.map(p => p.id)
+      const toDeselect = allCurrentlySelected
+        .filter(id => visibleProductIds.includes(id)) // Solo productos visibles
+        .filter(id => !selectedProducts.includes(id)) // Que ya no están seleccionados
+
+      // Productos nuevos a ser seleccionados
+      const toSelect = selectedProducts.filter(id => !allCurrentlySelected.includes(id))
+
+      // Actualizar productos a deseleccionar
       toDeselect.forEach(productId => {
         const productRef = doc(db, "products", productId)
         batch.update(productRef, {
@@ -119,7 +148,7 @@ export default function ProductsPage() {
         })
       })
 
-      // Update products to be selected
+      // Actualizar productos a seleccionar
       toSelect.forEach(productId => {
         const productRef = doc(db, "products", productId)
         batch.update(productRef, {
