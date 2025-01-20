@@ -140,7 +140,7 @@ export default function StoreConnection() {
       </div>
 
       {/* Store URL Input or Connected State */}
-      <div className="max-w-2xl flex flex-col items-center">
+      <div className="max-w-2xl flex flex-col space-y-4">
         {isConnected ? (
           <div className="w-full space-y-4">
             {/* Store URL Display */}
@@ -177,29 +177,36 @@ export default function StoreConnection() {
             </div>
           </div>
         ) : (
-          <div className="flex gap-4 w-full">
-            <InputWithLabel
-              id="store-url"
-              label="URL de tu tienda en Shopify (ej: store.myshopify.com)"
-              value={storeUrl}
-              onChange={(e) => setStoreUrl(e.target.value)}
-              error={error}
-              className="flex-1"
-            />
-            <button
-              onClick={handleConnect}
-              disabled={loading || !storeUrl}
-              className="px-8 h-12 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
-                transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base
-                disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <LoadingSpinner className="w-4 h-4" />
-              ) : (
-                'Conecta tu tienda'
-              )}
-            </button>
-          </div>
+          <>
+            <div className="flex gap-4 w-full">
+              <InputWithLabel
+                id="store-url"
+                label="URL de tu tienda en Shopify (ej: store.myshopify.com)"
+                value={storeUrl}
+                onChange={(e) => setStoreUrl(e.target.value)}
+                error={error}
+                className="flex-1"
+              />
+              <button
+                onClick={handleConnect}
+                disabled={loading || !storeUrl}
+                className="px-8 h-12 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
+                  transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base
+                  disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <LoadingSpinner className="w-4 h-4" />
+                ) : (
+                  'Conecta tu tienda'
+                )}
+              </button>
+            </div>
+            
+            {/* New Upload Option */}
+            <p className="text-gray-500 text-sm text-center">
+              O sube tu <span className="underline cursor-pointer hover:text-gray-700 transition-colors">CSV o PDF</span> con información de tus productos
+            </p>
+          </>
         )}
 
         {error && (
