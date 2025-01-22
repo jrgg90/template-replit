@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply antialiased;
-  }
-
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -31,13 +27,13 @@
   }
 }
 
-/* Add custom font if needed */
-@font-face {
-  font-family: 'CustomFont';
-  src: url('/fonts/your-font.woff2') format('woff2');
-  /* Add your custom font files */
+/* Base styles */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Animations */
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -52,4 +48,11 @@
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out forwards;
   opacity: 0;
+}
+
+/* Add custom font if needed */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/your-font.woff2') format('woff2');
+  /* Add your custom font files */
 }

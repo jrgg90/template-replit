@@ -42,7 +42,7 @@ export default function StoreConnection() {
       window.history.replaceState({}, '', '/onboarding');
       // Wait a moment for products to be available
       setTimeout(() => {
-        router.push('/products');
+        router.push('/onboarding/products');
       }, 1000);
     }
   }, []);
@@ -155,7 +155,7 @@ export default function StoreConnection() {
             {/* Action Buttons */}
             <div className="flex items-center justify-end gap-3">
               <button
-                onClick={() => router.push('/products')}
+                onClick={() => router.push('/onboarding/products')}
                 className="px-8 h-10 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
                   transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
               >
