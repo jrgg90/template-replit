@@ -8,6 +8,8 @@ import { getDoc, doc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
 import { Trash2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 
 interface InputProps {
   id: string;
@@ -149,18 +151,17 @@ export default function StoreConnection() {
               <p className="text-[#131F42] font-medium">
                 {storeUrl || 'No store URL found'}
               </p>
-              <p className="text-xs text-gray-400">Debug: {JSON.stringify({storeUrl, isConnected})}</p>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons - Inmediatamente después del recuadro */}
             <div className="flex items-center justify-end gap-3">
-              <button
+              <Button
                 onClick={() => router.push('/onboarding/products')}
                 className="px-8 h-10 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
                   transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
               >
                 Ver Productos
-              </button>
+              </Button>
               <button
                 onClick={handleDisconnect}
                 disabled={loading}
@@ -174,6 +175,25 @@ export default function StoreConnection() {
                   <Trash2 className="w-4 h-4" />
                 )}
               </button>
+            </div>
+
+            {/* Upload Option - Movido después de los botones */}
+            <div className="pt-4">
+              <p className="text-gray-500 text-sm text-center">
+                O sube tu <span className="underline cursor-pointer hover:text-gray-700 transition-colors">CSV o PDF</span> con información de tus productos
+              </p>
+            </div>
+
+            {/* Next Step Button - Se mantiene al final */}
+            <div className="flex justify-end pt-8 mt-4 border-t border-gray-100">
+              <Button
+                onClick={() => router.push('/onboarding/company-info')}
+                className="bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 
+                  hover:text-gray-700 font-light px-6 text-sm"
+              >
+                Siguiente paso
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
             </div>
           </div>
         ) : (
