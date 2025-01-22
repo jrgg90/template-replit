@@ -35,11 +35,13 @@ const OnboardingLayout: FC<OnboardingLayoutProps> = ({ children }) => {
       </header>
 
       {/* Main Content - Modificado para incluir nav */}
-      <div className="flex">
+      <div className="min-h-screen flex">
         <OnboardingNav />
-        <main className="flex-1 max-w-3xl mx-auto px-6 py-12">
-          {children}
-        </main>
+        <div className="flex-1 pl-[60px]">
+          <main className="max-w-3xl mx-auto px-6 py-12">
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   )

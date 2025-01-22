@@ -29,7 +29,7 @@ export function OnboardingNav() {
 
   return (
     <motion.div
-      className="h-full bg-white/50 border-r border-gray-100 flex-shrink-0"
+      className="h-full bg-white/50 border-r border-gray-100 flex-shrink-0 absolute left-0 z-10"
       animate={{
         width: isOpen ? "240px" : "60px",
       }}
