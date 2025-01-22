@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 const navigationItems = [
   {
     label: "Tienda y Productos",
-    href: "/onboarding/products",
+    href: "/onboarding",
     icon: "📦",
     color: "text-gray-900"
   },
@@ -32,9 +32,9 @@ export function OnboardingNav() {
   const pathname = usePathname();
 
   const isItemActive = (href: string) => {
-    // Si estamos en la raíz de onboarding, consideramos productos como activo
-    if (pathname === '/onboarding') {
-      return href === '/onboarding/products';
+    // Si estamos en productos, consideramos la opción de Tienda como activa
+    if (pathname === '/onboarding/products') {
+      return href === '/onboarding';
     }
     // Si no, verificamos si la ruta actual coincide con el href
     return pathname === href;
