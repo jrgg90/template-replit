@@ -27,31 +27,63 @@ export function UploadedFiles({ userId }: UploadedFilesProps) {
       const docSnap = await getDoc(docRef)
       
       if (docSnap.exists()) {
-        setFiles([docSnap.data()])
+        console.log('Document data:', docSnap.data())
+        
+        const fileData = docSnap.data()
+        if (!fileData.storagePath) {
+          console.error('Storage path missing in document:', fileData)
+        }
+        
+        setFiles([{
+          ...fileData,
+          storagePath: fileData.storagePath || `product-files/${userId}/${fileData.fileName}`
+        }])
+      } else {
+        console.log('No document found for userId:', userId)
+        setFiles([])
       }
     } catch (error) {
       console.error('Error loading files:', error)
+      setFiles([])
     } finally {
       setLoading(false)
     }
   }
 
   const handleDelete = async (file: any) => {
+    console.log('Attempting to delete file:', {
+      fileName: file.fileName,
+      storagePath: file.storagePath,
+      fullFile: file
+    })
+
+    if (!file.storagePath) {
+      console.error('No storage path found for file:', file)
+      toast.error('Error al eliminar el archivo: Ruta no encontrada')
+      return
+    }
+
     try {
       setDeleting(file.fileName)
       
-      // Eliminar de Storage
+      console.log('Deleting from storage path:', file.storagePath)
+      
       const storageRef = ref(storage, file.storagePath)
-      await deleteObject(storageRef)
+      try {
+        await deleteObject(storageRef)
+        console.log('Successfully deleted from storage')
+      } catch (storageError) {
+        console.error('Error deleting from storage:', storageError)
+      }
       
-      // Eliminar de Firestore
-      await deleteDoc(doc(db, "product_files", userId))
+      const docRef = doc(db, "product_files", userId)
+      await deleteDoc(docRef)
+      console.log('Successfully deleted from Firestore')
       
-      // Actualizar UI
       setFiles([])
       toast.success('Archivo eliminado correctamente')
     } catch (error) {
-      console.error('Error deleting file:', error)
+      console.error('Error in delete process:', error)
       toast.error('Error al eliminar el archivo')
     } finally {
       setDeleting(null)

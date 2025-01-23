@@ -176,6 +176,7 @@ export default function StoreConnection() {
         async () => {
           // Subida completada
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
+          const storagePath = `product-files/${user.uid}/${file.name}`
           
           // Guardar referencia en Firestore con más detalles
           await setDoc(doc(db, "product_files", user.uid), {
@@ -188,7 +189,7 @@ export default function StoreConnection() {
             userId: user.uid,
             userEmail: user.email || 'no-email',
             status: 'pending',
-            storagePath: `product-files/${user.uid}/${file.name}`,
+            storagePath: storagePath,
             lastModified: file.lastModified,
             lastModifiedDate: file.lastModified ? new Date(file.lastModified).toISOString() : null,
             processingStatus: {
@@ -275,7 +276,7 @@ export default function StoreConnection() {
             {user && <UploadedFiles userId={user.uid} />}
 
             {/* Upload Option - Ya sin el botón de desconectar */}
-            <div className="pt-4">
+            <div className="pt-4 text-center">
               <p className="text-gray-500 text-sm">
                 O{' '}
                 <button
