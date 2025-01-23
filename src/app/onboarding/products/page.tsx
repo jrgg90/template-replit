@@ -39,6 +39,7 @@ export default function ProductsPage() {
   useEffect(() => {
     if (user) {
       fetchProducts()
+      loadSelectedProducts()
     }
   }, [user, currentPage, filters])
 
@@ -109,6 +110,19 @@ export default function ProductsPage() {
       console.error('Error fetching products:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const loadSelectedProducts = async () => {
+    try {
+      const userDoc = await getDoc(doc(db, "users", user!.uid))
+      if (userDoc.exists()) {
+        const savedSelectedProducts = userDoc.data().selectedProducts || []
+        setSelectedProducts(savedSelectedProducts)
+      }
+    } catch (error) {
+      console.error('Error loading selected products:', error)
+      toast.error('Error al cargar productos seleccionados')
     }
   }
 
