@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { db } from '@/lib/firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import ProductsTable from './components/ProductsTable'
 import ProductFilters from './components/ProductFilters'
 import { ShopifyProduct } from '@/types/product'
@@ -119,60 +119,38 @@ export default function ProductsPage() {
   const handleConfirmSave = async () => {
     try {
       setIsSaving(true)
-      const batch = writeBatch(db)
-
-      // Obtener TODOS los productos seleccionados de la base de datos
-      const allProductsQuery = query(
-        collection(db, "products"),
-        where("userId", "==", user?.uid),
-        where("selectedForExport", "==", true)
-      )
-      const allSelectedSnapshot = await getDocs(allProductsQuery)
-      const allCurrentlySelected = allSelectedSnapshot.docs.map(doc => doc.id)
-
-      // Productos a ser deseleccionados (solo de los productos visibles actualmente)
-      const visibleProductIds = products.map(p => p.id)
-      const toDeselect = allCurrentlySelected
-        .filter(id => visibleProductIds.includes(id)) // Solo productos visibles
-        .filter(id => !selectedProducts.includes(id)) // Que ya no están seleccionados
-
-      // Productos nuevos a ser seleccionados
-      const toSelect = selectedProducts.filter(id => !allCurrentlySelected.includes(id))
-
-      // Actualizar productos a deseleccionar
-      toDeselect.forEach(productId => {
-        const productRef = doc(db, "products", productId)
-        batch.update(productRef, {
-          selectedForExport: false,
-          selectedAt: null
-        })
-      })
-
-      // Actualizar productos a seleccionar
-      toSelect.forEach(productId => {
-        const productRef = doc(db, "products", productId)
-        batch.update(productRef, {
-          selectedForExport: true,
-          selectedAt: new Date().toISOString()
-        })
-      })
-
-      await batch.commit()
       
-      toast.success(
-        toSelect.length > 0 && toDeselect.length > 0
-          ? 'Productos actualizados exitosamente'
-          : toSelect.length > 0
-          ? 'Productos seleccionados exitosamente'
-          : 'Productos deseleccionados exitosamente'
-      )
+      // Guardar los productos seleccionados en Firestore
+      const userRef = doc(db, "users", user!.uid)
       
+      // Primero verificamos si el documento existe
+      const userDoc = await getDoc(userRef)
+      
+      if (!userDoc.exists()) {
+        // Si no existe, lo creamos
+        await setDoc(userRef, {
+          selectedProducts: selectedProducts,
+          updatedAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          userId: user!.uid,
+          email: user!.email
+        })
+      } else {
+        // Si existe, lo actualizamos
+        await updateDoc(userRef, {
+          selectedProducts: selectedProducts,
+          updatedAt: new Date().toISOString()
+        })
+      }
+      
+      toast.success('Productos guardados correctamente')
       setShowSaveModal(false)
-      setSelectedProducts([])
-      fetchProducts() // Refresh the list
+      
+      // Redirigir a la página de detalles
+      router.push('/onboarding/products/details')
     } catch (error) {
       console.error('Error saving products:', error)
-      toast.error('Error al actualizar los productos')
+      toast.error('Error al guardar los productos')
     } finally {
       setIsSaving(false)
     }
@@ -200,34 +178,36 @@ export default function ProductsPage() {
   return (
     <ProductsLayout>
       <div className="space-y-8">
-        {/* Header Section with Save Button */}
+        {/* Header Section with Buttons */}
         <div>
-          <button
-            onClick={() => router.back()}
-            className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            <span>Volver a la conexión</span>
-          </button>
-          
           <div className="flex justify-between items-baseline">
             <div className="text-left">
               <h2 className="text-4xl tracking-tight">
                 <span className="font-light text-gray-600">Selecciona los productos</span>
-                <span className="font-medium text-[#131F42]"> que quieres exportar</span>
+                <span className="font-medium text-[#131F42]"> que deseas exportar</span>
               </h2>
               <p className="mt-3 text-base text-gray-600 font-light">
-                Los necesitamos para comenzar tu proceso de pre-exportación
+                Marca los productos que quieres incluir en tu proceso de exportación
               </p>
             </div>
-
-            <Button
-              onClick={handleSaveSelection}
-              className="bg-[#131F42] hover:bg-[#0F1835] text-white -mb-0.5"
-              disabled={selectedProducts.length === 0}
-            >
-              Guardar Selección ({selectedProducts.length})
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button
+                onClick={() => router.push('/onboarding/products/details')}
+                variant="outline"
+                className="text-gray-500 border border-gray-200 hover:bg-gray-50 
+                  hover:text-gray-700 font-light px-6 text-sm whitespace-nowrap"
+              >
+                Más información de productos
+              </Button>
+              <Button
+                onClick={handleSaveSelection}
+                disabled={selectedProducts.length === 0}
+                className="bg-[#131F42] text-white hover:bg-[#1c2b5d] 
+                  font-light px-6 text-sm whitespace-nowrap"
+              >
+                Guardar Selección ({selectedProducts.length})
+              </Button>
+            </div>
           </div>
         </div>
 
