@@ -2,11 +2,34 @@
 
 import { useEffect, useState } from 'react'
 import { db, storage } from '@/lib/firebase'
-import { doc, getDoc, deleteDoc } from 'firebase/firestore'
+import { doc, getDoc, deleteDoc, collection, getDocs } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
 import { Trash2, FileIcon, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
+
+interface UploadedFile {
+  id: string
+  fileId: string
+  fileName: string
+  fileUrl: string
+  fileType: string
+  fileSize: number
+  fileSizeFormatted: string
+  uploadedAt: string
+  userId: string
+  userEmail: string
+  status: string
+  storagePath: string
+  lastModified: number
+  lastModifiedDate: string | null
+  processingStatus: {
+    status: string
+    startedAt: string
+    completedAt: string | null
+    error: string | null
+  }
+}
 
 interface UploadedFilesProps {
   userId: string
@@ -14,7 +37,7 @@ interface UploadedFilesProps {
 }
 
 export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
-  const [files, setFiles] = useState<any[]>([])
+  const [files, setFiles] = useState<UploadedFile[]>([])
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState<string | null>(null)
 
@@ -24,25 +47,19 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
 
   const loadFiles = async () => {
     try {
-      const docRef = doc(db, "product_files", userId)
-      const docSnap = await getDoc(docRef)
+      const filesCollection = collection(db, "product_files", userId, "files")
+      const filesSnapshot = await getDocs(filesCollection)
       
-      if (docSnap.exists()) {
-        console.log('Document data:', docSnap.data())
-        
-        const fileData = docSnap.data()
-        if (!fileData.storagePath) {
-          console.error('Storage path missing in document:', fileData)
-        }
-        
-        setFiles([{
-          ...fileData,
-          storagePath: fileData.storagePath || `product-files/${userId}/${fileData.fileName}`
-        }])
-      } else {
-        console.log('No document found for userId:', userId)
-        setFiles([])
-      }
+      const loadedFiles = filesSnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      })) as UploadedFile[]
+      
+      loadedFiles.sort((a, b) => 
+        new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
+      )
+      
+      setFiles(loadedFiles)
     } catch (error) {
       console.error('Error loading files:', error)
       setFiles([])
@@ -52,7 +69,7 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
     }
   }
 
-  const handleDelete = async (file: any) => {
+  const handleDelete = async (file: UploadedFile) => {
     console.log('Attempting to delete file:', {
       fileName: file.fileName,
       storagePath: file.storagePath,
@@ -66,7 +83,7 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
     }
 
     try {
-      setDeleting(file.fileName)
+      setDeleting(file.fileId)
       
       console.log('Deleting from storage path:', file.storagePath)
       
@@ -78,11 +95,11 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
         console.error('Error deleting from storage:', storageError)
       }
       
-      const docRef = doc(db, "product_files", userId)
+      const docRef = doc(db, "product_files", userId, "files", file.fileId)
       await deleteDoc(docRef)
       console.log('Successfully deleted from Firestore')
       
-      setFiles([])
+      setFiles(prev => prev.filter(f => f.fileId !== file.fileId))
       toast.success('Archivo eliminado correctamente')
     } catch (error) {
       console.error('Error in delete process:', error)
@@ -106,11 +123,14 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
 
   return (
     <div className="p-4 bg-white rounded-lg border border-gray-200">
-      <p className="text-sm text-gray-500 mb-3">Archivos subidos:</p>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-sm text-gray-500">Archivos subidos:</p>
+        <p className="text-xs text-gray-400">{files.length} archivo(s)</p>
+      </div>
       <div className="space-y-2">
         {files.map((file) => (
           <div 
-            key={file.fileName}
+            key={file.fileId}
             className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg"
           >
             <div className="flex items-center gap-3">
@@ -126,10 +146,10 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
               variant="ghost"
               size="sm"
               onClick={() => handleDelete(file)}
-              disabled={deleting === file.fileName}
+              disabled={deleting === file.fileId}
               className="h-8 w-8 p-0"
             >
-              {deleting === file.fileName ? (
+              {deleting === file.fileId ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <Trash2 className="h-4 w-4 text-gray-400 hover:text-red-500" />

@@ -175,12 +175,14 @@ export default function StoreConnection() {
           setLoading(false)
         },
         async () => {
-          // Subida completada
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
           const storagePath = `product-files/${user.uid}/${file.name}`
           
-          // Guardar referencia en Firestore con más detalles
-          await setDoc(doc(db, "product_files", user.uid), {
+          // Crear un ID único para cada archivo
+          const fileId = `${Date.now()}-${file.name}`
+          
+          // Guardar en una subcolección de archivos
+          await setDoc(doc(db, "product_files", user.uid, "files", fileId), {
             fileName: file.name,
             fileUrl: downloadURL,
             fileType: file.type,
@@ -191,6 +193,7 @@ export default function StoreConnection() {
             userEmail: user.email || 'no-email',
             status: 'pending',
             storagePath: storagePath,
+            fileId: fileId,
             lastModified: file.lastModified,
             lastModifiedDate: file.lastModified ? new Date(file.lastModified).toISOString() : null,
             processingStatus: {

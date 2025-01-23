@@ -1,6 +1,6 @@
 'use client'
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { FilePlus, Upload, Trash2, X, FileIcon, Loader2, AlertCircle } from "lucide-react"
@@ -73,12 +73,12 @@ export function FileUploadModal({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl">Sube tu archivo de productos</DialogTitle>
-          <p className="text-sm text-gray-500 mt-2">
+          <DialogDescription className="text-sm text-gray-500 mt-2">
             Sube un archivo con información acerca de tus productos. 
             Puede ser un archivo Excel, CSV, o un PDF.
             <br />
             <span className="text-xs">Tamaño máximo: 10MB</span>
-          </p>
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-4">
