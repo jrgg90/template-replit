@@ -10,9 +10,10 @@ import { toast } from 'sonner'
 
 interface UploadedFilesProps {
   userId: string
+  onReload?: () => void
 }
 
-export function UploadedFiles({ userId }: UploadedFilesProps) {
+export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
   const [files, setFiles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState<string | null>(null)
@@ -47,6 +48,7 @@ export function UploadedFiles({ userId }: UploadedFilesProps) {
       setFiles([])
     } finally {
       setLoading(false)
+      onReload?.()
     }
   }
 

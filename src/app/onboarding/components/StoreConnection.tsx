@@ -35,6 +35,7 @@ export default function StoreConnection() {
   const [syncComplete, setSyncComplete] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [shouldReloadFiles, setShouldReloadFiles] = useState(0)
 
   // Check if store is already connected
   useEffect(() => {
@@ -202,7 +203,7 @@ export default function StoreConnection() {
 
           toast.success('Archivo subido correctamente')
           setShowUploadModal(false)
-          router.push('/onboarding/company-info')
+          setShouldReloadFiles(prev => prev + 1)
         }
       )
     } catch (error) {
@@ -273,7 +274,12 @@ export default function StoreConnection() {
             </div>
 
             {/* Uploaded Files Section */}
-            {user && <UploadedFiles userId={user.uid} />}
+            {user && (
+              <UploadedFiles 
+                userId={user.uid} 
+                key={shouldReloadFiles}
+              />
+            )}
 
             {/* Upload Option - Ya sin el botón de desconectar */}
             <div className="pt-4 text-center">
