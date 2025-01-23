@@ -65,14 +65,34 @@ export function ProductDetailsForm() {
       const productsData = await Promise.all(
         selectedProductIds.map(async (id: string) => {
           const productDoc = await getDoc(doc(db, "products", id))
-          return {
-            id: productDoc.id,
-            title: productDoc.data()?.title || 'Producto sin título',
+          // Obtener los detalles guardados del producto
+          const detailsDoc = await getDoc(doc(db, "product_details", id))
+          
+          // Combinar la información básica del producto con sus detalles
+          const details = detailsDoc.exists() ? detailsDoc.data() : {
             dimensions: { length: '', width: '', height: '' },
             weight: '',
             packaging: '',
             material: '',
             certifications: ''
+          }
+
+          // También inicializamos el formData con los detalles existentes
+          setFormData(prev => ({
+            ...prev,
+            [id]: {
+              dimensions: details.dimensions || { length: '', width: '', height: '' },
+              weight: details.weight || '',
+              packaging: details.packaging || '',
+              material: details.material || '',
+              certifications: details.certifications || ''
+            }
+          }))
+
+          return {
+            id: productDoc.id,
+            title: productDoc.data()?.title || 'Producto sin título',
+            ...details
           }
         })
       )

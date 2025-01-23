@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { ProductDetailsForm } from './components/ProductDetailsForm'
 
 export default function ProductDetailsPage() {
@@ -13,6 +13,15 @@ export default function ProductDetailsPage() {
     <div className="space-y-8">
       {/* Header Section */}
       <div>
+        {/* Botón Volver */}
+        <button
+          onClick={() => router.back()}
+          className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          <span>Regresar a selección de productos</span>
+        </button>
+
         <div className="flex justify-between items-baseline">
           <div className="text-left">
             <h2 className="text-4xl tracking-tight">
@@ -29,27 +38,6 @@ export default function ProductDetailsPage() {
       {/* Form Section */}
       <div className="bg-white rounded-lg shadow-sm border">
         <ProductDetailsForm />
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className="flex justify-between pt-8 mt-4 border-t border-gray-100">
-        <Button
-          onClick={() => router.back()}
-          variant="outline"
-          className="text-gray-500 border border-gray-200 hover:bg-gray-50 
-            hover:text-gray-700 font-light px-6 text-sm"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Regresar a selección de productos
-        </Button>
-        <Button
-          onClick={() => router.push('/onboarding/review')}
-          className="bg-[#131F42] text-white hover:bg-[#1c2b5d] 
-            font-light px-6 text-sm"
-        >
-          Continuar
-          <ArrowRight className="w-4 h-4 ml-2" />
-        </Button>
       </div>
     </div>
   )

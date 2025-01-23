@@ -180,6 +180,15 @@ export default function ProductsPage() {
       <div className="space-y-8">
         {/* Header Section with Buttons */}
         <div>
+          {/* Botón Volver */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            <span>Volver a la conexión</span>
+          </button>
+
           <div className="flex justify-between items-baseline">
             <div className="text-left">
               <h2 className="text-4xl tracking-tight">

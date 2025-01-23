@@ -305,7 +305,7 @@ export default function StoreConnection() {
                 className="bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 
                   hover:text-gray-700 font-light px-6 text-sm"
               >
-                Siguiente paso
+                Siguiente: Información de tu empresa
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
