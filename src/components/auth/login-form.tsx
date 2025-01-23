@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
+import { Loader2 } from "lucide-react"
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => Promise<void>
@@ -31,68 +32,80 @@ export function LoginForm({ onSubmit, className = "" }: LoginFormProps) {
   }
 
   return (
-    <div className={`flex flex-col space-y-6 p-6 ${className}`}>
-      <div className="flex flex-col items-center space-y-2">
+    <div className={`flex flex-col space-y-8 p-10 ${className}`}>
+      <div className="flex flex-col items-center space-y-3">
         <Image 
           src="/exbordia-logo.png"
           alt="Exbordia Logo"
-          width={140}
-          height={40}
-          className="object-contain"
+          width={160}
+          height={45}
+          className="object-contain mb-6"
         />
-        <h2 className="text-2xl font-semibold">Bienvenido a Exbordia</h2>
-        <p className="text-sm text-muted-foreground">
+        <h2 className="text-3xl font-light text-[#131F42]">
+          Bienvenido a Exbordia
+        </h2>
+        <p className="text-base text-gray-600 font-light">
           Inicia sesión con tu cuenta autorizada
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
           <div 
-            className="p-3 text-sm text-gray-600 bg-gray-50 rounded-md"
+            className="p-4 text-sm text-gray-600 bg-gray-50 rounded-lg"
             dangerouslySetInnerHTML={{ __html: error }}
           />
         )}
         
-        <div className="space-y-2">
+        <div className="space-y-4">
           <Input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="h-14 text-base px-4 border-gray-200 rounded-lg"
             required
           />
-        </div>
-        
-        <div className="space-y-2">
+          
           <Input
             type="password"
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="h-14 text-base px-4 border-gray-200 rounded-lg"
             required
           />
         </div>
 
         <Button 
           type="submit" 
-          className="w-full bg-[#131F42] text-white hover:bg-[#1c2b5d]"
+          className="w-full h-14 bg-[#131F42] text-white hover:bg-[#1c2b5d]
+            transition-colors font-light text-base rounded-lg"
           disabled={loading}
         >
-          {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Iniciando sesión...
+            </>
+          ) : (
+            "Iniciar Sesión"
+          )}
         </Button>
       </form>
 
-      <div className="text-center text-sm">
-        <span className="text-muted-foreground">¿No tienes acceso? </span>
-        <a 
-          href="/contacto" 
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline"
-        >
-          Solicitar acceso
-        </a>
+      <div className="text-center">
+        <p className="text-base text-gray-600">
+          ¿No tienes acceso?{' '}
+          <a 
+            href="/contacto" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#131F42] hover:text-[#1c2b5d] font-medium"
+          >
+            Solicitar acceso
+          </a>
+        </p>
       </div>
     </div>
   )
