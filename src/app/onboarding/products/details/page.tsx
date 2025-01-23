@@ -40,7 +40,7 @@ export default function ProductDetailsPage() {
             hover:text-gray-700 font-light px-6 text-sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Regresar
+          Regresar a selección de productos
         </Button>
         <Button
           onClick={() => router.push('/onboarding/review')}
