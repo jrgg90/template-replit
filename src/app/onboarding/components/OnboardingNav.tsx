@@ -78,7 +78,7 @@ export function OnboardingNav() {
                 className="min-w-[160px]"
               >
                 <span className={cn(
-                  "text-base font-light",
+                  "text-base font-light whitespace-nowrap",
                   isActive ? "text-[#131F42]" : "text-gray-600"
                 )}>
                   {item.label}

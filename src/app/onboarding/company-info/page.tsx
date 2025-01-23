@@ -1,12 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { CompanyQuestionnaire } from './components/CompanyQuestionnaire'
 
 export default function CompanyInfoPage() {
-  const router = useRouter()
-
   return (
     <div className="space-y-8">
       {/* Header Section */}
@@ -24,10 +20,8 @@ export default function CompanyInfoPage() {
         </div>
       </div>
 
-      {/* Form Section - Por ahora vacío */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <p>Formulario de información de empresa aquí...</p>
-      </div>
+      {/* Questionnaire Section */}
+      <CompanyQuestionnaire />
     </div>
   )
 } 
