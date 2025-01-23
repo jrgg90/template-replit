@@ -7,9 +7,15 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
-import { Trash2 } from 'lucide-react'
+import { Trash2, ShoppingBag, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { FileUploadModal } from './FileUploadModal'
+import { toast } from 'sonner'
+import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '@/lib/firebase'
+import { setDoc } from 'firebase/firestore'
+import { UploadedFiles } from './UploadedFiles'
 
 interface InputProps {
   id: string;
@@ -27,6 +33,8 @@ export default function StoreConnection() {
   const [isConnected, setIsConnected] = useState(false)
   const router = useRouter()
   const [syncComplete, setSyncComplete] = useState(false)
+  const [showUploadModal, setShowUploadModal] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
 
   // Check if store is already connected
   useEffect(() => {
@@ -128,6 +136,81 @@ export default function StoreConnection() {
     }
   };
 
+  const handleFileUpload = async (file: File) => {
+    if (!user) {
+      toast.error('Debes iniciar sesión para subir archivos')
+      return
+    }
+
+    try {
+      setLoading(true)
+      setUploadProgress(0)
+      
+      // Crear referencia en Firebase Storage
+      const fileRef = ref(storage, `product-files/${user.uid}/${file.name}`)
+      
+      // Agregar metadatos al archivo
+      const metadata = {
+        customMetadata: {
+          userId: user.uid,
+          userEmail: user.email || 'no-email',
+          uploadedAt: new Date().toISOString(),
+          originalName: file.name
+        }
+      }
+
+      // Usar los metadatos en la subida
+      const uploadTask = uploadBytesResumable(fileRef, file, metadata)
+
+      // Escuchar el progreso
+      uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          setUploadProgress(Math.round(progress))
+        },
+        (error) => {
+          console.error('Error uploading:', error)
+          toast.error('Error al subir el archivo')
+          setLoading(false)
+        },
+        async () => {
+          // Subida completada
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
+          
+          // Guardar referencia en Firestore con más detalles
+          await setDoc(doc(db, "product_files", user.uid), {
+            fileName: file.name,
+            fileUrl: downloadURL,
+            fileType: file.type,
+            fileSize: file.size,
+            fileSizeFormatted: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+            uploadedAt: new Date().toISOString(),
+            userId: user.uid,
+            userEmail: user.email || 'no-email',
+            status: 'pending',
+            storagePath: `product-files/${user.uid}/${file.name}`,
+            lastModified: file.lastModified,
+            lastModifiedDate: file.lastModified ? new Date(file.lastModified).toISOString() : null,
+            processingStatus: {
+              status: 'pending',
+              startedAt: new Date().toISOString(),
+              completedAt: null,
+              error: null
+            }
+          })
+
+          toast.success('Archivo subido correctamente')
+          setShowUploadModal(false)
+          router.push('/onboarding/company-info')
+        }
+      )
+    } catch (error) {
+      console.error('Error setting up upload:', error)
+      toast.error('Error al preparar la subida del archivo')
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="space-y-12">
       {/* Main Section */}
@@ -145,42 +228,63 @@ export default function StoreConnection() {
       <div className="max-w-2xl flex flex-col space-y-4">
         {isConnected ? (
           <div className="w-full space-y-4">
-            {/* Store URL Display */}
-            <div className="p-4 bg-white rounded-lg border border-gray-200">
-              <p className="text-sm text-gray-500 mb-1">Tienda conectada:</p>
-              <p className="text-[#131F42] font-medium">
-                {storeUrl || 'No store URL found'}
-              </p>
+            {/* Store URL Display y Ver Productos juntos */}
+            <div className="space-y-4">
+              <div className="p-4 bg-white rounded-lg border border-gray-200">
+                <p className="text-sm text-gray-500 mb-3">Tienda conectada:</p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <ShoppingBag className="h-5 w-5 text-[#131F42]" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{storeUrl}</p>
+                        <p className="text-xs text-gray-500">
+                          • Conectado el {new Date().toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleDisconnect}
+                      disabled={loading}
+                      className="h-8 w-8 p-0"
+                    >
+                      {loading ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="h-4 w-4 text-gray-400 hover:text-red-500" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex justify-end">
+                <Button
+                  onClick={() => router.push('/onboarding/products')}
+                  className="px-8 h-10 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
+                    transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
+                >
+                  Ver Productos
+                </Button>
+              </div>
             </div>
 
-            {/* Action Buttons - Inmediatamente después del recuadro */}
-            <div className="flex items-center justify-end gap-3">
-              <Button
-                onClick={() => router.push('/onboarding/products')}
-                className="px-8 h-10 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
-                  transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
-              >
-                Ver Productos
-              </Button>
-              <button
-                onClick={handleDisconnect}
-                disabled={loading}
-                className="w-10 h-10 flex items-center justify-center text-gray-500 rounded-lg 
-                  border border-gray-300 hover:bg-gray-50 transition-colors disabled:opacity-50"
-                aria-label="Desconectar Tienda"
-              >
-                {loading ? (
-                  <LoadingSpinner className="w-4 h-4" />
-                ) : (
-                  <Trash2 className="w-4 h-4" />
-                )}
-              </button>
-            </div>
+            {/* Uploaded Files Section */}
+            {user && <UploadedFiles userId={user.uid} />}
 
-            {/* Upload Option - Movido después de los botones */}
+            {/* Upload Option - Ya sin el botón de desconectar */}
             <div className="pt-4">
-              <p className="text-gray-500 text-sm text-center">
-                O sube tu <span className="underline cursor-pointer hover:text-gray-700 transition-colors">CSV o PDF</span> con información de tus productos
+              <p className="text-gray-500 text-sm">
+                O{' '}
+                <button
+                  onClick={() => setShowUploadModal(true)}
+                  className="underline cursor-pointer hover:text-gray-700 transition-colors"
+                >
+                  sube tu CSV o PDF
+                </button>
+                {' '}con información de tus productos
               </p>
             </div>
 
@@ -224,7 +328,14 @@ export default function StoreConnection() {
             
             {/* New Upload Option */}
             <p className="text-gray-500 text-sm text-center">
-              O sube tu <span className="underline cursor-pointer hover:text-gray-700 transition-colors">CSV o PDF</span> con información de tus productos
+              O{' '}
+              <button
+                onClick={() => setShowUploadModal(true)}
+                className="underline cursor-pointer hover:text-gray-700 transition-colors"
+              >
+                sube tu CSV o PDF
+              </button>
+              {' '}con información de tus productos
             </p>
           </>
         )}
@@ -233,6 +344,14 @@ export default function StoreConnection() {
           <p className="mt-2 text-sm text-red-600">{error}</p>
         )}
       </div>
+
+      <FileUploadModal
+        open={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        onUpload={handleFileUpload}
+        loading={loading}
+        progress={uploadProgress}
+      />
 
       {syncComplete && (
         <div className="fixed inset-0 bg-white/80 flex items-center justify-center z-50">

@@ -143,7 +143,8 @@ export function CompanyQuestionnaire() {
             <Button
               onClick={handleSave}
               disabled={loading || !isComplete()}
-              className="bg-[#131F42] text-white hover:bg-[#1c2b5d] px-8 min-w-[150px]"
+              className="px-8 h-10 bg-[#131F42] text-white rounded-lg hover:bg-[#1c2b5d] 
+                transition-colors font-normal whitespace-nowrap flex-shrink-0 text-base"
             >
               {loading ? (
                 <>
