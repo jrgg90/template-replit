@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { db } from '@/lib/firebase'
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore'
-import { Loader2, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react'
+import { Loader2, AlertCircle, CheckCircle2, ArrowRight, ClipboardList, Building2, PackageCheck } from 'lucide-react'
 
 export default function ReviewPage() {
   const router = useRouter()
@@ -55,92 +55,152 @@ export default function ReviewPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Header Section */}
       <div>
-        <div className="flex justify-between items-baseline">
-          <div className="text-left">
-            <h2 className="text-4xl tracking-tight">
-              <span className="font-light text-gray-600">Estamos revisando tu caso</span>
-              <span className="font-medium text-[#131F42]"> - te mantendremos informado</span>
-            </h2>
-            <p className="mt-3 text-base text-gray-600 font-light">
-              Nuestro equipo está analizando la información proporcionada
-            </p>
+        <h2 className="text-4xl tracking-tight">
+          <span className="font-light text-gray-600">Estamos revisando tu caso</span>
+          <span className="font-medium text-[#131F42]"> - te mantendremos informado</span>
+        </h2>
+        <p className="mt-3 text-base text-gray-600 font-light">
+          Nuestro equipo está analizando la información proporcionada
+        </p>
+      </div>
+
+      {/* Status Cards Grid */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Solicitud Card */}
+        <div className="bg-white rounded-xl border p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full p-2 bg-green-50">
+              <CheckCircle2 className="w-6 h-6 text-green-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900">Solicitud recibida</h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Hemos recibido tu solicitud el {status.submissionDate}. 
+                Te notificaremos por correo electrónico cuando hayamos revisado tu caso.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Productos Card */}
+        <div className="bg-white rounded-xl border p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full p-2 bg-blue-50">
+              <PackageCheck className="w-6 h-6 text-blue-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900">Información de Productos</h3>
+              {status.hasProducts ? (
+                <p className="mt-1 text-sm text-gray-500">
+                  Has seleccionado tus productos exitosamente.{' '}
+                  <Button
+                    onClick={() => router.push('/onboarding/products/details')}
+                    variant="link"
+                    className="text-blue-600 p-0 h-auto font-normal"
+                  >
+                    Agregar más detalles
+                    <ArrowRight className="w-3 h-3 ml-1" />
+                  </Button>
+                </p>
+              ) : (
+                <div className="mt-2 flex items-center gap-2">
+                  <p className="text-sm text-amber-600">No hemos detectado productos seleccionados</p>
+                  <Button
+                    onClick={() => router.push('/onboarding')}
+                    size="sm"
+                    variant="outline"
+                    className="ml-auto"
+                  >
+                    Seleccionar productos
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Empresa Card */}
+        <div className="bg-white rounded-xl border p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full p-2 bg-purple-50">
+              <Building2 className="w-6 h-6 text-purple-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900">Información de Empresa</h3>
+              {status.hasCompanyInfo ? (
+                <p className="mt-1 text-sm text-gray-500">
+                  Has completado la información básica de tu empresa.
+                </p>
+              ) : (
+                <div className="mt-2 flex items-center gap-2">
+                  <p className="text-sm text-amber-600">Falta información de tu empresa</p>
+                  <Button
+                    onClick={() => router.push('/onboarding/company-info')}
+                    size="sm"
+                    variant="outline"
+                    className="ml-auto"
+                  >
+                    Completar información
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Recordatorio Card */}
+        <div className="bg-gradient-to-br from-[#131F42]/5 to-[#131F42]/10 rounded-xl border p-6 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full p-2 bg-white">
+              <ClipboardList className="w-6 h-6 text-[#131F42]" />
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-[#131F42]">¿Sabías que?</h3>
+              <p className="mt-1 text-sm text-gray-600">
+                Entre más información proporciones sobre tus productos (dimensiones, peso, empaque),
+                más rápido podremos procesar tu solicitud.{' '}
+                <Button
+                  onClick={() => router.push('/onboarding/products/details')}
+                  variant="link"
+                  className="text-[#131F42] p-0 h-auto font-normal"
+                >
+                  Agregar detalles ahora
+                  <ArrowRight className="w-3 h-3 ml-1" />
+                </Button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Status Section */}
-      <div className="bg-white rounded-lg shadow-sm border p-6 space-y-6">
-        {/* Submission Status */}
-        <div className="flex items-start gap-4 pb-6 border-b">
-          <div className="rounded-full p-1 bg-blue-50">
-            <CheckCircle2 className="w-5 h-5 text-blue-500" />
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-gray-900">Solicitud recibida</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Hemos recibido tu solicitud el {status.submissionDate}. 
-              Te notificaremos por correo electrónico cuando hayamos revisado tu caso.
-            </p>
-          </div>
-        </div>
-
-        {/* Pending Actions (if any) */}
-        {(!status.hasProducts || !status.hasCompanyInfo) && (
-          <div className="flex items-start gap-4">
-            <div className="rounded-full p-1 bg-amber-50">
-              <AlertCircle className="w-5 h-5 text-amber-500" />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-gray-900">Acciones pendientes</h3>
-              <div className="space-y-3 mt-3">
-                {!status.hasProducts && (
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-600">
-                      No hemos detectado información de tus productos
-                    </p>
-                    <Button
-                      onClick={() => router.push('/onboarding')}
-                      variant="outline"
-                      size="sm"
-                    >
-                      Agregar productos
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                )}
-                
-                {!status.hasCompanyInfo && (
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-600">
-                      Falta información de tu empresa
-                    </p>
-                    <Button
-                      onClick={() => router.push('/onboarding/company-info')}
-                      variant="outline"
-                      size="sm"
-                    >
-                      Completar información
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Next Steps */}
-        <div className="pt-6 border-t">
-          <h4 className="text-sm font-medium text-gray-900 mb-2">Próximos pasos:</h4>
-          <ol className="space-y-2">
-            <li className="text-sm text-gray-600">1. Revisaremos la información proporcionada</li>
-            <li className="text-sm text-gray-600">2. Te contactaremos si necesitamos información adicional</li>
-            <li className="text-sm text-gray-600">3. Recibirás un correo con el resultado de la evaluación</li>
-          </ol>
-        </div>
+      {/* Next Steps Section */}
+      <div className="bg-white rounded-xl border p-8">
+        <h4 className="text-lg font-medium text-gray-900 mb-4">Próximos pasos:</h4>
+        <ol className="space-y-4">
+          <li className="flex items-center gap-3 text-gray-600">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#131F42]/20 text-sm font-medium text-[#131F42]">
+              1
+            </span>
+            <span>Revisaremos la información proporcionada</span>
+          </li>
+          <li className="flex items-center gap-3 text-gray-600">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#131F42]/20 text-sm font-medium text-[#131F42]">
+              2
+            </span>
+            <span>Te contactaremos si necesitamos información adicional</span>
+          </li>
+          <li className="flex items-center gap-3 text-gray-600">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#131F42]/20 text-sm font-medium text-[#131F42]">
+              3
+            </span>
+            <span>Recibirás un correo con el resultado de la evaluación</span>
+          </li>
+        </ol>
       </div>
     </div>
   )
