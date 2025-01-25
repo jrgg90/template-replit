@@ -10,6 +10,7 @@ import { useState } from "react"
 import { LoginDialog } from "@/components/auth/login-dialog"
 import { LoginButton } from "@/components/auth/login-button"
 import { CTA } from "@/components/layout/call-to-action"
+import { FAQSection } from "@/components/layout/faq-section"
 
 export default function Home() {
   return (
@@ -361,6 +362,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Footer */}
       <footer className="bg-[#131F42] text-white py-12">
