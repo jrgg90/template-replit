@@ -1,21 +1,51 @@
 'use client'
 
 import Image from 'next/image'
-import Script from 'next/script'
 import { useEffect } from 'react'
 import Link from 'next/link'
 
 export default function ContactPage() {
   useEffect(() => {
-    // Asegurarnos que el script de Typeform se carga después del montaje del componente
+    // Mejorar la carga del script de Typeform
     const loadTypeform = async () => {
-      // @ts-ignore
-      if (window.tf) return
-      const script = document.createElement('script')
-      script.src = '//embed.typeform.com/next/embed.js'
-      document.body.appendChild(script)
+      try {
+        // @ts-ignore
+        if (window.tf) return
+
+        // Cargar el script de Typeform
+        const script = document.createElement('script')
+        script.src = '//embed.typeform.com/next/embed.js'
+        script.async = true
+        
+        // Esperar a que el script se cargue completamente
+        await new Promise((resolve, reject) => {
+          script.onload = resolve
+          script.onerror = reject
+          document.body.appendChild(script)
+        })
+
+        // Dar tiempo adicional para que Typeform se inicialice
+        setTimeout(() => {
+          // @ts-ignore
+          if (window.tf) {
+            // @ts-ignore
+            window.tf.createWidget()
+          }
+        }, 1000)
+      } catch (error) {
+        console.error('Error loading Typeform:', error)
+      }
     }
+
     loadTypeform()
+
+    // Cleanup
+    return () => {
+      const script = document.querySelector('script[src*="typeform"]')
+      if (script) {
+        script.remove()
+      }
+    }
   }, [])
 
   return (
@@ -37,6 +67,10 @@ export default function ContactPage() {
       <div className="flex-1 pt-24">
         <div 
           data-tf-live="01JHKYZ8H2JA8N56CS9MX5TAK1"
+          data-tf-opacity="100"
+          data-tf-iframe-props="title=Exbordia Contact Form"
+          data-tf-transitive-search-params
+          data-tf-medium="snippet"
           className="h-screen w-full"
         />
       </div>
