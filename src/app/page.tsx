@@ -11,10 +11,12 @@ import { LoginDialog } from "@/components/auth/login-dialog"
 import { LoginButton } from "@/components/auth/login-button"
 import { CTA } from "@/components/layout/call-to-action"
 import { FAQSection } from "@/components/layout/faq-section"
+import { MainHeader } from "@/components/layout/MainHeader"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white pt-16">
+    <main className="min-h-screen bg-white">
+      <MainHeader />
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 min-h-[90vh] flex items-center overflow-hidden">
         {/* Animated Background */}
