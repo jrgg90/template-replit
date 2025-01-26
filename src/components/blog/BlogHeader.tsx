@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { LoginButton } from '@/components/auth/LoginButton'
+import { LoginButton } from '@/components/auth/login-button'
 
 export function BlogHeader() {
   return (
@@ -26,9 +26,11 @@ export function BlogHeader() {
             <Button 
               variant="ghost" 
               asChild
-              className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              <Link href="/blog">Blog</Link>
+              <Link href="/blog">
+                Blog
+              </Link>
             </Button>
             <LoginButton />
             <Link href="/contacto" target="_blank" rel="noopener noreferrer">

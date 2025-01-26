@@ -14,41 +14,7 @@ import { FAQSection } from "@/components/layout/faq-section"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/">
-              <Image 
-                src="/exbordia-logo.png"
-                alt="Exbordia Logo"
-                width={140}
-                height={40}
-                className="object-contain"
-              />
-            </Link>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex items-center gap-4">
-            <Link 
-              href="/blog"
-              className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-            >
-              Blog
-            </Link>
-            <LoginButton />
-            <Link href="/contacto" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
-                Solicitar Información
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
+    <main className="min-h-screen bg-white pt-16">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 min-h-[90vh] flex items-center overflow-hidden">
         {/* Animated Background */}
@@ -417,6 +383,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }
