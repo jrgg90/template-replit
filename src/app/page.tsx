@@ -18,16 +18,27 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center">
-            <Image 
-              src="/exbordia-logo.png"
-              alt="Exbordia Logo"
-              width={140}
-              height={40}
-              className="object-contain"
-            />
+            <Link href="/">
+              <Image 
+                src="/exbordia-logo.png"
+                alt="Exbordia Logo"
+                width={140}
+                height={40}
+                className="object-contain"
+              />
+            </Link>
           </div>
+
+          {/* CTA Buttons */}
           <div className="flex items-center gap-4">
+            <Link 
+              href="/blog"
+              className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
+            >
+              Blog
+            </Link>
             <LoginButton />
             <Link href="/contacto" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
