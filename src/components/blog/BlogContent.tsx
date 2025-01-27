@@ -2,6 +2,7 @@
 
 import { Clock } from 'lucide-react'
 import Image from 'next/image'
+import { getBlogImagePath } from '@/lib/helpers/blog-images'
 
 interface BlogContentProps {
   post: {
@@ -9,6 +10,7 @@ interface BlogContentProps {
     readingTime: string
     coverImage: string
     contentHtml: string
+    tag: string
   }
 }
 
@@ -29,6 +31,9 @@ export function BlogContent({ post }: BlogContentProps) {
       <div className="p-8 lg:p-12">
         {/* Header */}
         <header className="mb-8">
+          <span className="inline-block px-3 py-1 text-sm text-[#131F42] bg-blue-50 rounded-full mb-4">
+            {post.tag}
+          </span>
           <h1 className="text-3xl font-medium text-[#131F42] mb-4">
             {post.title}
           </h1>
@@ -50,7 +55,11 @@ export function BlogContent({ post }: BlogContentProps) {
             prose-p:text-gray-600 prose-p:leading-relaxed
             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
             prose-ul:my-6 prose-li:text-gray-600
-            prose-strong:text-gray-900 prose-strong:font-medium"
+            prose-strong:text-gray-900 prose-strong:font-medium
+            prose-blockquote:border-l-4 prose-blockquote:border-[#131F42]
+            prose-blockquote:pl-4 prose-blockquote:italic
+            prose-img:rounded-lg prose-img:w-full prose-img:my-8
+            prose-img:shadow-md prose-img:border prose-img:border-gray-100"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
       </div>

@@ -23,6 +23,12 @@ const nextConfig = {
     if (isServer) {
       config.externals.push('gray-matter')
     }
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        path: false
+      }
+    }
     return config
   }
 }

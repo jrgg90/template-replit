@@ -1,11 +1,11 @@
-'use client'
-
 import { BlogGrid } from '@/components/blog/BlogGrid'
 import { BlogHeader } from '@/components/blog/BlogHeader'
 import { BlogSearch } from '@/components/blog/BlogSearch'
-import { blogPosts } from '@/lib/blog-posts'
+import { getAllPosts } from '@/lib/blog'
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getAllPosts()
+
   return (
     <div className="min-h-screen bg-white">
       <BlogHeader />
@@ -27,7 +27,7 @@ export default function BlogPage() {
           <BlogSearch />
 
           {/* Blog Grid */}
-          <BlogGrid initialPosts={blogPosts} />
+          <BlogGrid initialPosts={posts} />
         </div>
       </main>
     </div>

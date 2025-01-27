@@ -1,29 +1,20 @@
 import { BlogHeader } from '@/components/blog/BlogHeader'
-import { getPostBySlug } from '@/lib/blog-posts'
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
-import { remark } from 'remark'
-import html from 'remark-html'
+import { getPostBySlug } from '@/lib/blog'
+import { markdownToHtml } from '@/lib/markdown'
 import { BlogContent } from '@/components/blog/BlogContent'
-import { Button } from '@/components/ui/button'
-
-// Función para convertir Markdown a HTML
-async function markdownToHtml(markdown: string) {
-  const result = await remark()
-    .use(html)
-    .process(markdown)
-  return result.toString()
-}
+import { notFound } from 'next/navigation'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default async function BlogPostPage({
   params
 }: {
   params: { slug: string }
 }) {
-  const post = getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug)
   
   if (!post) {
-    return null
+    notFound()
   }
 
   const contentHtml = await markdownToHtml(post.content)
@@ -63,9 +54,9 @@ export default async function BlogPostPage({
                     text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 
                     focus:ring-white/40"
                 />
-                <Button className="bg-white text-[#131F42] hover:bg-gray-100 px-6">
+                <button className="bg-white text-[#131F42] hover:bg-gray-100 px-6">
                   Suscribirse
-                </Button>
+                </button>
               </form>
             </div>
           </section>

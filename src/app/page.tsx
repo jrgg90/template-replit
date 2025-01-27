@@ -128,8 +128,8 @@ export default function Home() {
               Inventario y Envíos desde EE. UU
               </h3>
               <p className="text-gray-600">
-                Mantenga sus productos más cerca de los clientes en uno de nuestros 
-                almacenes y permítanos gestionar la entrega D2C y B2B para entregas 
+                Mantén tus productos más cerca de los clientes en uno de nuestros 
+                almacenes y permítenos gestionar la entrega D2C y B2B para entregas 
                 confiables en 2 días.
               </p>
             </div>
@@ -155,7 +155,7 @@ export default function Home() {
                 Pagos Transfronterizos
               </h3>
               <p className="text-gray-600 mb-8">
-                Reciba pagos en USD instantáneamente con Exbordia como su Merchant of Record, asegurando transacciones seguras para ventas en EE.UU. 
+                Recibe pagos en USD instantáneamente con Exbordia como tu Merchant of Record, asegurando transacciones seguras para ventas en EE.UU. 
                 Nos encargamos de impuestos y cumplimiento.
               </p>
               <div className="bg-white rounded-2xl p-4 shadow-sm">
@@ -178,12 +178,10 @@ export default function Home() {
                 <BarChart3 className="w-6 h-6 text-[#131F42]" />
               </div>
               <h3 className="text-2xl font-medium text-[#131F42] mb-4">
-                Insights de Mercado
+                Marketplaces Integrados
               </h3>
               <p className="text-gray-600">
-                Obtenga una ventaja competitiva con insights de mercado basados en datos 
-                y pronósticos de demanda para optimizar inventario y satisfacer la 
-                demanda internacional.
+                Amplía tu alcance e incrementa tus ventas en los principales canales (Amazon, Etsy, Faire, etc) con una sola integración.
               </p>
             </div>
 

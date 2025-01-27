@@ -1,52 +1,57 @@
-import path from 'node:path'
+import fs from 'node:fs'
+import path from 'path'
 import matter from 'gray-matter'
-import * as fs from 'node:fs'
 
-// Definir la interfaz para los posts
-interface BlogPost {
-  id: string
+export interface BlogPost {
   slug: string
   title: string
-  date: string
   excerpt: string
   coverImage: string
   readingTime: string
-  content: string
   tag: string
+  content: string
 }
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog')
 
+// Constantes para imágenes
+export const BLOG_IMAGES_PATH = '/blog-images'
+
+// Helper para construir rutas de imágenes
+export function getBlogImagePath(imageName: string) {
+  return `${BLOG_IMAGES_PATH}/${imageName}`
+}
+
 export async function getAllPosts(): Promise<BlogPost[]> {
-  try {
-    // Leer el directorio de posts de forma síncrona
-    const fileNames = fs.readdirSync(postsDirectory)
-    
-    // Leer cada archivo y procesar su contenido
-    const allPostsData = fileNames.map((fileName) => {
-      const id = fileName.replace(/\.md$/, '')
+  const fileNames = fs.readdirSync(postsDirectory)
+  
+  return fileNames
+    .filter(fileName => fileName.endsWith('.md'))
+    .map(fileName => {
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const matterResult = matter(fileContents)
-
+      const { data, content } = matter(fileContents)
+      
       return {
-        id,
-        slug: id,
-        content: matterResult.content,
-        ...(matterResult.data as Omit<BlogPost, 'id' | 'slug' | 'content'>)
+        slug: fileName.replace(/\.md$/, ''),
+        content,
+        ...(data as Omit<BlogPost, 'slug' | 'content'>)
       }
     })
+}
 
-    // Ordenar posts por fecha
-    return allPostsData.sort((a, b) => {
-      if (a.date < b.date) {
-        return 1
-      } else {
-        return -1
-      }
-    })
-  } catch (error) {
-    console.error('Error loading blog posts:', error)
-    return []
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const fullPath = path.join(postsDirectory, `${slug}.md`)
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+    const { data, content } = matter(fileContents)
+    
+    return {
+      slug,
+      content,
+      ...(data as Omit<BlogPost, 'slug' | 'content'>)
+    }
+  } catch {
+    return null
   }
 } 
