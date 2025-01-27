@@ -3,9 +3,8 @@ export interface BlogPost {
   slug: string
   title: string
   excerpt: string
-  content: string
   coverImage: string
-  date: string
   readingTime: string
   tag: string
+  content: string
 } 

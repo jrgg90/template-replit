@@ -15,6 +15,15 @@ const nextConfig = {
         hostname: '**.shopifycdn.net',
       }
     ]
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['gray-matter']
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push('gray-matter')
+    }
+    return config
   }
 }
 

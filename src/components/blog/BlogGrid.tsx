@@ -3,18 +3,21 @@
 import { BlogPost } from '@/types/blog'
 import { BlogCard } from './BlogCard'
 import { useSearchParams } from 'next/navigation'
-import { samplePosts } from '@/lib/blog-data'
 import { BlogPagination } from './BlogPagination'
 
 const POSTS_PER_PAGE = 6
 
-export function BlogGrid() {
+interface BlogGridProps {
+  initialPosts: BlogPost[]
+}
+
+export function BlogGrid({ initialPosts }: BlogGridProps) {
   const searchParams = useSearchParams()
   const searchTerm = searchParams.get('q')?.toLowerCase()
   const currentPage = Number(searchParams.get('page')) || 1
-
+  
   // Filtrar posts
-  let filteredPosts = [...samplePosts]
+  let filteredPosts = initialPosts
 
   if (searchTerm) {
     filteredPosts = filteredPosts.filter(post => 

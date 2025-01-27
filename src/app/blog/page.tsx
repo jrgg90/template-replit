@@ -3,6 +3,7 @@
 import { BlogGrid } from '@/components/blog/BlogGrid'
 import { BlogHeader } from '@/components/blog/BlogHeader'
 import { BlogSearch } from '@/components/blog/BlogSearch'
+import { blogPosts } from '@/lib/blog-posts'
 
 export default function BlogPage() {
   return (
@@ -26,7 +27,7 @@ export default function BlogPage() {
           <BlogSearch />
 
           {/* Blog Grid */}
-          <BlogGrid />
+          <BlogGrid initialPosts={blogPosts} />
         </div>
       </main>
     </div>
