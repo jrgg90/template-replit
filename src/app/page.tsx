@@ -80,7 +80,11 @@ export default function Home() {
             {/* CTA Buttons with enhanced animations */}
             <div className="flex justify-center opacity-0 animate-fade-in-up [animation-delay:1200ms] mb-20">
               <div className="flex flex-col items-center">
-                <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+                <Link 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform?usp=header"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
                   <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
                     hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 

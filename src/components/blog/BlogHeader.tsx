@@ -33,11 +33,15 @@ export function BlogHeader() {
               </Link>
             </Button>
             <LoginButton />
-            <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfbFzRLNC1NwdjzPd_kayP-CZFHMUk-4C_tad5WfBXQ8vEXKw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
                 Solicitar Información
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

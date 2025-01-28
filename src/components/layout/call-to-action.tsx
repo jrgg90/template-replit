@@ -24,7 +24,11 @@ export function CTA() {
             </p>
           </div>
           <div className="flex justify-center">
-            <Link href="/contacto" target="_blank" rel="noopener noreferrer">
+            <Link 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform?usp=header"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
               <Button className="gap-4 bg-[#131F42] hover:bg-[#1c2b5d] px-8 text-sm transform hover:scale-[1.02] transition-all duration-300">
                 Empieza a Exportar <MoveRight className="w-4 h-4" />
               </Button>

@@ -42,22 +42,9 @@ export default async function BlogPostPage({
               <h2 className="text-2xl font-medium mb-4">
                 ¿Te interesa exportar a Estados Unidos?
               </h2>
-              <p className="text-gray-300 mb-8">
-                Suscríbete a nuestro newsletter y recibe las últimas noticias, guías y consejos 
-                para expandir tu negocio al mercado estadounidense.
+              <p className="text-gray-300">
+                Mándanos un correo electrónico a <a href="mailto:contacto@exbordia.com" className="text-white">contacto@exbordia.com</a>
               </p>
-              <form className="flex gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Tu correo electrónico"
-                  className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 
-                    text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 
-                    focus:ring-white/40"
-                />
-                <button className="bg-white text-[#131F42] hover:bg-gray-100 px-6">
-                  Suscribirse
-                </button>
-              </form>
             </div>
           </section>
         </div>

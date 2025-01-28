@@ -1,41 +1,19 @@
 ---
-title: 'Guía Completa: Primeros Pasos para Exportar a Estados Unidos'
+title: '¿Qué es un Merchant of Record y para qué sirve?'
 date: '2024-02-20'
-excerpt: 'Descubre los aspectos fundamentales que debes considerar antes de comenzar tu proceso de exportación a Estados Unidos.'
-coverImage: '/blog/export-guide.jpg'
-readingTime: '5 min'
+excerpt: 'Descubre qué es un Merchant of Record y cómo te puede ayudar.'
+coverImage: '/blog-images/merchant-of-record.jpg'
+readingTime: '3 min'
+tag: 'Legal'
 ---
 
-El mercado estadounidense representa una oportunidad única para los empresarios mexicanos. Con más de 330 millones de consumidores potenciales y un poder adquisitivo significativamente mayor, Estados Unidos puede ser el siguiente gran paso para tu negocio.
+En el complejo mundo del comercio electrónico internacional, el término "Merchant of Record" (MoR) a menudo se pasa por alto, pero comprender su significado puede ser crucial para las empresas que buscan expandirse a nuevos mercados. **En pocas palabras, un MoR es la entidad legalmente responsable de la transacción con el cliente final.** Esto significa que el MoR es quien procesa los pagos, emite las facturas, gestiona los impuestos y se encarga de las devoluciones, liberando a las empresas de las complejidades legales y fiscales de cada país.
 
-## 1. Evalúa tu Preparación
+Imagina una pequeña empresa en México que desea vender sus productos en Estados Unidos. Se enfrentarían a una serie de obstáculos, como diferentes regulaciones fiscales, métodos de pago y normativas de protección al consumidor. Un MoR elimina estas barreras, simplificando la expansión internacional y reduciendo riesgos. Al asumir la responsabilidad legal y financiera de las transacciones, el MoR permite a las empresas ahorrar tiempo y recursos, ya que no necesitan establecer una entidad legal en cada país donde desean operar. Además, al ofrecer opciones de pago localizadas y un mejor servicio al cliente, el MoR mejora la experiencia del comprador.
 
-Antes de comenzar el proceso de exportación, es crucial evaluar si tu empresa está lista. Considera los siguientes aspectos:
+Si tu empresa está vendiendo productos o servicios en línea a nivel internacional, un MoR puede ser la solución ideal para agilizar tus operaciones y minimizar riesgos. En Exbordia, comprendemos los desafíos que enfrentan las empresas mexicanas que buscan expandirse a Estados Unidos. Por eso, **ofrecemos el servicio de MoR para que puedas concentrarte en el crecimiento de tu negocio sin preocuparte por las complejidades del comercio internacional.**
 
-- **Capacidad de producción**: ¿Puedes mantener un suministro constante?
-- **Calidad del producto**: ¿Cumples con los estándares estadounidenses?
-- **Recursos financieros**: ¿Tienes el capital necesario para la expansión?
-- **Equipo humano**: ¿Cuentas con personal que hable inglés y entienda el mercado?
+## Exbordia: Tu Merchant of Record en Estados Unidos
 
-## 2. Conoce los Requisitos Legales
 
-La exportación a Estados Unidos requiere cumplir con diversos requisitos:
-
-1. Registro ante la FDA (si aplica)
-2. Certificaciones específicas según tu industria
-3. Documentación aduanera
-4. Permisos de importación
-
-## 3. Entiende tu Mercado
-
-Investiga a fondo:
-- Competidores actuales
-- Precios del mercado
-- Canales de distribución
-- Preferencias del consumidor
-
-## Próximos Pasos
-
-Si has evaluado estos aspectos y te sientes listo, el siguiente paso es comenzar con la planificación detallada de tu estrategia de exportación.
-
-¿Necesitas ayuda con tu proceso de exportación? En Exbordia podemos guiarte en cada paso del camino. 
+---
