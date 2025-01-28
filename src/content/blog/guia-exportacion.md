@@ -1,48 +1,25 @@
 ---
-title: 'Guía Completa de Exportación 2024'
-excerpt: 'Todo lo que necesitas saber para comenzar a exportar tus productos a Estados Unidos'
-coverImage: '/blog-images/export-hero.jpg'
-readingTime: '6 min'
-tag: 'Guía'
+title: '3 errores que debes evitar para exportar a Estados Unidos'
+excerpt: '¿Sabías que 7 de cada 10 carritos de compra online terminan abandonados?  Si vendes a nivel internacional, esta cifra puede ser aún más alarmante.  Pero tranquilo, no todo está perdido.'
+coverImage: '/blog-images/ecommerce-errors.jpeg'
+readingTime: '3 min'
+tag: 'Cross-border'
 ---
 
-# Guía Completa de Exportación a Estados Unidos
+¿Sabías que 7 de cada 10 carritos de compra online terminan abandonados?  Si vendes a nivel internacional, esta cifra puede ser aún más alarmante.  Pero tranquilo, no todo está perdido.  Identificar los errores comunes que cometen las tiendas online es el primer paso para optimizar tu e-commerce y aumentar tus ventas.
 
-![Proceso de exportación](/blog-images/export-diagram.jpg)
+Muchos clientes abandonan sus carritos por una simple razón: desconfianza.  Un sitio web con un diseño poco profesional,  costos de envío ocultos o un proceso de pago que parece sacado de los años 90  son señales de alerta para cualquier comprador online.
 
-## ¿Por qué exportar a Estados Unidos?
+Si a esto le sumamos las dificultades propias del e-commerce internacional, como las fluctuaciones monetarias o la falta de plataformas web adaptadas a diferentes mercados,  el desafío se vuelve aún mayor.
 
-El mercado estadounidense representa una oportunidad única para las empresas mexicanas. Con más de 330 millones de consumidores potenciales y un poder adquisitivo significativamente mayor, Estados Unidos puede ser el siguiente gran paso para tu negocio.
+Para ayudarte a evitar estas  trampas, te presentamos 3 errores que debes evitar a toda costa:
 
-## Requisitos Básicos
+**1. Olvida los envíos "caracol":**  Enviar cada producto individualmente desde tu país de origen es lento,  caro  y poco eficiente.  ¿La solución?  Almacenar tus productos en Estados Unidos.  Así reduces costos,  aceleras los tiempos de entrega  y ofreces una experiencia de compra mucho más atractiva.
 
-### 1. Documentación Legal
-* **RFC actualizado**
-* **Padrón de exportadores**
-* **Certificado de origen**
+**2. Simplifica el proceso de pago:**  A nadie le gusta un proceso de pago interminable y lleno de obstáculos.  Ofrece un checkout  intuitivo,  con información clara sobre los costos de envío y los plazos de entrega.  Recuerda,  la transparencia  es clave para generar confianza.
 
-### 2. Producto
-* Certificaciones necesarias
-* Etiquetado correcto
-* Empaque adecuado
+**3. Crea una experiencia de compra localizada:**  No limites tu tienda online a una traducción literal de tu sitio web.  Adapta la experiencia de compra al mercado al que te diriges.  Muestra precios en la moneda local,  ofrece opciones de pago populares en el país de destino y personaliza el contenido para que el cliente se sienta como en casa.
 
-> 💡 **Tip**: Asegúrate de tener toda tu documentación en orden antes de comenzar el proceso.
-
-## Proceso Paso a Paso
-
-1. **Evaluación inicial**
-   * Capacidad de producción
-   * Costos y precios
-   * Mercado objetivo
-
-2. **Preparación**
-   * Documentación
-   * Certificaciones
-   * Logística
-
-3. **Implementación**
-   * Envíos de prueba
-   * Ajustes necesarios
-   * Escalamiento
+En Exbordia,  te ayudamos a construir un e-commerce internacional exitoso.  Ofrecemos soluciones de almacenamiento, logística y pagos que te permitirán superar estos desafíos y llevar tu negocio al siguiente nivel.
 
 ¿Necesitas ayuda con tu proceso de exportación? [Contáctanos](/contacto) 
