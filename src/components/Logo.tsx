@@ -7,11 +7,12 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   return (
     <Image 
-      src="/exbordia-logo.png"
-      alt="Exbordia Logo"
-      width={140}
+      src="/exbordia-logo.png" 
+      alt="Exbordia Logo" 
+      width={150}
       height={40}
-      className={className}
+      style={{ width: 'auto', height: 'auto' }}
+      priority
     />
   )
-} 
+}
