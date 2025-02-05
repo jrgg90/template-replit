@@ -42,7 +42,7 @@ export default function StoreConnection() {
     if (user) {
       checkConnection();
     }
-  }, [user]);
+  }, [user, checkConnection]);
 
   // Check URL params for sync status
   useEffect(() => {

@@ -3,6 +3,8 @@ import { MainHeader } from '@/components/layout/MainHeader'
 import { BlogSearch } from '@/components/blog/BlogSearch'
 import { getAllPosts } from '@/lib/blog'
 
+import { Suspense } from 'react'
+
 export default async function BlogPage() {
   const posts = await getAllPosts()
 
