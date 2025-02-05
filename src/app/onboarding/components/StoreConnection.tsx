@@ -37,12 +37,31 @@ export default function StoreConnection() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [shouldReloadFiles, setShouldReloadFiles] = useState(0)
 
+  const checkConnection = async () => {
+    try {
+      const connectionDoc = await getDoc(doc(db, "shopify_connections", user!.uid));
+      console.log("Connection data:", connectionDoc.data());
+      
+      if (connectionDoc.exists()) {
+        setIsConnected(true);
+        const { shopDomain } = connectionDoc.data();
+        console.log("Shop domain:", shopDomain);
+        setStoreUrl(shopDomain);
+      } else {
+        setIsConnected(false);
+        setStoreUrl('');
+      }
+    } catch (error) {
+      console.error('Error checking connection:', error);
+    }
+  };
+
   // Check if store is already connected
   useEffect(() => {
     if (user) {
       checkConnection();
     }
-  }, [user, checkConnection]);
+  }, [user]);
 
   // Check URL params for sync status
   useEffect(() => {
@@ -57,8 +76,6 @@ export default function StoreConnection() {
       }, 1000);
     }
   }, []);
-
-  const checkConnection = async () => {
     try {
       const connectionDoc = await getDoc(doc(db, "shopify_connections", user!.uid));
       console.log("Connection data:", connectionDoc.data());
