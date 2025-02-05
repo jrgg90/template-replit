@@ -1,4 +1,4 @@
-import { BlogHeader } from '@/components/blog/BlogHeader'
+import { MainHeader } from '@/components/layout/MainHeader'
 import { getPostBySlug } from '@/lib/blog'
 import { markdownToHtml } from '@/lib/markdown'
 import { BlogContent } from '@/components/blog/BlogContent'
@@ -21,7 +21,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="min-h-screen bg-white">
-      <BlogHeader />
+      <MainHeader />
       
       <main className="container mx-auto px-4 py-24">
         <div className="max-w-3xl mx-auto">

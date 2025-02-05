@@ -324,22 +324,62 @@ export default function Home() {
           </div>
 
           <div className="space-y-6">
-            <ScrollRevealStat
-              stat="80%"
-              description="menos en costos logísticos para tu negocio"
-            />
-            <ScrollRevealStat
-              stat="2.5 días"
-              description="o menos en tiempo de entrega para cumplir las expectativas de tus clientes en E.E.U.U."
-            />
-            <ScrollRevealStat
-              stat="100%"
-              description="transparencia total: Sin costos ocultos ni complicaciones"
-            />
-            <ScrollRevealStat
-              stat="sin riesgo"
-              description="prueba con un piloto para comenzar sin compromiso"
-            />
+            {/* Stats con diseño responsivo solo para móvil */}
+            <div className="block md:hidden space-y-12">
+              <div className="flex flex-col items-center gap-2">
+                <span className="text-6xl font-medium text-[#131F42]">80%</span>
+                <span className="text-center text-lg text-gray-600">
+                  menos en costos logísticos para tu negocio
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex items-baseline">
+                  <span className="text-6xl font-medium text-[#131F42]">2.5</span>
+                  <span className="text-6xl font-medium text-[#131F42] ml-2">días</span>
+                </div>
+                <span className="text-center text-lg text-gray-600">
+                  o menos en tiempo de entrega para cumplir las expectativas de tus clientes en E.E.U.U.
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <span className="text-6xl font-medium text-[#131F42]">100%</span>
+                <span className="text-center text-lg text-gray-600">
+                  transparencia total: Sin costos ocultos ni complicaciones
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex items-baseline">
+                  <span className="text-6xl font-medium text-[#131F42]">sin</span>
+                  <span className="text-6xl font-medium text-[#131F42] ml-2">riesgo</span>
+                </div>
+                <span className="text-center text-lg text-gray-600">
+                  prueba con un piloto para comenzar sin compromiso
+                </span>
+              </div>
+            </div>
+
+            {/* Mantener el diseño original para desktop */}
+            <div className="hidden md:block">
+              <ScrollRevealStat
+                stat="80%"
+                description="menos en costos logísticos para tu negocio"
+              />
+              <ScrollRevealStat
+                stat="2.5 días"
+                description="o menos en tiempo de entrega para cumplir las expectativas de tus clientes en E.E.U.U."
+              />
+              <ScrollRevealStat
+                stat="100%"
+                description="transparencia total: Sin costos ocultos ni complicaciones"
+              />
+              <ScrollRevealStat
+                stat="sin riesgo"
+                description="prueba con un piloto para comenzar sin compromiso"
+              />
+            </div>
           </div>
         </div>
       </section>

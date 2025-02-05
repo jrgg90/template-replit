@@ -1,5 +1,5 @@
 import { BlogGrid } from '@/components/blog/BlogGrid'
-import { BlogHeader } from '@/components/blog/BlogHeader'
+import { MainHeader } from '@/components/layout/MainHeader'
 import { BlogSearch } from '@/components/blog/BlogSearch'
 import { getAllPosts } from '@/lib/blog'
 
@@ -8,7 +8,7 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <BlogHeader />
+      <MainHeader />
       
       <main className="container mx-auto px-4 py-24">
         <div className="max-w-6xl mx-auto">
@@ -25,9 +25,8 @@ export default async function BlogPage() {
 
           {/* Search */}
           <BlogSearch />
-
           {/* Blog Grid */}
-          <BlogGrid initialPosts={posts} />
+          <BlogGrid initialPosts={posts as any} />
         </div>
       </main>
     </div>
