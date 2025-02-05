@@ -58,9 +58,12 @@ export default function StoreConnection() {
 
   // Check if store is already connected
   useEffect(() => {
-    if (user) {
-      checkConnection();
-    }
+    const checkConnectionAsync = async () => {
+      if (user) {
+        await checkConnection();
+      }
+    };
+    checkConnectionAsync();
   }, [user]);
 
   // Check URL params for sync status
