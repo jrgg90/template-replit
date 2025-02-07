@@ -2,7 +2,6 @@ import { BlogGrid } from '@/components/blog/BlogGrid'
 import { MainHeader } from '@/components/layout/MainHeader'
 import { BlogSearch } from '@/components/blog/BlogSearch'
 import { getAllPosts } from '@/lib/blog'
-
 import { Suspense } from 'react'
 
 export default async function BlogPage() {
@@ -25,10 +24,11 @@ export default async function BlogPage() {
             </p>
           </div>
 
-          {/* Search */}
-          <BlogSearch />
-          {/* Blog Grid */}
-          <BlogGrid initialPosts={posts as any} />
+          {/* Search y Grid envueltos en Suspense */}
+          <Suspense fallback={<div>Cargando...</div>}>
+            <BlogSearch />
+            <BlogGrid initialPosts={posts as any} />
+          </Suspense>
         </div>
       </main>
     </div>

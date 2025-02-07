@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { InputWithLabel } from '@/components/ui/input-with-label-animation'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
@@ -37,7 +37,7 @@ export default function StoreConnection() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [shouldReloadFiles, setShouldReloadFiles] = useState(0)
 
-  const checkConnection = async () => {
+  const checkConnection = useCallback(async () => {
     try {
       const connectionDoc = await getDoc(doc(db, "shopify_connections", user!.uid));
       console.log("Connection data:", connectionDoc.data());
@@ -54,7 +54,7 @@ export default function StoreConnection() {
     } catch (error) {
       console.error('Error checking connection:', error);
     }
-  };
+  }, [user]);
 
   // Check if store is already connected
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function StoreConnection() {
       }
     };
     checkConnectionAsync();
-  }, [user]);
+  }, [user, checkConnection]);
 
   // Check URL params for sync status
   useEffect(() => {
@@ -78,24 +78,7 @@ export default function StoreConnection() {
         router.push('/onboarding/products');
       }, 1000);
     }
-  }, []);
-    try {
-      const connectionDoc = await getDoc(doc(db, "shopify_connections", user!.uid));
-      console.log("Connection data:", connectionDoc.data());
-      
-      if (connectionDoc.exists()) {
-        setIsConnected(true);
-        const { shopDomain } = connectionDoc.data();
-        console.log("Shop domain:", shopDomain);
-        setStoreUrl(shopDomain);
-      } else {
-        setIsConnected(false);
-        setStoreUrl('');
-      }
-    } catch (error) {
-      console.error('Error checking connection:', error);
-    }
-  };
+  }, [router]);
 
   const handleConnect = async () => {
     try {
@@ -135,7 +118,7 @@ export default function StoreConnection() {
 
   const handleDisconnect = async () => {
     try {
-      setLoading(true);
+      setLoading(true)
       const response = await fetch('/api/shopify/disconnect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -146,6 +129,7 @@ export default function StoreConnection() {
       if (data.success) {
         setIsConnected(false);
         setStoreUrl('');
+        setShouldReloadFiles(prev => prev + 1)
       } else {
         setError('Failed to disconnect store');
       }

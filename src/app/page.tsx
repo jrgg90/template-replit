@@ -99,7 +99,7 @@ export default function Home() {
                   </button>
                 </Link>
                 <p className="mt-4 text-sm text-gray-500 font-light">
-                  Sin importar el tamaño de tu negocio, exportar nunca fue tan fácil
+                  
                 </p>
               </div>
             </div>
