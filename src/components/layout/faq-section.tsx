@@ -7,37 +7,29 @@ import {
 
 const faqs = [
   {
-    question: "¿No estás listo para enviar todo tu inventario?",
-    answer: "Conoce nuestro programa piloto para validar el mercado con un costo y riesgo mínimos. Podrás enviar un lote pequeño y medir la demanda antes de dar el paso definitivo."
+    question: "¿Necesito experiencia en comercio internacional para usar Exbordia?",
+    answer: "No. Nuestra plataforma te guía paso a paso y automatiza procesos clave como regulaciones, impuestos y logística. Tú solo te enfocas en hacer crecer tu marca."
   },
   {
-    question: "¿Qué pasa si aún no tengo clientes en Estados Unidos?",
-    answer: "Te ayudamos a publicar y vender en los principales marketplaces de EE.UU., como Amazon, Etsy o Faire. Es un excelente punto de partida para expandir tu mercado y atraer a tus primeros clientes estadounidenses."
+    question: " ¿Cómo me ayuda la inteligencia artificial en mi expansión?",
+    answer: "Nuestra AI te da recomendaciones accionables: qué países tienen mayor demanda, cómo ajustar precios, qué productos tienen más potencial y cómo optimizar tu estrategia global."
   },
   {
-    question: "¿Por qué expandirme a Estados Unidos?",
-    answer: "El mercado estadounidense es significativamente más grande que el mexicano; puede representar hasta 180 veces más oportunidades de venta. Llegar a EE.UU. te permite aumentar tus ingresos, diversificar riesgos y posicionar tu marca a nivel internacional."
+    question: "¿Cómo funciona la logística y el fulfillment con Exbordia?",
+    answer: "Nos conectamos con proveedores como Amazon FBA, ShipBob y 3PLs globales para que tus productos lleguen a clientes en cualquier parte del mundo sin complicaciones."
   },
   {
-    question: "Ya he enviado productos a Estados Unidos antes. ¿Puedo contratar solo algunos de sus servicios?",
-    answer: "Sí, nos adaptamos a tus necesidades. Si no requieres la gama completa de soluciones, contáctanos y diseñaremos un plan personalizado."
+    question: "Ya vendo en EE.UU. con Shopify, ¿en qué me ayuda Exbordia?",
+    answer: "Usas una gran infraestructura, pero eso no te asegura ventas. Exbordia te ayuda con lo más importante: atraer más clientes, generar tracción real y escalar tu marca en nuevos mercados."
   },
   {
-    question: "¿Qué requisitos necesito para empezar con Exbordia?",
-    answer: "Debes contar con un inventario mínimo, tener un producto apto para exportación y estar dispuesto a completar la documentación necesaria. Nosotros te guiaremos durante todo el proceso."
+    question: "¿Qué hace Exbordia diferente a una agencia de marketing o consultoría?",
+    answer: "No somos una agencia, somos una plataforma SaaS con AI que automatiza y optimiza tu expansión global. No damos solo asesoría, te damos herramientas accionables para crecer."
   },
   {
-    question: "¿Cuánto tiempo tardan en verse resultados al vender en EE.UU.?",
-    answer: "Dependerá de tu producto, la demanda y el canal de venta. Sin embargo, en general, nuestros clientes empiezan a ver interés y ventas iniciales dentro de las primeras semanas, especialmente si se publica en marketplaces reconocidos."
+    question: "¿Puedo usar Exbordia sin cambiar mi operación actual?",
+    answer: "Sí. Exbordia se integra con Shopify, Amazon, Faire y otros marketplaces para mejorar lo que ya tienes, sin alterar tu operación. Solo agrega crecimiento y nuevas oportunidades."
   },
-  {
-    question: "¿Qué tipo de productos son compatibles con sus servicios?",
-    answer: "Trabajamos principalmente con productos de tamaño y peso manejables que cumplan con las normativas de exportación. Si tienes dudas sobre la categoría de tu producto, consúltanos sin compromiso."
-  },
-  {
-    question: "¿Exbordia maneja devoluciones y servicio al cliente en EE.UU.?",
-    answer: "Ofrecemos apoyo logístico para devoluciones y consultas de tus clientes. Nuestro objetivo es que tu experiencia de venta en EE.UU. sea fluida y sin complicaciones."
-  }
 ]
 
 export function FAQSection() {
