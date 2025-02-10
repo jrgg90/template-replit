@@ -93,7 +93,7 @@ export default function Home() {
               Descubre en dónde tu marca tiene mayor potencial, conéctate a
                 <span className="relative inline-block">
                   <span className="absolute inset-x-0 bottom-0 h-[30%] bg-blue-100/30 -rotate-1" />
-                  <span className="relative text-blue-600 font-normal"> los marketplaces correctos y domina el comercio global con IA y automatización.</span>
+                  <span className="relative text-blue-700 font-normal"> los marketplaces correctos y domina el comercio global con IA y automatización.</span>
                 </span>
               </span>
             </p>
@@ -108,7 +108,7 @@ export default function Home() {
                 >
                   <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
                     hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 group-hover:opacity-100 
                       transition-opacity duration-300" />
                     <span className="relative flex items-center gap-2">
                       ¡Comienza Gratis!
@@ -136,11 +136,9 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-normal text-[#131F42] mb-6">
-              Domina tu Expansión Global <span className="font-light">desde un Solo Lugar</span>
+              Conecta tu Tienda Online y Domina tu Expansión <span className="font-light"> desde un Solo Lugar</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-            Gestiona y escala tu negocio internacionalmente con Exbordia.
-            </p>
+            
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
