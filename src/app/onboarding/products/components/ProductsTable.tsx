@@ -1,3 +1,5 @@
+"use client"
+
 import { ShopifyProduct } from '@/types/product'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { cn } from '@/lib/utils'
@@ -5,6 +7,8 @@ import Image from 'next/image'
 import { Checkbox } from "@/components/ui/checkbox"
 import { HelpCircle, Trash2 } from 'lucide-react'
 import * as Tooltip from '@radix-ui/react-tooltip'
+import ProductFilters from './ProductFilters'
+import { useState } from 'react'
 
 interface ProductsTableProps {
   products: ShopifyProduct[];
@@ -29,6 +33,15 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   onSelectionChange,
   onDeselect
 }) => {
+  const [filters, setFilters] = useState({
+    status: '',
+    inventoryStatus: '',
+    productType: '',
+    vendor: '',
+    search: '',
+    selectedForExport: ''
+  });
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-8">
@@ -69,6 +82,22 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
     } else {
       onSelectionChange(selectedProducts.filter(id => id !== productId));
     }
+  };
+
+  // Define your filter options
+  const filterOptions = {
+    productTypes: [
+      'Ropa',
+      'Accesorios',
+      'Electrónicos',
+      'Hogar',
+      // Add more product types as needed
+    ]
+  }
+
+  const handleFilterChange = (newFilters: any) => {
+    setFilters(newFilters);
+    // Add any additional filter logic here
   };
 
   return (
@@ -234,6 +263,11 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
           ))}
         </div>
       </div>
+
+      <ProductFilters 
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
     </div>
   );
 }

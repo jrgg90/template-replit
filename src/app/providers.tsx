@@ -1,12 +1,15 @@
 'use client'
 
-import * as React from 'react'
+import { ThemeProvider } from 'next-themes'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
+import { type ReactNode } from 'react'
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
   return (
-    <TooltipProvider delayDuration={0}>
-      {children}
-    </TooltipProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <TooltipProvider delayDuration={0}>
+        {children}
+      </TooltipProvider>
+    </ThemeProvider>
   )
 } 

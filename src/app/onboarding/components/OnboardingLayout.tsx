@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import UserMenu from './UserMenu'
+import { UserMenu } from "@/components/app/UserMenu"
 import ProgressSteps from './ProgressSteps'
 import { OnboardingNav } from './OnboardingNav'
 import Image from 'next/image'
