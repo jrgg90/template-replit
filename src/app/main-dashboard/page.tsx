@@ -161,13 +161,6 @@ export default function DashboardPage() {
   const [showActions, setShowActions] = React.useState(false)
   const [showConnections, setShowConnections] = React.useState(false)
 
-  // Calculate marketplace health
-  const marketplaceHealth = React.useMemo(() => {
-    const hasError = marketplaces.some(m => m.status === 'error')
-    const hasPending = marketplaces.some(m => m.status === 'pending')
-    return hasError ? 'error' : hasPending ? 'warning' : 'success'
-  }, [marketplaces])
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
       {/* Header Section */}
@@ -291,44 +284,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right Column - Status & Actions */}
+        {/* Right Column - Solo Pending Actions */}
         <div className="space-y-6">
-          {/* Marketplace Health */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className={cn(
-                  "w-2 h-2 rounded-full",
-                  marketplaceHealth === 'success' && "bg-emerald-500",
-                  marketplaceHealth === 'warning' && "bg-amber-500",
-                  marketplaceHealth === 'error' && "bg-red-500"
-                )} />
-                <h3 className="text-sm font-medium text-gray-900">Marketplace Status</h3>
-              </div>
-              <Button variant="ghost" size="sm" className="h-7 text-xs">
-                Manage
-                <ChevronRight className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-            <div className="space-y-2">
-              {marketplaces.map(marketplace => (
-                <div key={marketplace.name} 
-                  className="flex items-center justify-between p-2.5 bg-gray-50/50 rounded-lg border border-gray-100"
-                >
-                  <span className="text-sm text-gray-700">{marketplace.name}</span>
-                  <div className={cn(
-                    "px-2 py-1 rounded-full text-xs font-medium",
-                    marketplace.status === 'connected' && "bg-emerald-50 text-emerald-700",
-                    marketplace.status === 'error' && "bg-red-50 text-red-700",
-                    marketplace.status === 'pending' && "bg-amber-50 text-amber-700"
-                  )}>
-                    {marketplace.status}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Pending Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
             <div className="flex items-center justify-between mb-4">
