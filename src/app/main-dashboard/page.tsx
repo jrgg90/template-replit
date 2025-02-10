@@ -9,8 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { AlertCircle, ArrowRight, ArrowUpRight } from "lucide-react"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
+import { AlertCircle, ArrowRight, ArrowUpRight, TrendingUp, Users, AlertTriangle, Brain, ChevronDown, ChevronRight, BarChart2, Globe, CheckCircle2, XCircle } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { CountrySalesBreakdown } from "./components/CountrySalesBreakdown"
+import { CountrySalesPerformance } from "./components/CountrySalesPerformance"
+import React from "react"
 
 // Static data for demo
 const salesData = [
@@ -51,102 +55,317 @@ const marketplaces = [
   { name: "eBay", status: "pending" }
 ]
 
+// Add news data
+const newsInsights = [
+  {
+    type: 'competitor',
+    icon: Users,
+    title: 'Competitor Movement',
+    content: 'Your competitor just expanded to Spain, targeting the same market segment.',
+    timestamp: '2 hours ago',
+    priority: 'medium'
+  },
+  {
+    type: 'market',
+    icon: TrendingUp,
+    title: 'Market Trend',
+    content: 'Demand for handmade leather bags is rising in France, showing 25% growth.',
+    timestamp: '1 day ago',
+    priority: 'high'
+  },
+  {
+    type: 'regulatory',
+    icon: AlertTriangle,
+    title: 'Regulatory Alert',
+    content: 'New EU import taxes on textiles announced, effective from next quarter.',
+    timestamp: '3 days ago',
+    priority: 'high'
+  }
+]
+
+// Add the countrySalesData to the static data section
+const countrySalesData = [
+  { country: 'United States', value: 65000 },
+  { country: 'Mexico', value: 45000 },
+  { country: 'Canada', value: 35000 },
+  { country: 'Spain', value: 25000 },
+  { country: 'France', value: 15000 },
+]
+
+// Add AI confidence type
+type Confidence = 'high' | 'medium' | 'low';
+
+// Add AI insights data
+const aiInsights = [
+  {
+    title: "Expansion Opportunity",
+    content: "Your competitor expanded to Spain—consider listing on Amazon Spain for market entry.",
+    confidence: 'high' as Confidence,
+    type: 'expansion',
+    metric: "85% market fit",
+    action: "Explore Amazon Spain"
+  },
+  {
+    title: "Product Trend",
+    content: "Demand for handmade leather bags is rising in France. Consider expanding there.",
+    confidence: 'medium' as Confidence,
+    type: 'trend',
+    metric: "20% growth predicted",
+    action: "View Market Analysis"
+  },
+  {
+    title: "Platform Optimization",
+    content: "Your Shopify traffic is up 15%. Optimize your store for better conversions.",
+    confidence: 'high' as Confidence,
+    type: 'optimization',
+    metric: "15% traffic increase",
+    action: "View Recommendations"
+  }
+]
+
+// Merge AI insights and market trends
+const combinedInsights = [
+  {
+    type: 'ai',
+    icon: Brain,
+    title: 'Market Expansion',
+    content: 'Spain market shows 85% fit with your product',
+    metric: '+85% fit',
+    confidence: 'high' as const,
+    timestamp: 'Just now',
+    action: 'Explore Opportunity'
+  },
+  {
+    type: 'market',
+    icon: TrendingUp,
+    title: 'Demand Surge',
+    content: 'Leather goods demand up 25% in France',
+    metric: '+25% growth',
+    confidence: 'medium' as const,
+    timestamp: '2h ago',
+    action: 'View Analysis'
+  },
+  {
+    type: 'regulatory',
+    icon: AlertTriangle,
+    title: 'EU Regulation',
+    content: 'New import rules affecting textile sector',
+    metric: 'High Impact',
+    confidence: 'high' as const,
+    timestamp: '1d ago',
+    action: 'Review Changes'
+  }
+]
+
 export default function DashboardPage() {
+  const [showActions, setShowActions] = React.useState(false)
+  const [showConnections, setShowConnections] = React.useState(false)
+
+  // Calculate marketplace health
+  const marketplaceHealth = React.useMemo(() => {
+    const hasError = marketplaces.some(m => m.status === 'error')
+    const hasPending = marketplaces.some(m => m.status === 'pending')
+    return hasError ? 'error' : hasPending ? 'warning' : 'success'
+  }, [marketplaces])
+
   return (
-    <div className="flex flex-col h-full">
-      <header className="border-b p-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
-          <Select defaultValue="7d">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select timeframe" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="7d">Last 7 days</SelectItem>
-              <SelectItem value="30d">Last 30 days</SelectItem>
-              <SelectItem value="ytd">Year to date</SelectItem>
-            </SelectContent>
-          </Select>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Refined Header */}
+      <header className="bg-white border-b py-4 px-6">
+        <div className="flex justify-between items-center max-w-[1600px] mx-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
+          <div className="flex items-center gap-4">
+            <input
+              type="search"
+              placeholder="Search..."
+              className="w-64 px-3 py-1.5 text-sm rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            />
+            <div className="w-8 h-8 rounded-full bg-gray-200" /> {/* Avatar placeholder */}
+          </div>
         </div>
       </header>
 
-      <main className="flex-1 p-6 space-y-6">
-        {/* Global Sales Overview */}
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card className="p-6">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-sm text-muted-foreground">Total Global Sales</p>
-                <h2 className="text-3xl font-bold mt-2">$124,563.00</h2>
-                <p className="flex items-center text-sm text-green-600 mt-1">
-                  <ArrowUpRight className="w-4 h-4 mr-1" />
-                  +12.5% from last period
-                </p>
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        <div className="max-w-[1600px] mx-auto">
+          {/* Top Stats Row */}
+          <div className="grid grid-cols-4 gap-4 mb-6">
+            {/* Total Global Sales - More Compact */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-xs font-medium text-gray-500">Total Global Sales</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mt-1">$124,563.00</h2>
+                  <p className="flex items-center text-xs font-medium text-emerald-600 mt-1">
+                    <ArrowUpRight className="w-3 h-3 mr-1" />
+                    +12.5% from last period
+                  </p>
+                </div>
+                <Select defaultValue="7d">
+                  <SelectTrigger className="w-[90px] h-7 text-xs bg-gray-50 border-gray-200">
+                    <SelectValue placeholder="Timeframe" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7d">7 days</SelectItem>
+                    <SelectItem value="30d">30 days</SelectItem>
+                    <SelectItem value="ytd">YTD</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
-            <Button variant="outline" className="w-full mt-4">
-              View Detailed Sales Report
-            </Button>
-          </Card>
 
-          {/* Pending Actions Card */}
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Pending Actions</h3>
-            <div className="space-y-3">
-              {pendingActions.map(action => (
-                <div key={action.id} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-                  <AlertCircle className="w-5 h-5 text-orange-500 mt-0.5" />
-                  <div className="flex-1">
-                    <p className="text-sm">{action.title}</p>
-                    <div className="flex gap-2 mt-2">
-                      <Button size="sm" variant="secondary">Resolve Now</Button>
-                      <Button size="sm" variant="ghost">Ignore</Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            {/* Additional Summary Stats */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+              <p className="text-xs font-medium text-gray-500">Active Markets</p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
+              <p className="text-xs text-gray-500 mt-1">Across 3 continents</p>
             </div>
-          </Card>
 
-          {/* Marketplace Connections */}
-          <Card className="p-6">
-            <h3 className="font-semibold mb-4">Marketplace Connections</h3>
-            <div className="space-y-3">
-              {marketplaces.map(marketplace => (
-                <div key={marketplace.name} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
-                  <span className="text-sm">{marketplace.name}</span>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    marketplace.status === 'connected' ? 'bg-green-100 text-green-700' :
-                    marketplace.status === 'error' ? 'bg-red-100 text-red-700' :
-                    'bg-yellow-100 text-yellow-700'
-                  }`}>
-                    {marketplace.status}
-                  </span>
-                </div>
-              ))}
-              <Button variant="outline" className="w-full mt-2">
-                <span>Add New Connection</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+              <p className="text-xs font-medium text-gray-500">Growth Rate</p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-1">+18.2%</h3>
+              <p className="text-xs text-gray-500 mt-1">Month over month</p>
             </div>
-          </Card>
-        </div>
 
-        {/* Sales Performance Graph */}
-        <Card className="p-6">
-          <h3 className="font-semibold mb-4">Sales Performance</h3>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={salesData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="value" stroke="#2563eb" />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+              <p className="text-xs font-medium text-gray-500">Platform Health</p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-1">98%</h3>
+              <p className="text-xs text-gray-500 mt-1">All systems operational</p>
+            </div>
           </div>
-        </Card>
+
+          {/* Main Grid Layout */}
+          <div className="grid grid-cols-3 gap-6">
+            {/* Left Column - Growth & Intelligence */}
+            <div className="col-span-2 space-y-6">
+              {/* Growth & Market Intelligence */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-indigo-500" />
+                    <h2 className="text-base font-semibold text-gray-900">Growth & Market Intelligence</h2>
+                  </div>
+                  <Button variant="ghost" size="sm" className="h-8 text-xs font-medium text-gray-600 hover:text-gray-900">
+                    View All
+                    <ArrowRight className="w-3 h-3 ml-1" />
+                  </Button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {combinedInsights.map((insight, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col p-4 bg-gray-50/50 rounded-lg border border-gray-100"
+                    >
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className={cn(
+                          "p-2 rounded-lg shrink-0",
+                          insight.type === 'ai' && "bg-indigo-50 text-indigo-600",
+                          insight.type === 'market' && "bg-emerald-50 text-emerald-600",
+                          insight.type === 'regulatory' && "bg-amber-50 text-amber-600"
+                        )}>
+                          <insight.icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-medium text-gray-900">{insight.title}</h3>
+                          <p className="text-xs text-gray-500 mt-0.5">{insight.content}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+                        <span className={cn(
+                          "text-xs px-2 py-1 rounded-full font-medium",
+                          insight.confidence === 'high' && "bg-emerald-50 text-emerald-700",
+                          insight.confidence === 'medium' && "bg-amber-50 text-amber-700"
+                        )}>
+                          {insight.metric}
+                        </span>
+                        <Button variant="ghost" size="sm" className="h-7 text-xs font-medium">
+                          {insight.action}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sales Performance */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <CountrySalesPerformance />
+              </div>
+            </div>
+
+            {/* Right Column - Status & Actions */}
+            <div className="space-y-6">
+              {/* Marketplace Health */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className={cn(
+                      "w-2 h-2 rounded-full",
+                      marketplaceHealth === 'success' && "bg-emerald-500",
+                      marketplaceHealth === 'warning' && "bg-amber-500",
+                      marketplaceHealth === 'error' && "bg-red-500"
+                    )} />
+                    <h3 className="text-sm font-medium text-gray-900">Marketplace Status</h3>
+                  </div>
+                  <Button variant="ghost" size="sm" className="h-7 text-xs">
+                    Manage
+                    <ChevronRight className="w-3 h-3 ml-1" />
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {marketplaces.map(marketplace => (
+                    <div key={marketplace.name} 
+                      className="flex items-center justify-between p-2.5 bg-gray-50/50 rounded-lg border border-gray-100"
+                    >
+                      <span className="text-sm text-gray-700">{marketplace.name}</span>
+                      <div className={cn(
+                        "px-2 py-1 rounded-full text-xs font-medium",
+                        marketplace.status === 'connected' && "bg-emerald-50 text-emerald-700",
+                        marketplace.status === 'error' && "bg-red-50 text-red-700",
+                        marketplace.status === 'pending' && "bg-amber-50 text-amber-700"
+                      )}>
+                        {marketplace.status}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pending Actions */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-amber-500" />
+                    <h3 className="text-sm font-medium text-gray-900">{pendingActions.length} Actions Required</h3>
+                  </div>
+                  <ChevronDown className={cn(
+                    "w-4 h-4 text-gray-400 transition-transform",
+                    showActions && "transform rotate-180"
+                  )} />
+                </div>
+                <div className="space-y-2">
+                  {pendingActions.map(action => (
+                    <div key={action.id} className="p-3 bg-gray-50/50 rounded-lg border border-gray-100">
+                      <p className="text-sm text-gray-700 mb-2">{action.title}</p>
+                      <div className="flex items-center justify-between">
+                        <span className={cn(
+                          "text-xs px-2 py-1 rounded-full font-medium",
+                          action.priority === 'high' && "bg-red-50 text-red-700",
+                          action.priority === 'medium' && "bg-amber-50 text-amber-700"
+                        )}>
+                          {action.priority} priority
+                        </span>
+                        <Button size="sm" variant="ghost" className="h-7 text-xs font-medium">
+                          Resolve
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   )
