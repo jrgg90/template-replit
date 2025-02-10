@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
-import { AlertCircle, ArrowRight, ArrowUpRight, TrendingUp, Users, AlertTriangle, Brain, ChevronDown, ChevronRight, BarChart2, Globe, CheckCircle2, XCircle } from "lucide-react"
+import { AlertCircle, ArrowRight, ArrowUpRight, TrendingUp, Users, AlertTriangle, Brain, ChevronDown, ChevronRight, BarChart2, Globe, CheckCircle2, XCircle, ShoppingBag } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CountrySalesBreakdown } from "./components/CountrySalesBreakdown"
 import { CountrySalesPerformance } from "./components/CountrySalesPerformance"
@@ -178,7 +178,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Total Global Sales */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <div className="flex justify-between items-start">
@@ -203,23 +203,32 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Additional Summary Stats */}
+        {/* Marketplaces Activos */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <p className="text-xs font-medium text-gray-500">Active Markets</p>
-          <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
-          <p className="text-xs text-gray-500 mt-1">Across 3 continents</p>
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs font-medium text-gray-500">Marketplaces Activos</p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
+              <p className="text-xs text-gray-500 mt-1">Amazon, eBay, Walmart, Etsy, Shopify</p>
+            </div>
+            <div className="p-2 rounded-lg bg-emerald-50">
+              <ShoppingBag className="w-4 h-4 text-emerald-600" />
+            </div>
+          </div>
         </div>
 
+        {/* Active Markets */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <p className="text-xs font-medium text-gray-500">Growth Rate</p>
-          <h3 className="text-2xl font-bold text-gray-900 mt-1">+18.2%</h3>
-          <p className="text-xs text-gray-500 mt-1">Month over month</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <p className="text-xs font-medium text-gray-500">Platform Health</p>
-          <h3 className="text-2xl font-bold text-gray-900 mt-1">98%</h3>
-          <p className="text-xs text-gray-500 mt-1">All systems operational</p>
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xs font-medium text-gray-500">Países Activos</p>
+              <h3 className="text-2xl font-bold text-gray-900 mt-1">3</h3>
+              <p className="text-xs text-gray-500 mt-1">España, Francia, Alemania</p>
+            </div>
+            <div className="p-2 rounded-lg bg-blue-50">
+              <Globe className="w-4 h-4 text-blue-600" />
+            </div>
+          </div>
         </div>
       </div>
 
