@@ -169,204 +169,191 @@ export default function DashboardPage() {
   }, [marketplaces])
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Refined Header */}
-      <header className="bg-white border-b py-4 px-6">
-        <div className="flex justify-between items-center max-w-[1600px] mx-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
-          <div className="flex items-center gap-4">
-            <input
-              type="search"
-              placeholder="Search..."
-              className="w-64 px-3 py-1.5 text-sm rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-            />
-            <div className="w-8 h-8 rounded-full bg-gray-200" /> {/* Avatar placeholder */}
-          </div>
-        </div>
-      </header>
+    <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
+      {/* Header Section */}
+      <div className="space-y-4">
+        <h1 className="text-4xl md:text-5xl font-extralight tracking-tight text-gray-900">
+          Dashboard
+        </h1>
+      </div>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
-        <div className="max-w-[1600px] mx-auto">
-          {/* Top Stats Row */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
-            {/* Total Global Sales - More Compact */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-xs font-medium text-gray-500">Total Global Sales</p>
-                  <h2 className="text-2xl font-bold text-gray-900 mt-1">$124,563.00</h2>
-                  <p className="flex items-center text-xs font-medium text-emerald-600 mt-1">
-                    <ArrowUpRight className="w-3 h-3 mr-1" />
-                    +12.5% from last period
-                  </p>
-                </div>
-                <Select defaultValue="7d">
-                  <SelectTrigger className="w-[90px] h-7 text-xs bg-gray-50 border-gray-200">
-                    <SelectValue placeholder="Timeframe" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="7d">7 days</SelectItem>
-                    <SelectItem value="30d">30 days</SelectItem>
-                    <SelectItem value="ytd">YTD</SelectItem>
-                  </SelectContent>
-                </Select>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Total Global Sales */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="text-xs font-medium text-gray-500">Total Global Sales</p>
+              <h2 className="text-2xl font-bold text-gray-900 mt-1">$124,563.00</h2>
+              <p className="flex items-center text-xs font-medium text-emerald-600 mt-1">
+                <ArrowUpRight className="w-3 h-3 mr-1" />
+                +12.5% from last period
+              </p>
+            </div>
+            <Select defaultValue="7d">
+              <SelectTrigger className="w-[90px] h-7 text-xs bg-gray-50 border-gray-200">
+                <SelectValue placeholder="Timeframe" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7d">7 days</SelectItem>
+                <SelectItem value="30d">30 days</SelectItem>
+                <SelectItem value="ytd">YTD</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Additional Summary Stats */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+          <p className="text-xs font-medium text-gray-500">Active Markets</p>
+          <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
+          <p className="text-xs text-gray-500 mt-1">Across 3 continents</p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+          <p className="text-xs font-medium text-gray-500">Growth Rate</p>
+          <h3 className="text-2xl font-bold text-gray-900 mt-1">+18.2%</h3>
+          <p className="text-xs text-gray-500 mt-1">Month over month</p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+          <p className="text-xs font-medium text-gray-500">Platform Health</p>
+          <h3 className="text-2xl font-bold text-gray-900 mt-1">98%</h3>
+          <p className="text-xs text-gray-500 mt-1">All systems operational</p>
+        </div>
+      </div>
+
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-3 gap-6">
+        {/* Left Column - Growth & Intelligence */}
+        <div className="col-span-2 space-y-6">
+          {/* Growth & Market Intelligence */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Globe className="w-4 h-4 text-indigo-500" />
+                <h2 className="text-base font-semibold text-gray-900">Growth & Market Intelligence</h2>
               </div>
+              <Button variant="ghost" size="sm" className="h-8 text-xs font-medium text-gray-600 hover:text-gray-900">
+                View All
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Button>
             </div>
-
-            {/* Additional Summary Stats */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-              <p className="text-xs font-medium text-gray-500">Active Markets</p>
-              <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
-              <p className="text-xs text-gray-500 mt-1">Across 3 continents</p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-              <p className="text-xs font-medium text-gray-500">Growth Rate</p>
-              <h3 className="text-2xl font-bold text-gray-900 mt-1">+18.2%</h3>
-              <p className="text-xs text-gray-500 mt-1">Month over month</p>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-              <p className="text-xs font-medium text-gray-500">Platform Health</p>
-              <h3 className="text-2xl font-bold text-gray-900 mt-1">98%</h3>
-              <p className="text-xs text-gray-500 mt-1">All systems operational</p>
+            <div className="grid grid-cols-2 gap-4">
+              {combinedInsights.map((insight, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col p-4 bg-gray-50/50 rounded-lg border border-gray-100"
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className={cn(
+                      "p-2 rounded-lg shrink-0",
+                      insight.type === 'ai' && "bg-indigo-50 text-indigo-600",
+                      insight.type === 'market' && "bg-emerald-50 text-emerald-600",
+                      insight.type === 'regulatory' && "bg-amber-50 text-amber-600"
+                    )}>
+                      <insight.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-medium text-gray-900">{insight.title}</h3>
+                      <p className="text-xs text-gray-500 mt-0.5">{insight.content}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+                    <span className={cn(
+                      "text-xs px-2 py-1 rounded-full font-medium",
+                      insight.confidence === 'high' && "bg-emerald-50 text-emerald-700",
+                      insight.confidence === 'medium' && "bg-amber-50 text-amber-700"
+                    )}>
+                      {insight.metric}
+                    </span>
+                    <Button variant="ghost" size="sm" className="h-7 text-xs font-medium">
+                      {insight.action}
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Main Grid Layout */}
-          <div className="grid grid-cols-3 gap-6">
-            {/* Left Column - Growth & Intelligence */}
-            <div className="col-span-2 space-y-6">
-              {/* Growth & Market Intelligence */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-indigo-500" />
-                    <h2 className="text-base font-semibold text-gray-900">Growth & Market Intelligence</h2>
-                  </div>
-                  <Button variant="ghost" size="sm" className="h-8 text-xs font-medium text-gray-600 hover:text-gray-900">
-                    View All
-                    <ArrowRight className="w-3 h-3 ml-1" />
-                  </Button>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  {combinedInsights.map((insight, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col p-4 bg-gray-50/50 rounded-lg border border-gray-100"
-                    >
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className={cn(
-                          "p-2 rounded-lg shrink-0",
-                          insight.type === 'ai' && "bg-indigo-50 text-indigo-600",
-                          insight.type === 'market' && "bg-emerald-50 text-emerald-600",
-                          insight.type === 'regulatory' && "bg-amber-50 text-amber-600"
-                        )}>
-                          <insight.icon className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-900">{insight.title}</h3>
-                          <p className="text-xs text-gray-500 mt-0.5">{insight.content}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                        <span className={cn(
-                          "text-xs px-2 py-1 rounded-full font-medium",
-                          insight.confidence === 'high' && "bg-emerald-50 text-emerald-700",
-                          insight.confidence === 'medium' && "bg-amber-50 text-amber-700"
-                        )}>
-                          {insight.metric}
-                        </span>
-                        <Button variant="ghost" size="sm" className="h-7 text-xs font-medium">
-                          {insight.action}
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Sales Performance */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <CountrySalesPerformance />
+          </div>
+        </div>
 
-              {/* Sales Performance */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <CountrySalesPerformance />
+        {/* Right Column - Status & Actions */}
+        <div className="space-y-6">
+          {/* Marketplace Health */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className={cn(
+                  "w-2 h-2 rounded-full",
+                  marketplaceHealth === 'success' && "bg-emerald-500",
+                  marketplaceHealth === 'warning' && "bg-amber-500",
+                  marketplaceHealth === 'error' && "bg-red-500"
+                )} />
+                <h3 className="text-sm font-medium text-gray-900">Marketplace Status</h3>
               </div>
+              <Button variant="ghost" size="sm" className="h-7 text-xs">
+                Manage
+                <ChevronRight className="w-3 h-3 ml-1" />
+              </Button>
             </div>
-
-            {/* Right Column - Status & Actions */}
-            <div className="space-y-6">
-              {/* Marketplace Health */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className={cn(
-                      "w-2 h-2 rounded-full",
-                      marketplaceHealth === 'success' && "bg-emerald-500",
-                      marketplaceHealth === 'warning' && "bg-amber-500",
-                      marketplaceHealth === 'error' && "bg-red-500"
-                    )} />
-                    <h3 className="text-sm font-medium text-gray-900">Marketplace Status</h3>
+            <div className="space-y-2">
+              {marketplaces.map(marketplace => (
+                <div key={marketplace.name} 
+                  className="flex items-center justify-between p-2.5 bg-gray-50/50 rounded-lg border border-gray-100"
+                >
+                  <span className="text-sm text-gray-700">{marketplace.name}</span>
+                  <div className={cn(
+                    "px-2 py-1 rounded-full text-xs font-medium",
+                    marketplace.status === 'connected' && "bg-emerald-50 text-emerald-700",
+                    marketplace.status === 'error' && "bg-red-50 text-red-700",
+                    marketplace.status === 'pending' && "bg-amber-50 text-amber-700"
+                  )}>
+                    {marketplace.status}
                   </div>
-                  <Button variant="ghost" size="sm" className="h-7 text-xs">
-                    Manage
-                    <ChevronRight className="w-3 h-3 ml-1" />
-                  </Button>
                 </div>
-                <div className="space-y-2">
-                  {marketplaces.map(marketplace => (
-                    <div key={marketplace.name} 
-                      className="flex items-center justify-between p-2.5 bg-gray-50/50 rounded-lg border border-gray-100"
-                    >
-                      <span className="text-sm text-gray-700">{marketplace.name}</span>
-                      <div className={cn(
-                        "px-2 py-1 rounded-full text-xs font-medium",
-                        marketplace.status === 'connected' && "bg-emerald-50 text-emerald-700",
-                        marketplace.status === 'error' && "bg-red-50 text-red-700",
-                        marketplace.status === 'pending' && "bg-amber-50 text-amber-700"
-                      )}>
-                        {marketplace.status}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
+            </div>
+          </div>
 
-              {/* Pending Actions */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-amber-500" />
-                    <h3 className="text-sm font-medium text-gray-900">{pendingActions.length} Actions Required</h3>
-                  </div>
-                  <ChevronDown className={cn(
-                    "w-4 h-4 text-gray-400 transition-transform",
-                    showActions && "transform rotate-180"
-                  )} />
-                </div>
-                <div className="space-y-2">
-                  {pendingActions.map(action => (
-                    <div key={action.id} className="p-3 bg-gray-50/50 rounded-lg border border-gray-100">
-                      <p className="text-sm text-gray-700 mb-2">{action.title}</p>
-                      <div className="flex items-center justify-between">
-                        <span className={cn(
-                          "text-xs px-2 py-1 rounded-full font-medium",
-                          action.priority === 'high' && "bg-red-50 text-red-700",
-                          action.priority === 'medium' && "bg-amber-50 text-amber-700"
-                        )}>
-                          {action.priority} priority
-                        </span>
-                        <Button size="sm" variant="ghost" className="h-7 text-xs font-medium">
-                          Resolve
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          {/* Pending Actions */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-500" />
+                <h3 className="text-sm font-medium text-gray-900">{pendingActions.length} Actions Required</h3>
               </div>
+              <ChevronDown className={cn(
+                "w-4 h-4 text-gray-400 transition-transform",
+                showActions && "transform rotate-180"
+              )} />
+            </div>
+            <div className="space-y-2">
+              {pendingActions.map(action => (
+                <div key={action.id} className="p-3 bg-gray-50/50 rounded-lg border border-gray-100">
+                  <p className="text-sm text-gray-700 mb-2">{action.title}</p>
+                  <div className="flex items-center justify-between">
+                    <span className={cn(
+                      "text-xs px-2 py-1 rounded-full font-medium",
+                      action.priority === 'high' && "bg-red-50 text-red-700",
+                      action.priority === 'medium' && "bg-amber-50 text-amber-700"
+                    )}>
+                      {action.priority} priority
+                    </span>
+                    <Button size="sm" variant="ghost" className="h-7 text-xs font-medium">
+                      Resolve
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 } 

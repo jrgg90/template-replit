@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
-import { Command } from "lucide-react"
+import { Command, Search } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { MarketCard } from "./components/MarketCard"
-import { MarketComparisonTable } from "./components/MarketComparisonTable"
 
 // Datos simulados
 const recommendedMarkets = [
@@ -71,55 +70,24 @@ export default function MarketResearchPage() {
         </p>
       </div>
 
-      {/* Recommended Markets Section - Ahora es la sección principal */}
+      {/* Recommended Markets Section */}
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-light text-gray-900">Mercados Recomendados</h2>
-            <p className="mt-2 text-gray-600">Basado en tu perfil de negocio y objetivos de expansión</p>
           </div>
-          {/* Botón de explorar movido aquí */}
+          {/* Botón de explorar mejorado */}
           <button 
-            onClick={() => document.getElementById('exploreMarkets')?.focus()}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 text-[#0F172A] bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm"
           >
-            <Command className="h-4 w-4" />
-            <span className="text-sm font-medium">Explorar otros mercados</span>
+            <Search className="h-4 w-4" />
+            <span className="text-sm font-medium">Explorar más mercados</span>
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recommendedMarkets.map((market) => (
             <MarketCard key={market.id} market={market} />
           ))}
-        </div>
-      </div>
-
-      {/* Market Search Section - Ahora menos prominente */}
-      <div className="max-w-2xl mx-auto opacity-75 hover:opacity-100 transition-opacity">
-        <Card className="p-4 shadow-sm border bg-white/50 backdrop-blur-sm">
-          <div className="space-y-3">
-            <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-              <SelectTrigger id="exploreMarkets" className="w-full h-10 text-sm">
-                <SelectValue placeholder="Buscar otros países..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="portugal">🇵🇹 Portugal</SelectItem>
-                <SelectItem value="italy">🇮🇹 Italia</SelectItem>
-                <SelectItem value="netherlands">🇳🇱 Países Bajos</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </Card>
-      </div>
-
-      {/* Market Comparison Table */}
-      <div className="space-y-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-light text-gray-900">Comparación de Mercados</h2>
-          <p className="mt-2 text-gray-600">Análisis detallado de métricas clave por país</p>
-        </div>
-        <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
-          <MarketComparisonTable markets={recommendedMarkets} />
         </div>
       </div>
     </div>
