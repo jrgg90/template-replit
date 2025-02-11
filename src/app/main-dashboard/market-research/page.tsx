@@ -63,10 +63,6 @@ const recommendedMarkets = [
 export default function MarketResearchPage() {
   const [expandedMarket, setExpandedMarket] = useState<number | null>(null)
 
-  const toggleMarket = (marketId: number) => {
-    setExpandedMarket(expandedMarket === marketId ? null : marketId)
-  }
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
       {/* Header Section */}
@@ -93,12 +89,15 @@ export default function MarketResearchPage() {
         {recommendedMarkets.map((market) => (
           <Card 
             key={market.id}
-            className="overflow-hidden transition-all duration-200"
+            className={cn(
+              "overflow-hidden transition-all duration-200",
+              expandedMarket !== market.id && "h-[180px]"
+            )}
           >
             {/* Card Header - Always visible */}
             <div 
               className="p-6 cursor-pointer hover:bg-gray-50"
-              onClick={() => toggleMarket(market.id)}
+              onClick={() => setExpandedMarket(expandedMarket === market.id ? null : market.id)}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
