@@ -1,3 +1,9 @@
+export interface ProductImage {
+  id: string;
+  src: string;
+  alt?: string;
+}
+
 export interface ShopifyProduct {
   id: string;
   userId: string;
@@ -20,10 +26,7 @@ export interface ShopifyProduct {
   sku: string;
   
   // Media
-  images: Array<{
-    url: string;
-    alt?: string;
-  }>;
+  images: ProductImage[];
   
   // Status & Dates
   status: 'active' | 'draft' | 'archived';
@@ -43,4 +46,19 @@ export interface ShopifyProduct {
   
   selectedForExport?: boolean;
   selectedAt?: string | null;
+}
+
+export interface ProductListing {
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+  marketplace: string;
+  status: 'published' | 'draft' | 'error';
+  optimizationScore: number;
+  price: number;
+  sku: string;
+  category: string;
+  inventory: number;
+  originalData?: ShopifyProduct; // Para mantener referencia a los datos originales
 } 

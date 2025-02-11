@@ -34,12 +34,6 @@ export default function DashboardLayout({
               <p className="text-xs font-medium text-muted-foreground px-2">Platform</p>
               <AppSidebar />
             </div>
-            <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground px-2">Projects</p>
-              <div className="space-y-1">
-                <SidebarInset>Equipo de Ventas</SidebarInset>
-              </div>
-            </div>
           </div>
         </div>
 
