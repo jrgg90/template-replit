@@ -22,12 +22,12 @@ const mainItems = [
     icon: BarChart2,
   },
   {
-    title: "Market Research",
+    title: "Explore Markets",
     href: "/main-dashboard/market-research",
     icon: Globe,
   },
   {
-    title: "Product Listings",
+    title: "Products and Channels",
     href: "/main-dashboard/product-listings",
     icon: Package,
   },

@@ -1,5 +1,12 @@
 "use client"
 
+import { useState } from "react"
+import { 
+  BarChart2, Globe2, ShoppingBag, ArrowUpRight, 
+  TrendingUp, Target, AlertCircle, Users,
+  AlertTriangle, Brain, ChevronDown, ChevronRight, 
+  CheckCircle2, XCircle 
+} from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,7 +17,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
-import { AlertCircle, ArrowRight, ArrowUpRight, TrendingUp, Users, AlertTriangle, Brain, ChevronDown, ChevronRight, BarChart2, Globe, CheckCircle2, XCircle, ShoppingBag } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CountrySalesBreakdown } from "./components/CountrySalesBreakdown"
 import { CountrySalesPerformance } from "./components/CountrySalesPerformance"
@@ -157,169 +163,345 @@ const combinedInsights = [
   }
 ]
 
+const activeCountries = [
+  {
+    id: 1,
+    flag: "🇫🇷",
+    name: "France",
+    position: 1
+  },
+  {
+    id: 2,
+    flag: "🇩🇪",
+    name: "Germany",
+    position: 2
+  },
+  {
+    id: 3,
+    flag: "🇪🇸",
+    name: "Spain",
+    position: 3
+  }
+]
+
 export default function DashboardPage() {
-  const [showActions, setShowActions] = React.useState(false)
-  const [showConnections, setShowConnections] = React.useState(false)
-
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
-      {/* Header Section */}
-      <div className="space-y-4">
-        <h1 className="text-4xl md:text-5xl font-extralight tracking-tight text-gray-900">
-          Dashboard
-        </h1>
-      </div>
-
-      {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Total Global Sales */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-xs font-medium text-gray-500">Total Global Sales</p>
-              <h2 className="text-2xl font-bold text-gray-900 mt-1">$124,563.00</h2>
-              <p className="flex items-center text-xs font-medium text-emerald-600 mt-1">
-                <ArrowUpRight className="w-3 h-3 mr-1" />
-                +12.5% from last period
-              </p>
-            </div>
-            <Select defaultValue="7d">
-              <SelectTrigger className="w-[90px] h-7 text-xs bg-gray-50 border-gray-200">
-                <SelectValue placeholder="Timeframe" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="7d">7 days</SelectItem>
-                <SelectItem value="30d">30 days</SelectItem>
-                <SelectItem value="ytd">YTD</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        {/* Marketplaces Activos */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-500">Marketplaces Activos</p>
-              <h3 className="text-2xl font-bold text-gray-900 mt-1">5</h3>
-              <p className="text-xs text-gray-500 mt-1">Amazon, eBay, Walmart, Etsy, Shopify</p>
-            </div>
-            <div className="p-2 rounded-lg bg-emerald-50">
-              <ShoppingBag className="w-4 h-4 text-emerald-600" />
-            </div>
-          </div>
-        </div>
-
-        {/* Active Markets */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-500">Países Activos</p>
-              <h3 className="text-2xl font-bold text-gray-900 mt-1">3</h3>
-              <p className="text-xs text-gray-500 mt-1">España, Francia, Alemania</p>
-            </div>
-            <div className="p-2 rounded-lg bg-blue-50">
-              <Globe className="w-4 h-4 text-blue-600" />
-            </div>
-          </div>
-        </div>
+    <div className="max-w-7xl mx-auto px-6 py-8 space-y-12">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-medium text-gray-900">Dashboard</h1>
       </div>
 
       {/* Main Grid Layout */}
-      <div className="grid grid-cols-3 gap-6">
-        {/* Left Column - Growth & Intelligence */}
-        <div className="col-span-2 space-y-6">
-          {/* Growth & Market Intelligence */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-indigo-500" />
-                <h2 className="text-base font-semibold text-gray-900">Growth & Market Intelligence</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column - Main Content (2 cols) */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Main Market Card */}
+          <Card className="overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Left Section */}
+              <div className="p-8 space-y-6">
+                <h2 className="text-2xl font-normal">
+                  Explore insights and compare new markets
+                </h2>
+                <div className="space-y-4 text-gray-600">
+                  <div className="flex gap-3">
+                    <div className="w-1 h-1 rounded-full bg-gray-300 mt-2" />
+                    <p>Compare your existing markets with promising new ones.</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1 h-1 rounded-full bg-gray-300 mt-2" />
+                    <p>Discover markets best suited to your business, with information on competitiveness and ease-of-doing-business.</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1 h-1 rounded-full bg-gray-300 mt-2" />
+                    <p>Get tailored insights about customer behavior and market trends.</p>
+                  </div>
+                </div>
+                <div className="pt-4">
+                  <Button 
+                    className="bg-[#1a73e8] hover:bg-[#1557b0] text-white"
+                  >
+                    Explore markets
+                  </Button>
+                </div>
               </div>
-              <Button variant="ghost" size="sm" className="h-8 text-xs font-medium text-gray-600 hover:text-gray-900">
-                View All
-                <ArrowRight className="w-3 h-3 ml-1" />
+
+              {/* Right Section */}
+              <div className="border-l bg-gray-50">
+                <div className="p-8">
+                  <h3 className="text-base font-medium text-gray-900 mb-6">
+                    YOUR SHORTLISTED MARKETS
+                  </h3>
+                  <div className="space-y-2">
+                    {activeCountries.map((country) => (
+                      <div
+                        key={country.id}
+                        className="flex items-center gap-4 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        <span className="w-6 text-sm font-medium text-gray-500">
+                          {country.position}
+                        </span>
+                        <span className="text-lg">{country.flag}</span>
+                        <span className="text-sm font-medium text-gray-900">
+                          {country.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6">
+                    <Button 
+                      variant="link" 
+                      className="text-[#1a73e8] hover:text-[#1557b0] p-0 h-auto font-medium"
+                    >
+                      Edit shortlist →
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {quickActions.map((action, index) => (
+              <Card key={index} className="p-6 hover:shadow-md transition-all">
+                <div className="space-y-4">
+                  <div className={cn("p-2 w-fit rounded-lg", action.bgColor)}>
+                    <action.icon className={cn("h-5 w-5", action.iconColor)} />
+                  </div>
+                  <h3 className="font-medium">{action.title}</h3>
+                  <p className="text-sm text-gray-600">{action.description}</p>
+                  <Button variant="link" className="text-[#1a73e8] p-0 h-auto">
+                    {action.action} →
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Market Insights */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-medium text-gray-900">Market Insights</h2>
+              <Button variant="ghost" className="text-sm font-medium text-gray-600">
+                View all
               </Button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {combinedInsights.map((insight, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col p-4 bg-gray-50/50 rounded-lg border border-gray-100"
-                >
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className={cn(
-                      "p-2 rounded-lg shrink-0",
-                      insight.type === 'ai' && "bg-indigo-50 text-indigo-600",
-                      insight.type === 'market' && "bg-emerald-50 text-emerald-600",
-                      insight.type === 'regulatory' && "bg-amber-50 text-amber-600"
-                    )}>
-                      <insight.icon className="h-4 w-4" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {marketInsights.map((insight, index) => (
+                <Card key={index} className="p-6">
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-gray-50">
+                        <insight.icon className="h-5 w-5 text-gray-600" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-medium text-gray-900">{insight.title}</h3>
+                        <p className="text-sm text-emerald-600">{insight.metric}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">{insight.title}</h3>
-                      <p className="text-xs text-gray-500 mt-0.5">{insight.content}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                    <span className={cn(
-                      "text-xs px-2 py-1 rounded-full font-medium",
-                      insight.confidence === 'high' && "bg-emerald-50 text-emerald-700",
-                      insight.confidence === 'medium' && "bg-amber-50 text-amber-700"
-                    )}>
-                      {insight.metric}
-                    </span>
-                    <Button variant="ghost" size="sm" className="h-7 text-xs font-medium">
+                    <p className="text-sm text-gray-600">
+                      {insight.description}
+                    </p>
+                    <Button className="w-full bg-white hover:bg-gray-50 text-gray-900 border border-gray-200">
                       {insight.action}
                     </Button>
                   </div>
-                </div>
+                </Card>
               ))}
             </div>
-          </div>
-
-          {/* Sales Performance */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <CountrySalesPerformance />
           </div>
         </div>
 
-        {/* Right Column - Solo Pending Actions */}
-        <div className="space-y-6">
-          {/* Pending Actions */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-500" />
-                <h3 className="text-sm font-medium text-gray-900">{pendingActions.length} Actions Required</h3>
-              </div>
-              <ChevronDown className={cn(
-                "w-4 h-4 text-gray-400 transition-transform",
-                showActions && "transform rotate-180"
-              )} />
-            </div>
-            <div className="space-y-2">
-              {pendingActions.map(action => (
-                <div key={action.id} className="p-3 bg-gray-50/50 rounded-lg border border-gray-100">
-                  <p className="text-sm text-gray-700 mb-2">{action.title}</p>
-                  <div className="flex items-center justify-between">
-                    <span className={cn(
-                      "text-xs px-2 py-1 rounded-full font-medium",
-                      action.priority === 'high' && "bg-red-50 text-red-700",
-                      action.priority === 'medium' && "bg-amber-50 text-amber-700"
-                    )}>
-                      {action.priority} priority
-                    </span>
-                    <Button size="sm" variant="ghost" className="h-7 text-xs font-medium">
-                      Resolve
-                    </Button>
-                  </div>
+        {/* Right Column - AI Assistant & Roadmap */}
+        <div className="space-y-8">
+          {/* AI Export Assistant */}
+          <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+            <div className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-lg bg-white shadow-sm">
+                  <Brain className="h-6 w-6 text-blue-600" />
                 </div>
-              ))}
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-xl font-medium">AI Export Assistant</h2>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Tu consultor de exportación disponible 24/7
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    {aiSuggestions.map((suggestion, index) => (
+                      <Button 
+                        key={index}
+                        variant="outline"
+                        className="w-full justify-start text-left normal-case bg-white/80 hover:bg-white"
+                      >
+                        {suggestion.icon}
+                        <span>{suggestion.text}</span>
+                      </Button>
+                    ))}
+                  </div>
+                  <Button className="w-full bg-[#1a73e8] hover:bg-[#1557b0] text-white">
+                    Iniciar conversación
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
+          </Card>
+
+          {/* Expansion Roadmap */}
+          <Card className="overflow-hidden">
+            <div className="p-6">
+              <h2 className="text-xl font-medium mb-6">Tu Plan de Expansión</h2>
+              <div className="relative">
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200" />
+                <div className="space-y-8 relative">
+                  {roadmapSteps.map((step, index) => (
+                    <div key={index} className="flex gap-6">
+                      <div className={cn(
+                        "w-8 h-8 rounded-full flex items-center justify-center text-white",
+                        step.completed ? "bg-emerald-500" : 
+                        step.current ? "bg-blue-500" : "bg-gray-200"
+                      )}>
+                        {step.completed ? "✓" : index + 1}
+                      </div>
+                      <div>
+                        <h3 className={cn(
+                          "font-medium",
+                          !step.completed && !step.current && "text-gray-500"
+                        )}>
+                          {step.title}
+                        </h3>
+                        <p className={cn(
+                          "text-sm",
+                          step.completed || step.current ? "text-gray-600" : "text-gray-500"
+                        )}>
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
   )
-} 
+}
+
+const marketInsights = [
+  {
+    icon: TrendingUp,
+    title: "Oportunidad en España",
+    metric: "85% market fit",
+    description: "El mercado español muestra una alta compatibilidad con tus productos actuales.",
+    action: "Explorar Oportunidad"
+  },
+  {
+    icon: Target,
+    title: "Tendencia de Productos",
+    metric: "20% crecimiento",
+    description: "La demanda de productos artesanales está creciendo en Francia.",
+    action: "Ver Análisis"
+  }
+]
+
+const nextSteps = [
+  {
+    icon: AlertCircle,
+    title: "Completa tu perfil",
+    description: "Actualiza tu información de empresa para acceder a más mercados.",
+    action: "Completar Ahora"
+  },
+  {
+    icon: Globe2,
+    title: "Conecta Amazon ES",
+    description: "Todo listo para empezar a vender en Amazon España.",
+    action: "Conectar"
+  },
+  {
+    icon: ShoppingBag,
+    title: "Revisa productos",
+    description: "10 productos listos para publicar en nuevos mercados.",
+    action: "Revisar"
+  }
+]
+
+const quickActions = [
+  {
+    icon: AlertCircle,
+    title: "Completa tu perfil",
+    description: "Actualiza tu información de empresa para acceder a más mercados.",
+    action: "Completar Ahora",
+    bgColor: "bg-emerald-100",
+    iconColor: "text-emerald-600"
+  },
+  {
+    icon: Globe2,
+    title: "Conecta Amazon ES",
+    description: "Todo listo para empezar a vender en Amazon España.",
+    action: "Conectar",
+    bgColor: "bg-blue-100",
+    iconColor: "text-blue-600"
+  },
+  {
+    icon: ShoppingBag,
+    title: "Revisa productos",
+    description: "10 productos listos para publicar en nuevos mercados.",
+    action: "Revisar",
+    bgColor: "bg-yellow-100",
+    iconColor: "text-yellow-600"
+  }
+]
+
+const aiSuggestions = [
+  {
+    icon: <Users className="h-5 w-5 mr-2" />,
+    text: "Competitor Movement"
+  },
+  {
+    icon: <TrendingUp className="h-5 w-5 mr-2" />,
+    text: "Market Trend"
+  },
+  {
+    icon: <AlertTriangle className="h-5 w-5 mr-2" />,
+    text: "Regulatory Alert"
+  }
+]
+
+const roadmapSteps = [
+  {
+    title: "Market Research",
+    description: "Research new markets and identify potential opportunities",
+    completed: false,
+    current: true
+  },
+  {
+    title: "Business Plan",
+    description: "Develop a comprehensive business plan for market entry",
+    completed: false,
+    current: false
+  },
+  {
+    title: "Product Preparation",
+    description: "Prepare products for export and obtain necessary certifications",
+    completed: false,
+    current: false
+  },
+  {
+    title: "Market Entry",
+    description: "Launch your products in the selected market",
+    completed: false,
+    current: false
+  },
+  {
+    title: "Post-Launch Support",
+    description: "Provide ongoing support and assistance after market entry",
+    completed: false,
+    current: false
+  }
+] 
