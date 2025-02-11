@@ -149,28 +149,28 @@ export default function ProductListingsPage() {
           {/* Marketplaces List */}
           <div className="space-y-3">
             {marketplaces.map((country) => (
-              <Card key={country.country} className="overflow-hidden">
+              <Card key={country.country} className="overflow-hidden hover:shadow-md transition-all duration-200">
                 <div
                   onClick={() => toggleCountry(country.country)}
-                  className="w-full p-4 flex items-center justify-between text-left cursor-pointer hover:bg-gray-50"
+                  className="w-full p-6 flex items-center justify-between text-left cursor-pointer hover:bg-gray-50/75"
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">{country.flag}</span>
-                    <span className="font-medium text-gray-900">{country.country}</span>
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl">{country.flag}</span>
+                    <span className="text-lg font-medium text-gray-900">{country.country}</span>
                   </div>
-                  <ChevronRight className={`h-4 w-4 text-gray-400 transition-transform ${
+                  <ChevronRight className={`h-5 w-5 text-gray-400 transition-transform ${
                     expandedCountries.includes(country.country) ? 'rotate-90' : ''
                   }`} />
                 </div>
                 
                 {expandedCountries.includes(country.country) && (
-                  <div className="border-t divide-y">
+                  <div className="border-t divide-y bg-gray-50/50">
                     {country.platforms.map((platform) => (
                       <button
                         key={platform.name}
                         onClick={() => platform.status === 'connected' && setSelectedMarketplace(platform.name)}
                         className={cn(
-                          "w-full p-3 flex items-center justify-between hover:bg-gray-50 transition-colors",
+                          "w-full p-4 flex items-center justify-between hover:bg-white/75 transition-colors",
                           selectedMarketplace === platform.name && "bg-[#0F172A]/5 hover:bg-[#0F172A]/5",
                           platform.status !== 'connected' && "opacity-75"
                         )}
