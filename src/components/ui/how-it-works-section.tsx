@@ -6,28 +6,28 @@ export function HowItWorksSection() {
   const steps = [
     {
       number: "1",
-      title: "Sincroniza Tu Tienda con Exbordia",
-      description: "Conecta tu e-commerce (Shopify, WooCommerce, Wix) con Exbordia en minutos."
+      title: "Conecta a un experto de comercio global de IA a tu equipo",
+      description: "Sincroniza tu tienda de Shopify, WooCommerce, Wix, etc. con Exbordia con un solo clic."
     },
     {
       number: "2",
-      title: "Identifica los mercados más prometedores para tus productos",
-      description: "Descubre en qué países tus productos tienen mayor demanda y crea una estrategia de expansión. Ya sea que quieras vender en Estados Unidos, Canadá, Europa, LATAM o Asia, Exbordia te ayuda a preparar tu marca para conquistar el mercado internacional."
+      title: "Descubre dónde vender",
+      description: "Exbordia analiza demanda, competencia y regulaciones para sugerirte dónde vender."
     },
     {
       number: "3",
-      title: "Publica tus productos en los mejores marketplaces",
-      description: "Seleccionamos las mejores plataformas digitales para tu marca. Por ejemplo: Amazon, Etsy, Faire, Ebay y más. Optimizamos tus descripciones y publicamos tus productos en segundos."
+      title: "Publica automáticamente",
+      description: "Exbordia optimiza y sube tus productos en Amazon, Etsy, Faire y más por ti y sin esfuerzo."
     },
     {
       number: "4",
-      title: "Total Asistencia en Exportación",
-      description: "Nuestro equipo y asistentes de IA te ayudan a cumplir con todas las regulaciones y certificaciones necesarias para exportar tus productos en cada país."
+      title: "Resuelve dudas en segundos",
+      description: "Tu asistente de IA te guía en regulaciones, certificaciones y cumplimiento legal."
     },
     {
       number: "5",
       title: "¡Comienza a Vender!",
-      description: "Gestiona todas tus ventas internacionales, así como tus inventarios y logística desde un solo lugar con la plataforma de Exbordia."
+      description: "Gestiica ventas, inventarios, y logística en un solo lugar."
     }
   ];
 
@@ -48,7 +48,7 @@ export function HowItWorksSection() {
             <div className="relative">
               <div className="w-12 h-12 rounded-full bg-[#F5F7F9] flex items-center justify-center
                 text-[#131F42] font-medium group-hover:bg-[#131F42] group-hover:text-white
-                transition-all duration-300 text-lg">
+                transition-all duration-300 text-xl">
                 {step.number}
               </div>
               {index < steps.length - 1 && (
@@ -59,10 +59,10 @@ export function HowItWorksSection() {
 
             {/* Contenido */}
             <div className="flex-1 pt-1">
-              <h3 className="text-xl font-medium text-[#131F42] mb-3 group-hover:text-[#131F42] transition-colors">
+              <h3 className="text-2xl font-medium text-[#131F42] mb-3 group-hover:text-[#131F42] transition-colors">
                 {step.title}
               </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
+              <p className="text-gray-600 text-lg leading-relaxed">
                 {step.description}
               </p>
             </div>
