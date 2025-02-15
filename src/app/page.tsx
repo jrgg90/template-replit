@@ -22,104 +22,104 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <MainHeader />
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 min-h-[90vh] flex items-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Animated gradient blobs */}
-          <div className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-100/40 to-purple-100/40 rounded-full blur-3xl 
-            -top-40 -right-40 animate-pulse-slow" />
-          <div className="absolute w-[600px] h-[600px] bg-gradient-to-r from-purple-100/40 to-blue-100/40 rounded-full blur-3xl 
-            -bottom-20 -left-20 animate-pulse-slow [animation-delay:1s]" />
-          
-          {/* Subtle grid pattern */}
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
-          
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/80" />
-        </div>
-
-        {/* Content */}
-        <div className="relative container mx-auto max-w-6xl px-4 z-[2]">
-          <div className="flex flex-col items-center text-center">
-            {/* Spacer div en lugar del badge */}
-            <div className="h-[12px] mb-8" /> {/* 52px es aproximadamente la altura del badge anterior */}
-
-            {/* Main Title - Refined Design */}
-            <h1 className="flex flex-col gap-2 text-4xl md:text-[3.75rem] font-normal leading-[1.1] mb-8 tracking-tight">
-              {/* Primera línea con un gris más suave */}
-              <span className="text-[#1A1A2E] font-light opacity-0 animate-fade-in-up [animation-delay:400ms]">
-                Escala tu tienda online con un
+      <section className="relative min-h-screen flex flex-col items-center justify-start pt-44 overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-white pointer-events-none" />
+        
+        <div className="container relative mx-auto px-4 pb-32">
+          {/* Text Content */}
+          <div className="text-center max-w-[720px] mx-auto mb-24">
+            <motion.h1 
+              className="text-5xl md:text-6xl lg:text-7xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="block text-[#1A1A2E] font-light whitespace-nowrap tracking-tight">
+                Lleva tu tienda online
               </span>
-              
-              {/* Línea central con diseño refinado */}
-              <span className="relative font-medium opacity-0 animate-fade-in-up [animation-delay:600ms] group">
-                {/* Efecto de brillo más sutil */}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent 
-                  group-hover:translate-x-full duration-1000 transition-transform" />
-                
-                {/* Texto principal con nuevo estilo */}
-                <span className="relative font-[350] tracking-[-0.02em] bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF]
-                  group-hover:from-[#2E5C9E] group-hover:via-[#0A84FF] group-hover:to-[#2E5C9E]
-                  text-transparent bg-clip-text transition-all duration-700
-                  [font-feature-settings:'salt'_on,'ss01'_on]">
-                  Agente de
-                  Comercio 
-                  Internacional
-                </span>
-                
-                {/* Destellos más sutiles */}
-                <span className="absolute -right-2 -top-2 w-1.5 h-1.5 bg-[#0A84FF]/30 rounded-full animate-pulse" />
-                <span className="absolute -left-2 -bottom-2 w-1.5 h-1.5 bg-[#0A84FF]/30 rounded-full animate-pulse [animation-delay:500ms]" />
+              <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
+                font-medium tracking-tight pb-3">
+                a nuevos mercados globales
               </span>
+            </motion.h1>
 
-              {/* Última línea con el mismo gris suave */}
-              <span className="text-[#1A1A2E] font-light opacity-0 animate-fade-in-up [animation-delay:800ms]">
-                que trabaja para ti
-              </span>
-            </h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-gray-600 max-w-[600px] mx-auto mb-12 leading-relaxed relative z-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Con los <span className="font-medium text-gray-700">Agentes de Inteligencia Artificial</span> que te ayudan a vender tus productos en todo el mundo !Fácil!
+            </motion.p>
 
-            {/* Subtitle with animated highlight */}
-            <p className="relative text-lg md:text-xl font-light text-gray-800 mb-12 max-w-2xl mx-auto tracking-wide leading-relaxed 
-              opacity-0 animate-fade-in-up [animation-delay:1000ms]">
-              <span className="relative">
-                Integra Inteligencia Artificial y comienza a vender en los principales marketplaces globales, resuelve todas tus dudas y escala globalmente sin miedo.
-              </span>
-            </p>
-
-            {/* CTA Buttons with enhanced animations */}
-            <div className="flex justify-center opacity-0 animate-fade-in-up [animation-delay:1200ms] mb-20">
-              <div className="flex flex-col items-center">
-                <Link 
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform?usp=header"
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <button className="group relative px-8 py-3 bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300 
-                    hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 group-hover:opacity-100 
-                      transition-opacity duration-300" />
-                    <span className="relative flex items-center gap-2">
-                      Únete al Waitlist
-                      <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" 
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                  </button>
-                </Link>
-                <p className="mt-4 text-sm text-gray-500 font-light">
-                  
-                </p>
-              </div>
-            </div>
-
-            {/* Divider line */}
-            <div className="w-full border-t border-gray-100 opacity-0 animate-fade-in-up [animation-delay:1400ms]" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Link 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="group relative inline-flex items-center justify-center px-12 py-4 text-lg
+                  bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300
+                  hover:shadow-[0_8px_40px_rgba(10,132,255,0.22)] hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 
+                    group-hover:opacity-100 transition-opacity duration-500" />
+                  <span className="relative flex items-center gap-2">
+                    Agenda tu demo
+                    <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </button>
+              </Link>
+            </motion.div>
           </div>
+
+          {/* Platform Image */}
+          <motion.div
+            className="relative max-w-[1200px] mx-auto"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <motion.div
+              animate={{ 
+                y: [0, 15, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              className="relative z-20"
+            >
+              <Image
+                src="/asistente2.png"
+                alt="Exbordia Platform Interface"
+                width={1400}
+                height={900}
+                priority
+                className="w-full h-auto rounded-xl shadow-[0_20px_50px_rgba(8,112,184,0.12)]"
+              />
+            </motion.div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -inset-[10%] -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full
+                bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
+            </div>
+          </motion.div>
         </div>
+
+        {/* Decorative Circles */}
+        <div className="absolute top-40 left-20 w-72 h-72 bg-blue-100/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-purple-100/10 rounded-full blur-[120px] pointer-events-none" />
       </section>
 
       {/* Workflows Section */}
