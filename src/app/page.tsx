@@ -236,7 +236,7 @@ export default function Home() {
               <div className="relative w-[200%] -mr-[1%] -ml-[1%]">
                 <div className="relative">
                   <Image
-                    src="/nuevosmercados2.png"
+                    src="/nuevosmercados3.png"
                     alt="Exbordia Market Finder Interface"
                     width={2800}
                     height={1600}
@@ -291,7 +291,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-                    
+
 
       {/* How it Works Section */}
       <section className="py-24 bg-gradient-to-b from-white to-[#F5F7F9] overflow-hidden">
