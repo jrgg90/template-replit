@@ -8,6 +8,12 @@ import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
+const navigation = [
+  { name: 'Blog', href: '/blog' },
+  { name: 'Precios', href: '/precios' },
+  // ... otros links existentes ...
+]
+
 export function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -48,6 +54,13 @@ export function MainHeader() {
             >
               Blog
             </Link>
+            <Link 
+              href="/precios"
+              className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg text-base font-light"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Precios
+            </Link>
             <div className="px-4">
               <button 
                 onClick={() => {
@@ -71,6 +84,15 @@ export function MainHeader() {
           >
             <Link href="/blog">
               Blog
+            </Link>
+          </Button>
+          <Button 
+            variant="ghost" 
+            asChild
+            className="text-[#131F42] font-light"
+          >
+            <Link href="/precios">
+              Precios
             </Link>
           </Button>
           <LoginButton />
