@@ -8,27 +8,23 @@ import {
 const faqs = [
   {
     question: "¿Necesito experiencia en comercio internacional para usar Exbordia?",
-    answer: "No. Nuestra plataforma te guía paso a paso y automatiza procesos clave como regulaciones, impuestos y logística. Tú solo te enfocas en hacer crecer tu marca."
+    answer: "No, Exbordia automatiza todo el proceso por ti. No necesitas conocimientos previos ni experiencia en exportación."
   },
   {
-    question: " ¿Cómo me ayuda la inteligencia artificial en mi expansión?",
-    answer: "Nuestra AI te da recomendaciones accionables: qué países tienen mayor demanda, cómo ajustar precios, qué productos tienen más potencial y cómo optimizar tu estrategia global."
+    question: "¿En qué países funciona Exbordia?",
+    answer: "Exbordia te ayuda a vender en EE.UU., Canadá, LATAM, Europa y otros mercados con demanda para tu producto."
   },
   {
-    question: "¿Cómo funciona la logística y el fulfillment con Exbordia?",
-    answer: "Nos conectamos con proveedores como Amazon FBA, ShipBob y 3PLs globales para que tus productos lleguen a clientes en cualquier parte del mundo sin complicaciones."
+    question: "¿Cuánto tiempo toma empezar a vender con Exbordia?",
+    answer: "Puedes empezar en minutos. Conéctalo a tu tienda y Exbordia comenzará a trabajar de inmediato."
   },
   {
-    question: "Ya vendo en EE.UU. con Shopify, ¿en qué me ayuda Exbordia?",
-    answer: "Usas una gran infraestructura, pero eso no te asegura ventas. Exbordia te ayuda con lo más importante: atraer más clientes, generar tracción real y escalar tu marca en nuevos mercados."
+    question: "¿Necesito conocimientos técnicos o de código para usar Exbordia?",
+    answer: "No, Exbordia es 100% plug & play. Se integra con tu e-commerce sin configuraciones complicadas"
   },
   {
     question: "¿Qué hace Exbordia diferente a una agencia de marketing o consultoría?",
-    answer: "No somos una agencia, somos una plataforma SaaS con AI que automatiza y optimiza tu expansión global. No damos solo asesoría, te damos herramientas accionables para crecer."
-  },
-  {
-    question: "¿Puedo usar Exbordia sin cambiar mi operación actual?",
-    answer: "Sí. Exbordia se integra con Shopify, Amazon, Faire y otros marketplaces para mejorar lo que ya tienes, sin alterar tu operación. Solo agrega crecimiento y nuevas oportunidades."
+    answer: "A diferencia de las agencias, Exbordia no solo asesora, sino que actúa en tiempo real. Gracias a su base de datos actualizada y a sus partnerships globales, Exbordia identifica oportunidades, optimiza listings y gestiona regulaciones más rápido y con mayor precisión, permitiéndote expandirte sin fricción."
   },
 ]
 
@@ -37,7 +33,7 @@ export function FAQSection() {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-normal text-[#131F42] mb-6">
+          <h2 className="text-4xl font-normal text-[#131F42] mb-6 tracking-tight">
             Preguntas <span className="font-light">Frecuentes</span>
           </h2>
         </div>

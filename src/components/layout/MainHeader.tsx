@@ -75,7 +75,7 @@ export function MainHeader() {
           </Button>
           <LoginButton />
           <a 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform?usp=dialog"
+            href="https://tally.so/r/mYx0b0"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -88,7 +88,7 @@ export function MainHeader() {
         {/* Mobile CTA - Always visible */}
         <div className="md:hidden">
           <a 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform?usp=dialog"
+            href="https://tally.so/r/mYx0b0"
             target="_blank"
             rel="noopener noreferrer"
           >

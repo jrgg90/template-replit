@@ -18,6 +18,39 @@ import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section
 import { HowItWorksSection } from "@/components/ui/how-it-works-section"
 
 export default function Home() {
+  const steps = [
+    {
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
+            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+        </svg>
+      ),
+      title: "Conecta tu tienda",
+      description: "Integra tu tienda online con el Agente de Exbordia en minutos."
+    },
+    {
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      ),
+      title: "Define tus objetivos",
+      description: "Dile a tu agente qué mercados te interesan, qué te preocupa y qué productos quieres vender."
+    },
+    {
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
+            d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "¡Listo para vender!",
+      description: "Tu agente comenzará a trabajar en tu expansión internacional automáticamente."
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-white">
       <MainHeader />
@@ -50,7 +83,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Con los <span className="font-medium text-gray-700">Agentes de Inteligencia Artificial</span> que te ayudan a vender tus productos en todo el mundo !Fácil!
+              Con los <span className="font-bold text-gray-900">Agentes de Inteligencia Artificial</span> que te ayudan a vender tus productos en todo el mundo !Fácil!
             </motion.p>
 
             <motion.div
@@ -58,25 +91,25 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Link 
-                href="https://docs.google.com/forms/d/e/1FAIpQLSemzk2gJ3yZthlBf1cl8yy4weKUWa0AGl48LFx3w6F1A6YAJQ/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+                <Link 
+                href="https://tally.so/r/mYx0b0"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
                 <button className="group relative inline-flex items-center justify-center px-12 py-4 text-lg
                   bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300
                   hover:shadow-[0_8px_40px_rgba(10,132,255,0.22)] hover:scale-105">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 
                     group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="relative flex items-center gap-2">
-                    Agenda tu demo
+                    <span className="relative flex items-center gap-2">
+                    Comienza Hoy Mismo
                     <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
-                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </span>
-                </button>
-              </Link>
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </button>
+                </Link>
             </motion.div>
           </div>
 
@@ -233,26 +266,176 @@ export default function Home() {
 
             {/* Right Column - Platform Preview */}
             <div className="flex-1 flex items-center justify-center overflow-hidden">
-              <div className="relative w-[200%] -mr-[1%] -ml-[1%]">
-                <div className="relative">
+              <div className="relative w-[220%] -mr-[2%] -ml-[2%]">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="relative"
+                >
                   <Image
                     src="/nuevosmercados3.png"
                     alt="Exbordia Market Finder Interface"
                     width={2800}
                     height={1600}
                     priority
-                    className="w-full h-auto object-contain hover:scale-[1.01] transition-transform duration-700"
+                    className="w-full h-auto object-contain transition-transform duration-700
+                      hover:shadow-[0_20px_50px_rgba(19,31,66,0.12)]"
                   />
-                  {/* Ajustamos el gradiente para que cubra mejor el borde */}
-                  <div className="absolute top-0 right-0 h-full w-[20%] bg-gradient-to-r from-transparent to-[#FAFAFA]" />
-                </div>
+                  <div className="absolute top-0 right-0 h-full w-[15%] 
+                    bg-gradient-to-r from-transparent via-[#FAFAFA]/50 to-[#FAFAFA]" />
+                </motion.div>
+
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/0 via-blue-100/10 to-purple-100/0 
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Partnerships Section */}
+      {/* Expert Chat Section - Ahora justo después de Market Finder */}
+      <section className="py-24 bg-gradient-to-b from-[#FAFAFA] via-white to-[#F8FAFC] relative">
+        {/* Decorative Elements para mejorar la transición */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#FAFAFA] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/grid.png')] opacity-[0.02]" />
+        
+        <div className="container mx-auto max-w-6xl px-4 relative">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Asistente 24/7
+                </motion.div>
+                
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-4xl font-normal text-[#131F42] mb-6 tracking-tight"
+                >
+                  Tu experto en cross-border
+                  <span className="block font-medium">e-commerce siempre disponible</span>
+                </motion.h2>
+                
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="text-xl text-gray-600 mb-8"
+                >
+                  Pregunta cualquier duda sobre comercio internacional. Tu agente Exbordia tiene las respuestas que necesitas para expandir tu negocio.
+                </motion.p>
+              </div>
+            </div>
+
+            {/* Right Column - Chat Interface con animaciones mejoradas */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex-1 flex items-center justify-center"
+            >
+              <div className="w-full max-w-xl relative">
+                {/* Decorative Elements */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-100/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-100/20 rounded-full blur-3xl" />
+                
+                <div className="bg-white rounded-2xl shadow-[0_8px_32px_rgba(19,31,66,0.08)] p-8 md:p-10 space-y-8 relative">
+                  {/* Chat Messages */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="space-y-6"
+                  >
+                    {/* Usuario */}
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden shadow-md">
+                        <Image
+                          src="/profilepic.png"
+                          alt="Usuario"
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="bg-gray-100 rounded-2xl rounded-tl-none px-6 py-4 shadow-sm">
+                          <p className="text-gray-700">¿Cómo configuro los impuestos para ventas internacionales en mi tienda Shopify?</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Exbordia */}
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#131F42] flex items-center justify-center shadow-md overflow-hidden">
+                        <Image
+                          src="/snippet.png"
+                          alt="Exbordia Assistant"
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="bg-blue-50 rounded-2xl rounded-tl-none px-6 py-5 shadow-sm">
+                          <p className="text-gray-700 font-medium mb-3">Te ayudo con eso. Para Shopify, necesitas:</p>
+                          <ul className="space-y-3 text-gray-700">
+                            <li className="flex items-start gap-3">
+                              <span className="text-blue-600 mt-1.5 text-lg">•</span>
+                              <span>Configurar el tax nexus para cada país</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="text-blue-600 mt-1.5 text-lg">•</span>
+                              <span>Establecer las tasas de impuestos por región</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="text-blue-600 mt-1.5 text-lg">•</span>
+                              <span>Activar el cálculo automático de impuestos</span>
+                            </li>
+                          </ul>
+                          <p className="mt-4 text-gray-700">Vamos a Shopify y lo configuramos juntos.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ... resto de los mensajes con el mismo estilo ... */}
+                  </motion.div>
+
+                  {/* Input Area */}
+                  <div className="mt-10 pt-8 border-t border-gray-200">
+                    <div className="flex items-center gap-4">
+                      <div className="flex-1 bg-gray-50 rounded-full px-8 py-4 text-gray-500 shadow-inner">
+                        Pregunta cualquier...
+                      </div>
+                      <button className="flex-shrink-0 bg-[#131F42] text-white rounded-full px-8 py-4 
+                        hover:bg-[#1c2b5a] transition-all duration-300 hover:shadow-lg">
+                        Comienza ahora
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnerships Section - Ahora viene después */}
       <section className="py-24 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -262,8 +445,8 @@ export default function Home() {
             </h2>
             <p className="text-xl text-gray-600">
               Integra tu tienda online fácilmente y expande tu negocio globalmente sin importar qué plataforma uses
-            </p>
-          </div>
+              </p>
+            </div>
 
           {/* Partnerships Grid */}
           <div className="relative">
@@ -280,7 +463,7 @@ export default function Home() {
               {/* Subtle Gradients */}
               <div className="absolute -left-20 -top-20 w-40 h-40 bg-blue-100/30 rounded-full blur-3xl" />
               <div className="absolute -right-20 -bottom-20 w-40 h-40 bg-purple-100/30 rounded-full blur-3xl" />
-            </div>
+              </div>
 
             {/* Additional Text */}
             <div className="text-center mt-8">
@@ -294,23 +477,75 @@ export default function Home() {
 
 
       {/* How it Works Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-[#F5F7F9] overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section className="py-32 relative overflow-hidden">
+        {/* Fondo con patrón sutil */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white to-[#F8FAFC]">
+          <div className="absolute inset-0 opacity-[0.02]" 
+            style={{ 
+              backgroundImage: 'radial-gradient(circle at 1px 1px, #131F42 1px, transparent 0)',
+              backgroundSize: '40px 40px' 
+            }} 
+          />
+        </div>
+
+        <div className="container mx-auto px-4 relative">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-24"
           >
-            <span className="text-sm font-medium text-blue-600 tracking-wider uppercase">
-              Proceso Simple
-            </span>
-            <h2 className="text-4xl font-normal text-[#131F42] mt-4">
-              ¿Cómo <span className="font-light">Funciona?</span>
+            <h2 className="text-4xl font-normal text-[#131F42] mt-4 mb-6 tracking-tight">
+              ¿Cómo <span className="font-medium">Funciona?</span>
             </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              En solo tres pasos podrás empezar a vender tus productos en mercados internacionales
+            </p>
           </motion.div>
 
-          <HowItWorksSection />
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Línea conectora */}
+            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-[#131F42]/5 via-[#131F42]/20 to-[#131F42]/5 
+              -translate-y-1/2 hidden md:block" />
+
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="relative group"
+              >
+                <div className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(19,31,66,0.06)] hover:shadow-[0_8px_30px_rgba(19,31,66,0.12)] 
+                  transition-all duration-300 group-hover:translate-y-[-4px] relative z-10 border border-[#131F42]/5">
+                  {/* Número del paso */}
+                  <div className="absolute -top-6 left-8 bg-[#131F42] text-white w-12 h-12 rounded-full flex items-center 
+                    justify-center text-xl font-medium shadow-lg group-hover:scale-110 transition-transform duration-300
+                    group-hover:bg-gradient-to-r group-hover:from-[#131F42] group-hover:to-[#2563eb]">
+                    {index + 1}
+                  </div>
+
+                  {/* Icono */}
+                  <div className="mb-6 text-[#131F42] h-16 flex items-center justify-center">
+                    {step.icon}
+                  </div>
+
+                  <h3 className="text-2xl font-medium text-[#131F42] mb-4">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+
+                {/* Decorative gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#131F42]/5 to-[#2563eb]/5 rounded-2xl 
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
