@@ -138,12 +138,12 @@ export default function Home() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Automatiza
-                  <span className="block font-medium">el comercio global.</span>
+                  Un nuevo miembro en
+                  <span className="block font-medium">tu equipo de comercio global.</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Exbordia ejecuta tareas clave por ti. Con un solo clic, puedes:
+                Dile a Exbordia qué hacer y olvídate de las tareas manuales. Tu agente de comercio internacional se encargará de todo.
                 </p>
 
                 <div className="space-y-4">
@@ -154,8 +154,8 @@ export default function Home() {
                     "Encontrar mercados con demanda para tu producto"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-1">
-                        <svg className="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-700 flex items-center justify-center mt-1">
+                        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
@@ -203,8 +203,8 @@ export default function Home() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Vende en el país
-                  <span className="block font-medium">correcto con datos reales.</span>
+                  Un analista de mercados
+                  <span className="block font-medium">que te dice dónde vender.</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
@@ -219,8 +219,8 @@ export default function Home() {
                     "Recomendaciones basadas en datos reales"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-1">
-                        <svg className="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-700 flex items-center justify-center mt-1">
+                        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
@@ -257,7 +257,7 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-              Conectamos con todas las
+              Tu asistente se conecta con todas las 
               <span className="block font-medium">plataformas de e-commerce</span>
             </h2>
             <p className="text-xl text-gray-600">
