@@ -88,7 +88,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Con los <span className="font-bold text-gray-900">Agentes de Inteligencia Artificial</span> que te ayudan a vender tus productos en todo el mundo !Fácil!
+              Con los <span className="font-bold text-gray-900">Agentes de Inteligencia Artificial</span> que venderán tus productos en todo el mundo !Fácil!
             </motion.p>
 
             <motion.div
