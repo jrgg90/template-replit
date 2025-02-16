@@ -88,7 +88,7 @@ const logos = [
 
 export function PartnersCarousel() {
   return (
-    <div className="w-full max-w-5xl mx-auto mt-8 mb-16">
+    <div className="w-full max-w-5xl mx-auto">
       <div className="relative mx-auto">
         <Carousel
           opts={{

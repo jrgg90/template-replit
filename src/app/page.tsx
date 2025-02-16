@@ -151,10 +151,9 @@ export default function Home() {
           </motion.div>
 
           {/* Partners Carousel */}
-          <div className="mt-12 mb-0">
-            {/* Texto descriptivo */}
+          <div className="mt-8">
             <motion.p 
-              className="text-center text-gray-500 text-lg mb-8"
+              className="text-center text-gray-500 text-lg mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -171,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* Workflows Section */}
-      <section className="py-24 bg-white">
+      <section className="pt-8 pb-16 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16">
             {/* Left Column - Text Content */}
