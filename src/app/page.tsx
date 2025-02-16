@@ -16,6 +16,7 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
 import { HowItWorksSection } from "@/components/ui/how-it-works-section"
+import { PartnersCarousel } from "@/components/ui/partners-carousel"
 
 export default function Home() {
   const steps = [
@@ -61,7 +62,7 @@ export default function Home() {
         
         <div className="container relative mx-auto px-4 pb-32">
           {/* Text Content */}
-          <div className="text-center max-w-[720px] mx-auto mb-24">
+          <div className="text-center max-w-[720px] mx-auto mb-12">
             <motion.h1 
               className="text-5xl md:text-6xl lg:text-7xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]"
               initial={{ opacity: 0, y: 20 }}
@@ -148,6 +149,20 @@ export default function Home() {
                 bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
             </div>
           </motion.div>
+
+          {/* Partners Carousel */}
+          <div className="mt-12 mb-0">
+            {/* Texto descriptivo */}
+            <motion.p 
+              className="text-center text-gray-500 text-lg mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              El agente trabaja con cualquier plataforma
+            </motion.p>
+            <PartnersCarousel />
+          </div>
         </div>
 
         {/* Decorative Circles */}
