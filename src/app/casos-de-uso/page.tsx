@@ -3,6 +3,9 @@
 import Image from 'next/image'
 import { motion } from "framer-motion"
 import { MainHeader } from "@/components/layout/MainHeader"
+import { TypewriterText } from "@/components/ui/typewriter-text"
+import { ListeningIndicator } from "@/components/ui/listening-indicator"
+import { ChatMessage } from "@/components/ui/chat-message"
 
 export default function CasosDeUso() {
   return (
@@ -60,8 +63,8 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Investiga en qué países
-                  <span className="block font-medium">hay mas demanda para mis productos</span>
+                  Investiga en qué países hay
+                  <span className="block font-medium">más mercados para mis productos</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
@@ -69,7 +72,6 @@ export default function CasosDeUso() {
                 </p>
 
                 <div className="space-y-4">
-                  
                 </div>
               </div>
             </div>
@@ -86,7 +88,7 @@ export default function CasosDeUso() {
         </div>
       </section>
 
-      {/* Caso de Uso 2: Texto a la derecha */}
+      {/* Caso de Uso 2: Productos */}
       <section className="py-24 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16">
@@ -107,12 +109,12 @@ export default function CasosDeUso() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  Análisis de Mercado
+                  Optimización de Listings
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Encuentra los mejores
-                  <span className="block font-medium">mercados para tus productos</span>
+                  Traduce y optimiza mis listings
+                  <span className="block font-medium">para vender más en otros países.</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
@@ -120,6 +122,126 @@ export default function CasosDeUso() {
                 </p>
 
                 <div className="space-y-4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Caso de Uso 3: Texto a la izquierda */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Amazon
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                Configura mi cuenta de Amazon 
+                  <span className="block font-medium">Seller Central para vender en EE.UU.</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Adapta tus listings a cada marketplace internacional con traducciones profesionales y optimización SEO específica para cada plataforma.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column - Image */}
+            <div className="flex-1 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                  Placeholder Image
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Caso de Uso 4: Texto a la derecha */}
+      <section className="py-24 bg-[#FAFAFA]">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Image */}
+            <div className="flex-1 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                  Placeholder Image
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Regulaciones y Certificaciones
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                Verifica si mis productos
+                  <span className="block font-medium">necesitan certificaciones para vender en Europa</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Verifica automáticamente el cumplimiento normativo y obtén las certificaciones necesarias para vender en cada mercado.
+                </p>
+
+                <div className="space-y-4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Caso de Uso 5: Texto a la izquierda */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Marketplaces
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                  Investiga en qué marketplace
+                  <span className="block font-medium">debo vender para tener éxito en Canadá.</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Analiza precios, estrategias y posicionamiento de tus competidores en cada marketplace internacional.
+                </p>
+
+                <div className="space-y-4">
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Image */}
+            <div className="flex-1 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                  Placeholder Image
                 </div>
               </div>
             </div>
