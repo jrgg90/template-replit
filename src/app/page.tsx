@@ -69,8 +69,12 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="block text-[#1A1A2E] font-light whitespace-nowrap tracking-tight">
-                Lleva tu tienda online
+              <span className="block text-[#1A1A2E] font-light tracking-tight">
+                Lleva tu tienda{' '}
+                <span className="md:inline hidden">online</span>
+                <span className="md:hidden inline">
+                  online
+                </span>
               </span>
               <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
                 font-medium tracking-tight pb-3">
