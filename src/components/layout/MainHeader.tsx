@@ -55,6 +55,13 @@ export function MainHeader() {
               Blog
             </Link>
             <Link 
+              href="/casos-de-uso"
+              className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg text-base font-light"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Casos de uso
+            </Link>
+            <Link 
               href="/precios"
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg text-base font-light"
               onClick={() => setIsMenuOpen(false)}
@@ -84,6 +91,15 @@ export function MainHeader() {
           >
             <Link href="/blog">
               Blog
+            </Link>
+          </Button>
+          <Button 
+            variant="ghost" 
+            asChild
+            className="text-[#131F42] font-light"
+          >
+            <Link href="/casos-de-uso">
+              Casos de uso
             </Link>
           </Button>
           <Button 
