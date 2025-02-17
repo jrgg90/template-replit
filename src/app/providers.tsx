@@ -8,8 +8,7 @@ import { AuthProvider } from '@/lib/contexts/AuthContext'
 export function Providers({ children }: { children: ReactNode }) {
   // Verificar si estamos en una ruta pública
   const isPublicRoute = window.location.pathname.startsWith('/sandbox') ||
-                       window.location.pathname.startsWith('/blog') ||
-                       window.location.pathname.startsWith('/precios')
+                       window.location.pathname.startsWith('/blog')
 
   if (isPublicRoute) {
     return <>{children}</>
