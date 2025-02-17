@@ -201,8 +201,7 @@ export default function Home() {
                   {[
                     "Traducir y optimizar listings en marketplaces",
                     "Validar regulaciones y certificaciones",
-                    "Conectarte con fulfillment partners",
-                    "Encontrar mercados con demanda para tu producto"
+                    "Conectarte con fulfillment partners"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-700 flex items-center justify-center mt-1">
@@ -266,7 +265,6 @@ export default function Home() {
                   {[
                     "Análisis de demanda por país y categoría",
                     "Evaluación de competencia y precios",
-                    "Validación de regulaciones por producto",
                     "Recomendaciones basadas en datos reales"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">

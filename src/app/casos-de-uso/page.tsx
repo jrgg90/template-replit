@@ -6,6 +6,7 @@ import { MainHeader } from "@/components/layout/MainHeader"
 import { TypewriterText } from "@/components/ui/typewriter-text"
 import { ListeningIndicator } from "@/components/ui/listening-indicator"
 import { ChatMessage } from "@/components/ui/chat-message"
+import Link from "next/link"
 
 export default function CasosDeUso() {
   return (
@@ -23,11 +24,11 @@ export default function CasosDeUso() {
               transition={{ duration: 0.8 }}
             >
               <span className="block text-[#1A1A2E] font-light tracking-tight">
-                Hola, ¿En que puedo
+                Explora todo lo que Exbordia
               </span>
               <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
                 font-medium tracking-tight pb-3">
-                ayudarte hoy?
+                puede hacer por ti
               </span>
             </motion.h1>
 
@@ -37,7 +38,7 @@ export default function CasosDeUso() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Exbordia hace lo que haría un asistente de comercio internacional en tu equipo, disponible 24/7.
+              Dale la bienvenida a tu nuevo asistente de comercio internacional, disponible 24/7.
             </motion.p>
           </div>
         </div>
@@ -73,6 +74,17 @@ export default function CasosDeUso() {
 
                 <div className="space-y-4">
                 </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
               </div>
             </div>
 
@@ -123,6 +135,17 @@ export default function CasosDeUso() {
 
                 <div className="space-y-4">
                 </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
               </div>
             </div>
           </div>
@@ -152,6 +175,20 @@ export default function CasosDeUso() {
                 <p className="text-xl text-gray-600 mb-8">
                   Adapta tus listings a cada marketplace internacional con traducciones profesionales y optimización SEO específica para cada plataforma.
                 </p>
+
+                <div className="space-y-4">
+                </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
               </div>
             </div>
 
@@ -202,6 +239,17 @@ export default function CasosDeUso() {
 
                 <div className="space-y-4">
                 </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
               </div>
             </div>
           </div>
@@ -234,6 +282,17 @@ export default function CasosDeUso() {
 
                 <div className="space-y-4">
                 </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
               </div>
             </div>
 
