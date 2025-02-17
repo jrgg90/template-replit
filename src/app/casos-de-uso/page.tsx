@@ -7,6 +7,8 @@ import { TypewriterText } from "@/components/ui/typewriter-text"
 import { ListeningIndicator } from "@/components/ui/listening-indicator"
 import { ChatMessage } from "@/components/ui/chat-message"
 import Link from "next/link"
+import { MarketList } from "@/components/sandbox/market-finder/market-list"
+import { ListingPreview } from "@/components/sandbox/listing-optimizer/listing-preview"
 
 export default function CasosDeUso() {
   return (
@@ -51,7 +53,7 @@ export default function CasosDeUso() {
       {/* Caso de Uso 1: Texto a la izquierda */}
       <section className="py-24 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Text Content */}
             <div className="flex-1">
               <div className="sticky top-24">
@@ -65,17 +67,13 @@ export default function CasosDeUso() {
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
                   Investiga en qué países hay
-                  <span className="block font-medium">más mercados para mis productos</span>
+                  <span className="block font-medium">más demanda para mis productos</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
                   Descubre en qué países hay más oportunidades de venta basándonos en datos de mercado y tendencias globales.
                 </p>
 
-                <div className="space-y-4">
-                </div>
-
-                {/* Nuevo botón */}
                 <Link 
                   href="https://tally.so/r/mYx0b0"
                   target="_blank"
@@ -88,12 +86,15 @@ export default function CasosDeUso() {
               </div>
             </div>
 
-            {/* Right Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+            {/* Right Column - Market List */}
+            <div className="flex-1">
+              <div className="relative pt-[95px] max-w-[520px]">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                {/* Market List Component */}
+                <MarketList />
               </div>
             </div>
           </div>
@@ -101,15 +102,18 @@ export default function CasosDeUso() {
       </section>
 
       {/* Caso de Uso 2: Productos */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-16 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+            <div className="flex-1">
+              <div className="relative pt-[40px]">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                {/* Listing Preview Component */}
+                <ListingPreview />
               </div>
             </div>
 
@@ -126,17 +130,13 @@ export default function CasosDeUso() {
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
                   Traduce y optimiza mis listings
-                  <span className="block font-medium">para vender más en otros países.</span>
+                  <span className="block font-medium">para vender más en otros países</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
                   El asistente analiza datos de demanda, competencia y regulaciones para identificar las mejores oportunidades de expansión internacional.
                 </p>
 
-                <div className="space-y-4">
-                </div>
-
-                {/* Nuevo botón */}
                 <Link 
                   href="https://tally.so/r/mYx0b0"
                   target="_blank"

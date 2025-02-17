@@ -13,6 +13,11 @@ export default function SandboxIndex() {
       description: "Diseño para búsqueda y análisis de mercados",
       path: "/sandbox/market-finder",
     },
+    {
+      title: "Listing Optimizer",
+      description: "Diseño para optimización de listings",
+      path: "/sandbox/listing-optimizer",
+    },
     // Aquí se pueden agregar más páginas de diseño
   ]
 
