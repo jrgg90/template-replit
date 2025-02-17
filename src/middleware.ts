@@ -1,18 +1,28 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Lista de rutas públicas
+const publicRoutes = ['/sandbox', '/blog', '/precios'];
+// Lista de rutas protegidas que requieren autenticación
+const protectedRoutes = ['/onboarding', '/main-dashboard'];
+
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('token');
   const { pathname } = request.nextUrl;
 
-  // Protected routes
-  if (pathname.startsWith('/onboarding')) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
+  // Verificar si es una ruta pública
+  if (publicRoutes.some(route => pathname.startsWith(route))) {
+    return NextResponse.next();
   }
 
-  // Public routes that should redirect if user is authenticated
+  // Verificar si es una ruta protegida
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
+  
+  if (isProtectedRoute && !token) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  // Redirigir a onboarding si está autenticado en la landing
   if (pathname === '/' && token) {
     return NextResponse.redirect(new URL('/onboarding', request.url));
   }
@@ -20,15 +30,12 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+// Actualizar el matcher para incluir todas las rutas relevantes
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/',
+    '/onboarding/:path*',
+    '/sandbox/:path*',
+    '/main-dashboard/:path*',
   ],
 }; 

@@ -1,7 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { AuthProvider } from '@/lib/contexts/AuthContext'
 import { Providers } from './providers'
 import { Toaster } from 'sonner'
 
@@ -21,14 +20,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={inter.className}>
-        <AuthProvider>
-          <Providers>
-            {children}
-            <Toaster position="top-right" />
-          </Providers>
-        </AuthProvider>
+        <Providers>
+          {children}
+        </Providers>
+        <Toaster />
       </body>
     </html>
   )
