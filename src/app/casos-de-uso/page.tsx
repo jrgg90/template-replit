@@ -9,6 +9,7 @@ import { ChatMessage } from "@/components/ui/chat-message"
 import Link from "next/link"
 import { MarketList } from "@/components/sandbox/market-finder/market-list"
 import { ListingPreview } from "@/components/sandbox/listing-optimizer/listing-preview"
+import { RegulacionesPreview } from "@/components/sandbox/regulaciones/regulaciones-preview"
 
 export default function CasosDeUso() {
   return (
@@ -134,7 +135,7 @@ export default function CasosDeUso() {
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  El asistente analiza datos de demanda, competencia y regulaciones para identificar las mejores oportunidades de expansión internacional.
+                  Adapta tus listings a cada marketplace internacional con traducciones profesionales y optimización SEO específica para cada plataforma.
                 </p>
 
                 <Link 
@@ -152,10 +153,10 @@ export default function CasosDeUso() {
         </div>
       </section>
 
-      {/* Caso de Uso 3: Texto a la izquierda */}
+      {/* Caso de Uso 3: Amazon Seller */}
       <section className="py-24 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Text Content */}
             <div className="flex-1">
               <div className="sticky top-24">
@@ -173,7 +174,7 @@ export default function CasosDeUso() {
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Adapta tus listings a cada marketplace internacional con traducciones profesionales y optimización SEO específica para cada plataforma.
+                  Crea, conecta o configura tu cuenta de Amazon Seller Central para vender en EE.UU.
                 </p>
 
                 <div className="space-y-4">
@@ -192,28 +193,39 @@ export default function CasosDeUso() {
               </div>
             </div>
 
-            {/* Right Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+            {/* Right Column - Amazon Seller Logo */}
+            <div className="flex-1">
+              <div className="relative pt-[40px] flex items-center justify-center">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                <Image 
+                  src="/logos-partners-png/amazonseller.png"
+                  alt="Amazon Seller Central"
+                  width={400}
+                  height={240}
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Caso de Uso 4: Texto a la derecha */}
+      {/* Caso de Uso 4: Regulaciones y Certificaciones */}
       <section className="py-24 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+            <div className="flex-1">
+              <div className="relative pt-[40px]">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                {/* Regulaciones Preview Component */}
+                <RegulacionesPreview />
               </div>
             </div>
 
@@ -229,18 +241,14 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                Verifica si mis productos
-                  <span className="block font-medium">necesitan certificaciones para vender en Europa</span>
+                  Identifica los requisitos
+                  <span className="block font-medium">para vender en otros países</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Verifica automáticamente el cumplimiento normativo y obtén las certificaciones necesarias para vender en cada mercado.
+                  Conoce las certificaciones, regulaciones y documentación necesaria para vender tus productos en nuevos mercados.
                 </p>
 
-                <div className="space-y-4">
-                </div>
-
-                {/* Nuevo botón */}
                 <Link 
                   href="https://tally.so/r/mYx0b0"
                   target="_blank"
