@@ -10,6 +10,7 @@ import Link from "next/link"
 import { MarketList } from "@/components/sandbox/market-finder/market-list"
 import { ListingPreview } from "@/components/sandbox/listing-optimizer/listing-preview"
 import { RegulacionesPreview } from "@/components/sandbox/regulaciones/regulaciones-preview"
+import { MarketplacesAnalysis } from "@/components/sandbox/marketplaces/marketplaces-analysis"
 
 export default function CasosDeUso() {
   return (
@@ -52,7 +53,7 @@ export default function CasosDeUso() {
       </section>
 
       {/* Caso de Uso 1: Texto a la izquierda */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Text Content */}
@@ -103,9 +104,9 @@ export default function CasosDeUso() {
       </section>
 
       {/* Caso de Uso 2: Productos */}
-      <section className="py-16 bg-[#FAFAFA]">
+      <section className="py-20 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[480px]">
             {/* Left Column - Image */}
             <div className="flex-1">
               <div className="relative pt-[40px]">
@@ -154,7 +155,7 @@ export default function CasosDeUso() {
       </section>
 
       {/* Caso de Uso 3: Amazon Seller */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Text Content */}
@@ -214,7 +215,7 @@ export default function CasosDeUso() {
       </section>
 
       {/* Caso de Uso 4: Regulaciones y Certificaciones */}
-      <section className="py-24 bg-[#FAFAFA]">
+      <section className="py-20 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Image */}
@@ -264,10 +265,10 @@ export default function CasosDeUso() {
         </div>
       </section>
 
-      {/* Caso de Uso 5: Texto a la izquierda */}
-      <section className="py-24 bg-white">
+      {/* Caso de Uso 5: Marketplaces */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-16 min-h-[600px]">
             {/* Left Column - Text Content */}
             <div className="flex-1">
               <div className="sticky top-24">
@@ -281,17 +282,13 @@ export default function CasosDeUso() {
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
                   Investiga en qué marketplace
-                  <span className="block font-medium">debo vender para tener éxito en Canadá.</span>
+                  <span className="block font-medium">debo vender para tener éxito en Canadá</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
                   Analiza precios, estrategias y posicionamiento de tus competidores en cada marketplace internacional.
                 </p>
 
-                <div className="space-y-4">
-                </div>
-
-                {/* Nuevo botón */}
                 <Link 
                   href="https://tally.so/r/mYx0b0"
                   target="_blank"
@@ -304,28 +301,40 @@ export default function CasosDeUso() {
               </div>
             </div>
 
-            {/* Right Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+            {/* Right Column - Marketplaces Analysis */}
+            <div className="flex-1">
+              <div className="relative pt-[40px]">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                {/* Marketplaces Analysis Component */}
+                <MarketplacesAnalysis />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Caso de Uso 6: Texto a la derecha */}
-      <section className="py-24 bg-[#FAFAFA]">
+      {/* Caso de Uso 6: Shopify Markets */}
+      <section className="py-20 bg-[#FAFAFA]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
-            {/* Left Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
-                </div>
+          <div className="flex flex-col md:flex-row gap-16 min-h-[480px]">
+            {/* Left Column - Shopify Logo */}
+            <div className="flex-1">
+              <div className="relative flex items-center justify-center h-full">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                <Image 
+                  src="/logos-partners-png/shopify.png"
+                  alt="Shopify Markets"
+                  width={280}
+                  height={180}
+                  className="object-contain w-[280px]"
+                  priority
+                />
               </div>
             </div>
 
@@ -341,18 +350,14 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Configura mi tienda para
-                  <span className="block font-medium">integrar Shopify Markets para vender en U.S.A.</span>
+                  Configura tu tienda Shopify
+                  <span className="block font-medium">para vender globalmente</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Asistencia en la configuración y gestión de Shopify Markets para vender en múltiples regiones desde una única plataforma.
+                  Expande tu negocio internacionalmente con Shopify Markets. Gestiona múltiples mercados desde una sola tienda.
                 </p>
 
-                <div className="space-y-4">
-                </div>
-
-                {/* Nuevo botón */}
                 <Link 
                   href="https://tally.so/r/mYx0b0"
                   target="_blank"
@@ -368,7 +373,7 @@ export default function CasosDeUso() {
         </div>
       </section>
 
-      {/* Caso de Uso 7: Texto a la izquierda */}
+      {/* Caso de Uso 7: Agentes Aduanales */}
       <section className="py-24 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex flex-col md:flex-row gap-16">
@@ -409,13 +414,57 @@ export default function CasosDeUso() {
             </div>
 
             {/* Right Column - Image */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Placeholder Image
+            <div className="flex-1">
+              <div className="relative flex items-center justify-center">
+                {/* Decorative gradient backgrounds */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-100/20 rounded-full blur-[100px] -z-10" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-100/20 rounded-full blur-[100px] -z-10" />
+                
+                <div className="relative w-full max-w-[480px]">
+                  <Image 
+                    src="/logos-partners-png/agenteaduanal.png"
+                    alt="Agente Aduanal"
+                    width={480}
+                    height={360}
+                    className="w-full h-auto"
+                    priority
+                  />
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Section */}
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <motion.h2 
+              className="text-4xl font-normal text-[#131F42] mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Y muchas otras 
+              <span className="font-medium"> automatizaciones más</span>
+            </motion.h2>
+            
+            <p className="text-xl text-gray-600 mb-12">
+              Si tienes preguntas, contáctanos
+            </p>
+
+            <Link
+              href="https://tally.so/r/mYx0b0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 
+                bg-[#131F42] text-white rounded-full text-lg font-medium 
+                hover:bg-[#1c2b4a] transition-colors duration-200
+                shadow-lg hover:shadow-xl"
+            >
+              Contactar
+            </Link>
           </div>
         </div>
       </section>

@@ -1,10 +1,6 @@
-import Link from 'next/link'
+"use client"
 
-// Configuración para asegurar que la página sea completamente estática
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-export const fetchCache = 'force-no-store'
-export const runtime = 'edge'
+import Link from 'next/link'
 
 export default function SandboxIndex() {
   const pages = [
@@ -18,7 +14,16 @@ export default function SandboxIndex() {
       description: "Diseño para optimización de listings",
       path: "/sandbox/listing-optimizer",
     },
-    // Aquí se pueden agregar más páginas de diseño
+    {
+      title: "Regulaciones",
+      description: "Diseño para análisis de regulaciones y certificaciones",
+      path: "/sandbox/regulaciones",
+    },
+    {
+      title: "Marketplaces",
+      description: "Análisis comparativo de marketplaces",
+      path: "/sandbox/marketplaces",
+    }
   ]
 
   return (
