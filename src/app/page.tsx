@@ -587,21 +587,21 @@ export default function Home() {
 
             {/* Column 2 - Use Cases */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Use Cases</h3>
+              <h3 className="text-lg font-medium mb-4">Casos de Uso</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/casos-de-uso#market-finder" className="text-gray-300 hover:text-white transition-colors">
-                    Market Finder
+                  <Link href="/casos-de-uso" className="text-gray-300 hover:text-white transition-colors">
+                    Investigación de mercados
                   </Link>
                 </li>
                 <li>
-                  <Link href="/casos-de-uso#ai-assistant" className="text-gray-300 hover:text-white transition-colors">
-                    AI Assistant
+                  <Link href="/casos-de-uso#marketplaces" className="text-gray-300 hover:text-white transition-colors">
+                    Marketplaces
                   </Link>
                 </li>
                 <li>
-                  <Link href="/casos-de-uso#workflows" className="text-gray-300 hover:text-white transition-colors">
-                    Workflows
+                  <Link href="/casos-de-uso#shopify-markets" className="text-gray-300 hover:text-white transition-colors">
+                    Shopify Markets
                   </Link>
                 </li>
               </ul>
@@ -634,8 +634,8 @@ export default function Home() {
               <h3 className="text-lg font-medium mb-4">Contacto</h3>
               <div className="space-y-3">
                 <p className="text-gray-300">
-                  <a href="mailto:contacto@exbordia.com" className="hover:text-white transition-colors">
-                    contacto@exbordia.com
+                  <a href="mailto:info@exbordia.com" className="hover:text-white transition-colors">
+                    info@exbordia.com
                   </a>
                 </p>
                 <div className="flex space-x-4">
