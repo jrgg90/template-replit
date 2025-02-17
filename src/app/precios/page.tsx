@@ -114,7 +114,50 @@ export default function PricingPage() {
         tiers={PRICING_TIERS}
       />
 
-      {/* Market Opportunity Section - reemplaza a FAQ */}
+      {/* FAQ Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="text-4xl font-normal text-center mb-16">
+            Preguntas Frecuentes
+          </h2>
+
+          <div className="space-y-3">
+            {[
+              {
+                question: "¿Puedo cambiar de plan en cualquier momento?",
+                answer: "Sí, puedes cambiar de plan de gratis a growth o scale en cualquier momento. Los cambios se aplican inmediatamente y el cobro se ajusta proporcionalmente."
+              },
+              {
+                question: "¿Hay algún contrato a largo plazo?",
+                answer: "Nuestros planes son mensuales y puedes cancelar en cualquier momento. Sólo hay compromiso si tienes un plan anual."
+              },
+              {
+                question: "¿Qué métodos de pago aceptan?",
+                answer: "Aceptamos todas las principales tarjetas de crédito, PayPal y transferencias bancarias para planes enterprise."
+              }
+            ].map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-100 rounded-lg hover:border-gray-200 transition-colors duration-200"
+              >
+                <details className="group">
+                  <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                    <span className="text-gray-900 text-lg">{faq.question}</span>
+                    <span className="transition group-open:rotate-180">
+                      <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </span>
+                  </summary>
+                  <p className="text-gray-600 mt-3 group-open:animate-fadeIn px-6 pb-6">
+                    {faq.answer}
+                  </p>
+                </details>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Market Opportunity Section */}
       <MarketOpportunitySection />
 
     </main>

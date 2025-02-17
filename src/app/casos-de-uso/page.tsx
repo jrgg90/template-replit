@@ -307,6 +307,110 @@ export default function CasosDeUso() {
           </div>
         </div>
       </section>
+
+      {/* Caso de Uso 6: Texto a la derecha */}
+      <section className="py-24 bg-[#FAFAFA]">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Image */}
+            <div className="flex-1 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                  Placeholder Image
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Shopify Markets
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                  Configura mi tienda para
+                  <span className="block font-medium">integrar Shopify Markets para vender en U.S.A.</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Asistencia en la configuración y gestión de Shopify Markets para vender en múltiples regiones desde una única plataforma.
+                </p>
+
+                <div className="space-y-4">
+                </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Caso de Uso 7: Texto a la izquierda */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Agentes Aduanales
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                  Conéctame con un
+                  <span className="block font-medium">Agente Aduanal en México</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Aprovecha la red de partnerships de Exbordia para identificar y conectar con agentes aduanales confiables en México.
+                </p>
+
+                <div className="space-y-4">
+                </div>
+
+                {/* Nuevo botón */}
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Empieza hoy
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column - Image */}
+            <div className="flex-1 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                  Placeholder Image
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 } 

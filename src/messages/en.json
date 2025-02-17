@@ -1,0 +1,16 @@
+{
+  "casos_de_uso": {
+    "shopify_markets": {
+      "badge": "Shopify Markets",
+      "title": "Set up my store to integrate",
+      "subtitle": "Shopify Markets to sell in the U.S.A.",
+      "description": "Assistance in setting up and managing Shopify Markets to sell in multiple regions from a single platform."
+    },
+    "agentes_aduanales": {
+      "badge": "Customs Agents",
+      "title": "Connect me with a",
+      "subtitle": "Customs Agent in Mexico",
+      "description": "Take advantage of Exbordia's partnership network to identify and connect with reliable customs agents in Mexico."
+    }
+  }
+} 
