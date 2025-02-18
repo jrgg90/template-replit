@@ -289,7 +289,7 @@ export default function Home() {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   className="relative"
                 >
-                  <div className="scale-[0.65] origin-center transform">
+                  <div className="scale-[0.78] origin-center transform">
                     <MarketFinderPreview />
                   </div>
                   <div className="absolute top-0 right-0 h-full w-[15%] 

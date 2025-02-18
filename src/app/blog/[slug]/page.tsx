@@ -43,7 +43,7 @@ export default async function BlogPostPage({
                 ¿Te interesa exportar a Estados Unidos?
               </h2>
               <p className="text-gray-300">
-                Mándanos un correo electrónico a <a href="mailto:contacto@exbordia.com" className="text-white">contacto@exbordia.com</a>
+                Mándanos un correo electrónico a <a href="mailto:info@exbordia.com" className="text-white">info@exbordia.com</a>
               </p>
             </div>
           </section>
