@@ -423,82 +423,86 @@ export default function WorkflowsLandingPage() {
                 <div className="grid grid-cols-3 gap-6">
                   {/* North America Market */}
                   <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-200">
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-3 mb-6">
                       <span className="text-2xl">🌎</span>
                       <h3 className="text-lg font-medium">Norte América</h3>
                     </div>
-                    <div className="flex flex-wrap gap-4 items-center">
+                    <div className="flex flex-row items-center gap-8">
                       <Image
                         src="/logos-partners-png/amazon.png"
                         alt="Amazon USA"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
+                        width={200}
+                        height={60}
+                        className="h-14 w-auto object-contain"
                       />
                       <Image
                         src="/logos-partners-png/walmart.png"
                         alt="Walmart"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
+                        width={200}
+                        height={60}
+                        className="h-14 w-auto object-contain"
                       />
                       <Image
                         src="/logos-partners-png/shopify.png"
                         alt="Shopify Markets"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
+                        width={200}
+                        height={60}
+                        className="h-14 w-auto object-contain"
                       />
                     </div>
                   </div>
 
                   {/* LATAM Market */}
                   <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-200">
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-3 mb-6">
                       <span className="text-2xl">🌍</span>
                       <h3 className="text-lg font-medium">Latinoamérica</h3>
                     </div>
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <Image
-                        src="/logos-partners-png/mercadolibre.png"
-                        alt="Mercado Libre"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
-                      />
-                      <Image
-                        src="/logos-partners-png/shopify.png"
-                        alt="Shopify Markets"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
-                      />
-                      <p className="text-sm text-gray-600">+ Marketplaces regionales</p>
+                    <div className="flex flex-col space-y-8">
+                      <div className="flex flex-row justify-center items-center gap-8">
+                        <Image
+                          src="/logos-partners-png/mercadolibre.png"
+                          alt="Mercado Libre"
+                          width={200}
+                          height={60}
+                          className="h-14 w-auto object-contain"
+                        />
+                        <Image
+                          src="/logos-partners-png/shopify.png"
+                          alt="Shopify Markets"
+                          width={200}
+                          height={60}
+                          className="h-14 w-auto object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-600 text-center">+ Marketplaces regionales</p>
                     </div>
                   </div>
 
                   {/* Europe Market */}
                   <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-200">
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-3 mb-6">
                       <span className="text-2xl">🇪🇺</span>
                       <h3 className="text-lg font-medium">Europa</h3>
                     </div>
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <Image
-                        src="/logos-partners-png/amazon.png"
-                        alt="Amazon Europe"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
-                      />
-                      <Image
-                        src="/logos-partners-png/shopify.png"
-                        alt="Shopify Markets"
-                        width={120}
-                        height={36}
-                        className="h-8 w-auto object-contain"
-                      />
-                      <p className="text-sm text-gray-600">+ Marketplaces regionales</p>
+                    <div className="flex flex-col space-y-8">
+                      <div className="flex flex-row justify-center items-center gap-8">
+                        <Image
+                          src="/logos-partners-png/amazon.png"
+                          alt="Amazon Europe"
+                          width={200}
+                          height={60}
+                          className="h-14 w-auto object-contain"
+                        />
+                        <Image
+                          src="/logos-partners-png/shopify.png"
+                          alt="Shopify Markets"
+                          width={200}
+                          height={60}
+                          className="h-14 w-auto object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-600 text-center">+ Marketplaces regionales</p>
                     </div>
                   </div>
                 </div>
