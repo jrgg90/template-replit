@@ -1,5 +1,7 @@
 "use client"
 
+import { motion } from "framer-motion"
+
 interface Certification {
   id: string
   name: string
@@ -58,42 +60,46 @@ export function RegulacionesPreview() {
         </div>
       </div>
 
-      {/* Certifications List */}
-      <div className="divide-y divide-gray-100/50">
-        {certifications.map((cert) => (
-          <div key={cert.id} className="p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${
-                  cert.status === 'completed' ? 'bg-green-500' :
-                  cert.status === 'in_progress' ? 'bg-yellow-500' :
-                  'bg-gray-300'
-                }`} />
-                <h4 className="text-sm font-medium text-gray-900">{cert.name}</h4>
-                {cert.required && (
-                  <span className="px-1.5 py-0.5 bg-red-50 text-red-600 rounded text-xs font-medium">
-                    Requerido
-                  </span>
-                )}
-              </div>
-            </div>
-            <p className="text-xs text-gray-600 mb-2 pl-4">{cert.description}</p>
-            <div className="flex items-center justify-between text-xs pl-4">
-              <span className="text-gray-500">
-                Fecha límite: {new Date(cert.deadline).toLocaleDateString()}
-              </span>
-              <span className={`px-2 py-0.5 rounded-full ${
-                cert.status === 'completed' ? 'bg-green-50 text-green-600' :
-                cert.status === 'in_progress' ? 'bg-yellow-50 text-yellow-600' :
-                'bg-gray-50 text-gray-600'
-              }`}>
-                {cert.status === 'completed' ? 'Completado' :
-                 cert.status === 'in_progress' ? 'En Proceso' :
-                 'Pendiente'}
-              </span>
+      {/* Content */}
+      <div className="space-y-4 p-4">
+        {/* FDA Registration */}
+        <div className="flex items-start gap-3">
+          <div className="w-2 h-2 rounded-full bg-amber-500 mt-2" />
+          <div className="flex-1">
+            <h4 className="text-sm font-medium text-[#131F42] mb-1">FDA Registration</h4>
+            <p className="text-xs text-gray-600 mb-2">Registro de establecimiento y listado de productos cosméticos ante la FDA</p>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">Fecha límite: 6/29/2024</span>
+              <span className="px-2 py-0.5 bg-amber-50/50 text-amber-600 rounded-full text-xs">En Proceso</span>
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Safety Assessment */}
+        <div className="flex items-start gap-3">
+          <div className="w-2 h-2 rounded-full bg-gray-300 mt-2" />
+          <div className="flex-1">
+            <h4 className="text-sm font-medium text-[#131F42] mb-1">Safety Assessment</h4>
+            <p className="text-xs text-gray-600 mb-2">Evaluación de seguridad de productos y documentación de ingredientes</p>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">Fecha límite: 7/14/2024</span>
+              <span className="px-2 py-0.5 bg-gray-50/50 text-gray-600 rounded-full text-xs">Pendiente</span>
+            </div>
+          </div>
+        </div>
+
+        {/* US Labeling Requirements */}
+        <div className="flex items-start gap-3">
+          <div className="w-2 h-2 rounded-full bg-green-500 mt-2" />
+          <div className="flex-1">
+            <h4 className="text-sm font-medium text-[#131F42] mb-1">US Labeling Requirements</h4>
+            <p className="text-xs text-gray-600 mb-2">Etiquetado conforme a regulaciones de la FDA para cosméticos</p>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">Fecha límite: 4/30/2024</span>
+              <span className="px-2 py-0.5 bg-green-50/50 text-green-600 rounded-full text-xs">Completado</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

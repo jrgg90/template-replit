@@ -29,7 +29,12 @@ export default function SandboxIndex() {
       title: "Workflows Landing",
       description: "Página de aterrizaje para workflows automatizados",
       path: "/sandbox/workflows-landing",
-    }
+    },
+    {
+      title: "Cuadro Sandbox",
+      description: "Réplica del diagrama de workflows",
+      path: "/sandbox/cuadro-sandbox",
+    },
   ]
 
   return (

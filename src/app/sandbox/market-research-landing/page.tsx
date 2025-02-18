@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import Link from "next/link"
+import { RequirementsList } from "@/components/regulatory/requirements-list"
 
 interface MarketCardProps {
   country: string
@@ -157,6 +158,40 @@ export default function MarketResearchLanding() {
         </div>
       </header>
       
+      {/* Regulatory Requirements Section */}
+      <section className="py-24 bg-[#FAFAFA]">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col md:flex-row gap-16">
+            {/* Left Column - Text Content */}
+            <div className="flex-1">
+              <div className="sticky top-24">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  Regulaciones
+                </div>
+                
+                <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
+                  Cumplimiento regulatorio
+                  <span className="block font-medium">simplificado.</span>
+                </h2>
+                
+                <p className="text-xl text-gray-600 mb-8">
+                  Mantén el control de tus requisitos regulatorios y certificaciones necesarias para cada mercado.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column - Requirements List */}
+            <div className="flex-1">
+              <RequirementsList />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content */}
       <section className="pt-44 pb-16">
         <div className="container mx-auto px-4">
