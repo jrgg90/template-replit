@@ -17,6 +17,7 @@ import { useInView } from "react-intersection-observer"
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
 import { HowItWorksSection } from "@/components/ui/how-it-works-section"
 import { PartnersCarousel } from "@/components/ui/partners-carousel"
+import { MarketFinderPreview } from "@/components/market-finder/market-finder-preview"
 
 export default function Home() {
   const steps = [
@@ -288,21 +289,12 @@ export default function Home() {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   className="relative"
                 >
-                  <Image
-                    src="/nuevosmercados3.png"
-                    alt="Exbordia Market Finder Interface"
-                    width={2800}
-                    height={1600}
-                    priority
-                    className="w-full h-auto object-contain transition-transform duration-700
-                      hover:shadow-[0_20px_50px_rgba(19,31,66,0.12)]"
-                  />
+                  <div className="scale-[0.65] origin-center transform">
+                    <MarketFinderPreview />
+                  </div>
                   <div className="absolute top-0 right-0 h-full w-[15%] 
                     bg-gradient-to-r from-transparent via-[#FAFAFA]/50 to-[#FAFAFA]" />
                 </motion.div>
-
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/0 via-blue-100/10 to-purple-100/0 
-                  opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
             </div>
           </div>
