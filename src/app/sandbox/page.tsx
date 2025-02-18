@@ -23,6 +23,11 @@ export default function SandboxIndex() {
       title: "Marketplaces",
       description: "Análisis comparativo de marketplaces",
       path: "/sandbox/marketplaces",
+    },
+    {
+      title: "Workflows Landing",
+      description: "Página de aterrizaje para workflows automatizados",
+      path: "/sandbox/workflows-landing",
     }
   ]
 

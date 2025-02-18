@@ -28,11 +28,11 @@ export default function CasosDeUso() {
               transition={{ duration: 0.8 }}
             >
               <span className="block text-[#1A1A2E] font-light tracking-tight">
-                Explora todo lo que Exbordia
+                Automatiza tu expansión internacional con
               </span>
               <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
                 font-medium tracking-tight pb-3">
-                puede hacer por ti
+                workflows inteligentes
               </span>
             </motion.h1>
 
@@ -42,7 +42,7 @@ export default function CasosDeUso() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Dale la bienvenida a tu nuevo asistente de comercio internacional, disponible 24/7.
+              Configura flujos de trabajo automatizados para gestionar tus operaciones internacionales de manera eficiente y escalable.
             </motion.p>
           </div>
         </div>
