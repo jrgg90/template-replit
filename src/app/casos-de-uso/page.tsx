@@ -11,6 +11,7 @@ import { MarketList } from "@/components/sandbox/market-finder/market-list"
 import { ListingPreview } from "@/components/sandbox/listing-optimizer/listing-preview"
 import { RegulacionesPreview } from "@/components/sandbox/regulaciones/regulaciones-preview"
 import { MarketplacesAnalysis } from "@/components/sandbox/marketplaces/marketplaces-analysis"
+import { WorkflowDiagram } from "@/components/ui/workflow-diagram"
 
 export default function CasosDeUso() {
   return (
@@ -18,7 +19,7 @@ export default function CasosDeUso() {
       <MainHeader />
       
       {/* Hero Section */}
-      <section className="relative pt-44 pb-16">
+      <section className="relative pt-44 pb-8">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-[800px] mx-auto mb-20">
             <motion.h1 
@@ -50,6 +51,20 @@ export default function CasosDeUso() {
         {/* Decorative Elements */}
         <div className="absolute top-40 -left-20 w-72 h-72 bg-blue-100/10 rounded-full blur-[120px] -z-10" />
         <div className="absolute bottom-0 -right-20 w-72 h-72 bg-purple-100/10 rounded-full blur-[120px] -z-10" />
+      </section>
+
+      {/* Workflow Diagram Section */}
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-7xl mx-auto"
+          >
+            <WorkflowDiagram />
+          </motion.div>
+        </div>
       </section>
 
       {/* Caso de Uso 1: Texto a la izquierda */}
