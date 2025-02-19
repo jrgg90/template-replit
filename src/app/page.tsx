@@ -228,7 +228,7 @@ export default function Home() {
 
             {/* Right Column - Platform Preview */}
             <div className="flex-1">
-              <div className="flex justify-start">
+              <div className="flex justify-start pt-16">
                 <motion.div
                   className="relative max-w-[480px]"
                   initial={{ opacity: 0, y: 40 }}
