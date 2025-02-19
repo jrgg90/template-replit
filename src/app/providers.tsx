@@ -1,13 +1,14 @@
-
 'use client'
 
 import { ThemeProvider } from 'next-themes'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { type ReactNode, useEffect, useState } from 'react'
 import { AuthProvider } from '@/lib/contexts/AuthContext'
+import { usePathname } from 'next/navigation'
 
 export function Providers({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -17,14 +18,7 @@ export function Providers({ children }: { children: ReactNode }) {
     return <>{children}</>
   }
 
-  // Check for public routes after component is mounted
-  const isPublicRoute = window.location.pathname.startsWith('/sandbox') ||
-                       window.location.pathname.startsWith('/blog')
-
-  if (isPublicRoute) {
-    return <>{children}</>
-  }
-
+  // Siempre envolvemos con AuthProvider porque el LoginButton lo necesita
   return (
     <AuthProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

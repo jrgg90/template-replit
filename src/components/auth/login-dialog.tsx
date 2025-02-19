@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dialog"
 import { LoginForm } from "./login-form"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/lib/hooks/useAuth"
+import { useAuth } from "@/lib/contexts/AuthContext"
 
 interface LoginDialogProps {
   open: boolean
