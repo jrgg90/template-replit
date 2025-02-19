@@ -18,6 +18,7 @@ import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section
 import { HowItWorksSection } from "@/components/ui/how-it-works-section"
 import { PartnersCarousel } from "@/components/ui/partners-carousel"
 import { MarketFinderPreview } from "@/components/market-finder/market-finder-preview"
+import { WorkflowDiagram } from "@/components/workflows/workflow-diagram"
 
 export default function Home() {
   const steps = [
@@ -175,12 +176,12 @@ export default function Home() {
       </section>
 
       {/* Workflows Section */}
-      <section className="pt-8 pb-16 bg-white">
+      <section className="pt-32 pb-32 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-12">
             {/* Left Column - Text Content */}
             <div className="flex-1">
-              <div className="sticky top-24">
+              <div className="max-w-[480px]">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -195,7 +196,7 @@ export default function Home() {
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                Dile a Exbordia qué hacer y olvídate de las tareas manuales. Tu agente de comercio internacional se encargará de todo.
+                  Dile a Exbordia qué hacer y olvídate de las tareas manuales. Tu agente de comercio internacional se encargará de todo.
                 </p>
 
                 <div className="space-y-4">
@@ -218,20 +219,29 @@ export default function Home() {
             </div>
 
             {/* Right Column - Platform Preview */}
-            <div className="flex-1 flex items-center justify-center overflow-hidden">
-              <div className="relative w-[200%] -mr-[30%] -ml-[10%]">
-                <div className="relative">
-                  <Image
-                    src="/worfklows.png"
-                    alt="Exbordia Platform Interface"
-                    width={2400}
-                    height={1400}
-                    priority
-                    className="w-full h-auto object-contain hover:scale-[1.01] transition-transform duration-700"
-                  />
-                  {/* Gradiente de difuminado en el borde derecho */}
-                  <div className="absolute top-0 right-0 h-full w-[15%] bg-gradient-to-r from-transparent to-white" />
-                </div>
+            <div className="flex-1">
+              <div className="flex justify-start">
+                <motion.div
+                  className="relative max-w-[480px]"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.3 }}
+                >
+                  <div className="relative z-20">
+                    <div className="h-[400px] overflow-y-hidden w-[660px] -ml-[90px] relative">
+                      <div className="scale-[0.60] origin-top">
+                        <WorkflowDiagram />
+                      </div>
+                      <div className="absolute top-0 right-0 h-full w-[100px] bg-gradient-to-r from-transparent to-white pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Decorative gradient */}
+                  <div className="absolute -inset-[10%] -z-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full
+                      bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
+                  </div>
+                </motion.div>
               </div>
             </div>
           </div>
