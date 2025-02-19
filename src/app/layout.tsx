@@ -18,12 +18,12 @@ const structuredData = {
 }
 
 export const metadata: Metadata = {
-  title: 'Exbordia - Lleva tu tienda online al mundo',
-  description: 'Automatiza tu comercio internacional con Inteligencia Artificial.',
+  title: 'Exbordia - Expande tu tienda online a nuevos mercados fácilmente',
+  description: 'Conéctate con Exbordia y haz crecer tu e-commerce. Descubre mercados, posiciona tus productos y comienza a vender internacionalmente hoy mismo.',
   keywords: 'exportación, ecommerce, Estados Unidos, logística, marketplaces, Inteligencia Artificial',
   openGraph: {
-    title: 'Exbordia - Lleva tu tienda online al mundo',
-    description: 'Automatiza tu comercio internacional con Inteligencia Artificial.',
+    title: 'Exbordia - Expande tu tienda online a nuevos mercados fácilmente',
+    description: 'Conéctate con Exbordia y haz crecer tu e-commerce. Descubre mercados, posiciona tus productos y comienza a vender internacionalmente hoy mismo.',
     url: 'https://www.exbordia.com',
     siteName: 'Exbordia',
     images: [
