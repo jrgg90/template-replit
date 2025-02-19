@@ -2,23 +2,18 @@
 
 import { ThemeProvider } from 'next-themes'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
-import { type ReactNode, useEffect, useState } from 'react'
+import { type ReactNode } from 'react'
 import { AuthProvider } from '@/lib/contexts/AuthContext'
-import { usePathname } from 'next/navigation'
 
 export function Providers({ children }: { children: ReactNode }) {
-  const [mounted, setMounted] = useState(false)
-  const pathname = usePathname()
+  // Verificar si estamos en una ruta pública
+  const isPublicRoute = window.location.pathname.startsWith('/sandbox') ||
+                       window.location.pathname.startsWith('/blog')
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
+  if (isPublicRoute) {
     return <>{children}</>
   }
 
-  // Siempre envolvemos con AuthProvider porque el LoginButton lo necesita
   return (
     <AuthProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

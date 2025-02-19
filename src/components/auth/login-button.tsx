@@ -1,24 +1,22 @@
 "use client"
 
-import { useState } from 'react'
-import { Button } from '../ui/button'
-import { LoginDialog } from './login-dialog'
+import { Button } from "@/components/ui/button"
+import { LoginDialog } from "@/components/auth/login-dialog"
+import { useState } from "react"
 
 export function LoginButton() {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <Button
+      <Button 
+        variant="ghost" 
+        className="text-[#131F42] font-light"
         onClick={() => setOpen(true)}
-        className="bg-[#131F42] text-white hover:bg-[#1f2b4d] transition-colors"
       >
         Iniciar Sesión
       </Button>
-      <LoginDialog 
-        open={open} 
-        onOpenChange={setOpen}
-      />
+      <LoginDialog open={open} onOpenChange={setOpen} />
     </>
   )
 } 
