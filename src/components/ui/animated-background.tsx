@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { cn } from '@/lib/utils';
 import { AnimatePresence, Transition, motion } from 'framer-motion';
 import {
@@ -21,14 +21,15 @@ type AnimatedBackgroundProps = {
   enableHover?: boolean;
 };
 
-export default function AnimatedBackground({
+const AnimatedBackground = ({
   children,
   defaultValue,
   onValueChange,
   className,
   transition,
   enableHover = false,
-}: AnimatedBackgroundProps) {
+}: AnimatedBackgroundProps) => {
+  const [isMounted, setIsMounted] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const uniqueId = useId();
 
@@ -41,10 +42,16 @@ export default function AnimatedBackground({
   };
 
   useEffect(() => {
+    setIsMounted(true);
     if (defaultValue !== undefined) {
       setActiveId(defaultValue);
     }
+    return () => setIsMounted(false);
   }, [defaultValue]);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return Children.map(children, (child: any, index) => {
     const id = child.props['data-id'];
@@ -88,4 +95,6 @@ export default function AnimatedBackground({
       </>
     );
   });
-} 
+};
+
+export default AnimatedBackground; 

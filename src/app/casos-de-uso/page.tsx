@@ -528,7 +528,7 @@ export default function CasosDeUso() {
               <h3 className="text-lg font-medium mb-4">Recursos</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/precios" className="text-gray-300 hover:text-white transition-colors">
                     Precios
                   </Link>
                 </li>

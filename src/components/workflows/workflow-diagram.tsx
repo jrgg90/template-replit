@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Globe, Package, MapPin, Scale, Tag, ShoppingBag, ShoppingCart, BarChart2, Store, Handshake, Truck, DollarSign } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const workflows = [
   // Primera fila
@@ -81,7 +82,18 @@ const workflows = [
   },
 ]
 
-export function WorkflowDiagram() {
+const WorkflowDiagram = () => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false) // Cleanup
+  }, [])
+
+  if (!isMounted) {
+    return <div className="relative w-[1100px] h-[730px]" /> // Placeholder con dimensiones
+  }
+
   return (
     <div className="relative w-[1100px] h-[730px]">
       {/* Fondo decorativo con mejor calidad */}
@@ -178,4 +190,6 @@ export function WorkflowDiagram() {
       ))}
     </div>
   )
-}   
+}
+
+export default WorkflowDiagram   

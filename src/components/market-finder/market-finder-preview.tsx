@@ -1,11 +1,20 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MarketCard } from "./market-card"
 
-export function MarketFinderPreview() {
+const MarketFinderPreview = () => {
   const [expandedCountry, setExpandedCountry] = useState<string>("Francia")
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null // o un placeholder/skeleton
+  }
 
   return (
     <motion.div
@@ -54,4 +63,6 @@ export function MarketFinderPreview() {
       />
     </motion.div>
   )
-} 
+}
+
+export default MarketFinderPreview 

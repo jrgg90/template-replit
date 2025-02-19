@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Globe2, LayoutDashboard, BarChart3, DollarSign, Truck } from 'lucide-react'
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import AnimatedBackground from "@/components/ui/animated-background"
 import { ScrollRevealStat } from "@/components/ui/scroll-reveal-stat"
 import Link from 'next/link'
 import { useState } from "react"
@@ -17,8 +16,38 @@ import { useInView } from "react-intersection-observer"
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
 import { HowItWorksSection } from "@/components/ui/how-it-works-section"
 import { PartnersCarousel } from "@/components/ui/partners-carousel"
-import { MarketFinderPreview } from "@/components/market-finder/market-finder-preview"
-import { WorkflowDiagram } from "@/components/workflows/workflow-diagram"
+import dynamic from 'next/dynamic'
+
+// Mantener solo las versiones dinámicas
+const AnimatedBackgroundWithNoSSR = dynamic(
+  () => import('@/components/ui/animated-background').then(mod => mod.default),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[120px] bg-gray-50 animate-pulse rounded-xl" />
+    )
+  }
+)
+
+const WorkflowDiagramWithNoSSR = dynamic(
+  () => import('@/components/workflows/workflow-diagram').then(mod => mod.default),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[730px] bg-gray-50 animate-pulse rounded-xl" />
+    )
+  }
+)
+
+const MarketFinderPreviewWithNoSSR = dynamic(
+  () => import('@/components/market-finder/market-finder-preview').then(mod => mod.default),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[400px] bg-gray-50 animate-pulse rounded-xl" />
+    )
+  }
+)
 
 export default function Home() {
   const steps = [
@@ -238,7 +267,7 @@ export default function Home() {
                   <div className="relative z-20">
                     <div className="h-[400px] overflow-y-hidden w-[660px] -ml-[90px] relative">
                       <div className="scale-[0.60] origin-top">
-                        <WorkflowDiagram />
+                        <WorkflowDiagramWithNoSSR />
                       </div>
                       <div className="absolute top-0 right-0 h-full w-[100px] bg-gradient-to-r from-transparent to-white pointer-events-none" />
                     </div>
@@ -316,7 +345,7 @@ export default function Home() {
                   className="relative"
                 >
                   <div className="scale-[0.78] origin-center transform">
-                    <MarketFinderPreview />
+                    <MarketFinderPreviewWithNoSSR />
                   </div>
                   <div className="absolute top-0 right-0 h-full w-[15%] 
                     bg-gradient-to-r from-transparent via-[#FAFAFA]/50 to-[#FAFAFA]" />
