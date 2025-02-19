@@ -54,7 +54,7 @@ export default function CasosDeUso() {
       </section>
 
       {/* Workflow Diagram Section */}
-      <section className="py-8">
+      <section className="hidden md:block py-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
