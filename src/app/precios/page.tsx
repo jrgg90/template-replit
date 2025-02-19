@@ -216,7 +216,7 @@ export default function PricingPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="mailto: info@exbordia.com" className="text-gray-300 hover:text-white transition-colors">
                     Soporte
                   </Link>
                 </li>

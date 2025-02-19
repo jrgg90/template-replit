@@ -106,7 +106,7 @@ export function BlogPageClient({ initialPosts }: BlogPageClientProps) {
               <h3 className="text-lg font-medium mb-4">Recursos</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/precios" className="text-gray-300 hover:text-white transition-colors">
                     Precios
                   </Link>
                 </li>
@@ -116,7 +116,7 @@ export function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/support" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="mailto: info@exbordia.com" className="text-gray-300 hover:text-white transition-colors">
                     Soporte
                   </Link>
                 </li>
