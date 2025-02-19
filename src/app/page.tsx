@@ -215,6 +215,14 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+
+                <Link 
+                  href="/casos-de-uso"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Ver Workflows
+                </Link>
               </div>
             </div>
 
@@ -288,6 +296,14 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+
+                <Link 
+                  href="/casos-de-uso"
+                  className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Ver Workflows
+                </Link>
               </div>
             </div>
 
@@ -355,6 +371,14 @@ export default function Home() {
                 >
                   Pregunta cualquier duda sobre comercio internacional. Tu agente Exbordia tiene las respuestas que necesitas para expandir tu negocio.
                 </motion.p>
+
+                <Link 
+                  href="/casos-de-uso"
+                  className="inline-flex px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
+                    rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
+                >
+                  Ver Workflows
+                </Link>
               </div>
             </div>
 
