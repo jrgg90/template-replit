@@ -7,4 +7,12 @@ export interface BlogPost {
   readingTime: string
   tag: string
   content: string
+  language: string
+  date: string
+  author: string
+  metadata?: {
+    author: string
+    date: string
+    tags: string[]
+  }
 } 

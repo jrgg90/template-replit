@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "title": {
+      "prefix": "Simple,",
+      "highlight": "transparent pricing"
+    },
+    "subtitle": "Start free and scale as you grow"
+  },
+  "plans": {
+    "free": {
+      "name": "Free",
+      "price": "0",
+      "description": "For businesses looking to explore new markets",
+      "features": [
+        "1 international market analysis",
+        "1 marketplace integration",
+        "Basic market recommendations",
+        "Chat with assistant (100 messages/month)",
+        "Email support"
+      ],
+      "cta": "Start free"
+    },
+    "growth": {
+      "name": "Growth",
+      "price": "49",
+      "billingPeriod": "/month",
+      "description": "For businesses ready to expand internationally",
+      "features": [
+        "3 international market analysis",
+        "3 marketplace integrations",
+        "Advanced market recommendations",
+        "Unlimited chat with assistant",
+        "Automatic listing translation",
+        "Competition analysis",
+        "Priority support"
+      ],
+      "cta": "Start free trial",
+      "trial": "14-day free trial"
+    },
+    "scale": {
+      "name": "Scale",
+      "price": "199",
+      "billingPeriod": "/month",
+      "description": "For businesses seeking full global expansion",
+      "features": [
+        "Unlimited international markets",
+        "Unlimited integrations",
+        "Custom recommendations",
+        "Unlimited chat with assistant",
+        "Advanced translation & optimization",
+        "Deep competition analysis",
+        "Automated listing management",
+        "24/7 priority support",
+        "Dedicated account manager"
+      ],
+      "cta": "Contact sales"
+    }
+  }
+} 

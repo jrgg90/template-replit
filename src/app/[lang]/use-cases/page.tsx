@@ -3,20 +3,27 @@
 import Image from 'next/image'
 import { motion } from "framer-motion"
 import { MainHeader } from "@/components/layout/MainHeader"
-import { TypewriterText } from "@/components/ui/typewriter-text"
-import { ListeningIndicator } from "@/components/ui/listening-indicator"
-import { ChatMessage } from "@/components/ui/chat-message"
 import Link from "next/link"
 import { MarketList } from "@/components/sandbox/market-finder/market-list"
 import { ListingPreview } from "@/components/sandbox/listing-optimizer/listing-preview"
 import { RegulacionesPreview } from "@/components/sandbox/regulaciones/regulaciones-preview"
 import { MarketplacesAnalysis } from "@/components/sandbox/marketplaces/marketplaces-analysis"
 import { WorkflowDiagram } from "@/components/ui/workflow-diagram"
+import { useTranslation } from "@/app/i18n/client"
+import { Language } from "@/types"
 
-export default function CasosDeUso() {
+interface UseCasesProps {
+  params: {
+    lang: Language
+  }
+}
+
+export default function UseCases({ params }: UseCasesProps) {
+  const { t } = useTranslation('use-cases')
+
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader />
+      <MainHeader lang={params.lang} />
       
       {/* Hero Section */}
       <section className="relative pt-44 pb-8">
@@ -29,11 +36,11 @@ export default function CasosDeUso() {
               transition={{ duration: 0.8 }}
             >
               <span className="block text-[#1A1A2E] font-light tracking-tight">
-                Automatiza tu expansión internacional con
+                Automatize your international expansion with
               </span>
               <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
                 font-medium tracking-tight pb-3">
-                workflows inteligentes
+                smart workflows
               </span>
             </motion.h1>
 
@@ -43,7 +50,7 @@ export default function CasosDeUso() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Configura flujos de trabajo automatizados para gestionar tus operaciones internacionales de manera eficiente y escalable.
+              Configure smart workflows to manage your international operations efficiently and scaleably.
             </motion.p>
           </div>
         </div>
@@ -79,16 +86,16 @@ export default function CasosDeUso() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  Investigación de mercado
+                  Market Research
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Investiga en qué países hay
-                  <span className="block font-medium">más demanda para mis productos</span>
+                  Investigate in which countries
+                  <span className="block font-medium">there is more demand for my products</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Descubre en qué países hay más oportunidades de venta basándonos en datos de mercado y tendencias globales.
+                  Discover in which countries there is more demand for my products based on market data and global trends.
                 </p>
 
                 <Link 
@@ -98,7 +105,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -142,16 +149,16 @@ export default function CasosDeUso() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  Optimización de Listings
+                  Listing Optimization
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Traduce y optimiza mis listings
-                  <span className="block font-medium">para vender más en otros países</span>
+                  Translate and optimize my listings
+                  <span className="block font-medium">to sell more in other countries</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Adapta tus listings a cada marketplace internacional con traducciones profesionales y optimización SEO específica para cada plataforma.
+                  Adapt your listings to each international marketplace with professional translations and SEO optimization specific to each platform.
                 </p>
 
                 <Link 
@@ -161,7 +168,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -185,12 +192,12 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                Configura mi cuenta de Amazon 
-                  <span className="block font-medium">Seller Central para vender en EE.UU.</span>
+                  Configure my Amazon
+                  <span className="block font-medium">Seller Central to sell in the United States</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Crea, conecta o configura tu cuenta de Amazon Seller Central para vender en EE.UU.
+                  Create, connect or configure your Amazon Seller Central account to sell in the United States.
                 </p>
 
                 <div className="space-y-4">
@@ -204,7 +211,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -253,16 +260,16 @@ export default function CasosDeUso() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  Regulaciones y Certificaciones
+                  Regulations and Certifications
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Identifica los requisitos
-                  <span className="block font-medium">para vender en otros países</span>
+                  Identify the requirements
+                  <span className="block font-medium">to sell in other countries</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Conoce las certificaciones, regulaciones y documentación necesaria para vender tus productos en nuevos mercados.
+                  Learn about the certifications, regulations and documentation needed to sell your products in new markets.
                 </p>
 
                 <Link 
@@ -272,7 +279,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -296,12 +303,12 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Investiga en qué marketplace
-                  <span className="block font-medium">debo vender para tener éxito en Canadá</span>
+                  Investigate in which marketplace
+                  <span className="block font-medium">I should sell to be successful in Canada</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Analiza precios, estrategias y posicionamiento de tus competidores en cada marketplace internacional.
+                  Analyze prices, strategies and positioning of your competitors in each international marketplace.
                 </p>
 
                 <Link 
@@ -311,7 +318,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -365,12 +372,12 @@ export default function CasosDeUso() {
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Configura tu tienda Shopify
-                  <span className="block font-medium">para vender globalmente</span>
+                  Configure your Shopify store
+                  <span className="block font-medium">to sell globally</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Expande tu negocio internacionalmente con Shopify Markets. Gestiona múltiples mercados desde una sola tienda.
+                  Expand your international business with Shopify Markets. Manage multiple markets from a single store.
                 </p>
 
                 <Link 
@@ -380,7 +387,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -400,16 +407,16 @@ export default function CasosDeUso() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  Agentes Aduanales
+                  Customs Agents
                 </div>
                 
                 <h2 className="text-4xl font-normal text-gray-900 mb-6 tracking-tight">
-                  Conéctame con un
-                  <span className="block font-medium">Agente Aduanal en México</span>
+                  Connect with a
+                  <span className="block font-medium">Customs Agent in Mexico</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8">
-                  Aprovecha la red de partnerships de Exbordia para identificar y conectar con agentes aduanales confiables en México.
+                  Take advantage of the Exbordia partnership network to identify and connect with reliable customs agents in Mexico.
                 </p>
 
                 <div className="space-y-4">
@@ -423,7 +430,7 @@ export default function CasosDeUso() {
                   className="inline-flex mt-8 px-6 py-2.5 text-[#131F42] border border-[#131F42]/20 
                     rounded-full text-sm font-medium hover:bg-[#131F42]/5 transition-colors duration-200"
                 >
-                  Empieza hoy
+                  Start now
                 </Link>
               </div>
             </div>
@@ -438,7 +445,7 @@ export default function CasosDeUso() {
                 <div className="relative w-full max-w-[480px]">
                   <Image 
                     src="/logos-partners-png/agenteaduanal.png"
-                    alt="Agente Aduanal"
+                    alt="Customs Agent"
                     width={480}
                     height={360}
                     className="w-full h-auto"
@@ -461,12 +468,12 @@ export default function CasosDeUso() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              Y muchas otras 
-              <span className="font-medium"> automatizaciones más</span>
+              And many other
+              <span className="font-medium"> automations</span>
             </motion.h2>
             
             <p className="text-xl text-gray-600 mb-12">
-              Si tienes preguntas, contáctanos
+              If you have questions, contact us
             </p>
 
             <Link
@@ -478,7 +485,7 @@ export default function CasosDeUso() {
                 hover:bg-[#1c2b4a] transition-colors duration-200
                 shadow-lg hover:shadow-xl"
             >
-              Contactar
+              Contact us
             </Link>
           </div>
         </div>
@@ -495,7 +502,7 @@ export default function CasosDeUso() {
               <ul className="space-y-3">
                 <li>
                   <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
-                    Iniciar sesión
+                    Login
                   </Link>
                 </li>
               </ul>
@@ -503,20 +510,20 @@ export default function CasosDeUso() {
 
             {/* Column 2 - Use Cases */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Casos de Uso</h3>
+              <h3 className="text-lg font-medium mb-4">Use Cases</h3>
               <ul className="space-y-3">
                 <li>
                   <Link href="/casos-de-uso" className="text-gray-300 hover:text-white transition-colors">
-                    Investigación de mercados
+                    Market Research
                   </Link>
                 </li>
                 <li>
-                  <Link href="/casos-de-uso#marketplaces" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/use-cases#marketplaces" className="text-gray-300 hover:text-white transition-colors">
                     Marketplaces
                   </Link>
                 </li>
                 <li>
-                  <Link href="/casos-de-uso#shopify-markets" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/use-cases#shopify-markets" className="text-gray-300 hover:text-white transition-colors">
                     Shopify Markets
                   </Link>
                 </li>
@@ -525,11 +532,11 @@ export default function CasosDeUso() {
 
             {/* Column 3 - Resources */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Recursos</h3>
+              <h3 className="text-lg font-medium mb-4">Resources</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/precios" className="text-gray-300 hover:text-white transition-colors">
-                    Precios
+                  <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+                    Pricing
                   </Link>
                 </li>
                 <li>
@@ -539,7 +546,7 @@ export default function CasosDeUso() {
                 </li>
                 <li>
                   <Link href="mailto: info@exbordia.com" className="text-gray-300 hover:text-white transition-colors">
-                    Soporte
+                    Support
                   </Link>
                 </li>
               </ul>
@@ -547,7 +554,7 @@ export default function CasosDeUso() {
 
             {/* Column 4 - Contact */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Contacto</h3>
+              <h3 className="text-lg font-medium mb-4">Contact</h3>
               <div className="space-y-3">
                 <p className="text-gray-300">
                   <a href="mailto:info@exbordia.com" className="hover:text-white transition-colors">
@@ -578,15 +585,15 @@ export default function CasosDeUso() {
                   className="brightness-0 invert object-contain"
                 />
                 <p className="text-sm text-gray-300">
-                  © {new Date().getFullYear()} Exbordia. Todos los derechos reservados.
+                  © {new Date().getFullYear()} Exbordia. All rights reserved.
                 </p>
               </div>
               <div className="flex space-x-6">
                 <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Términos y Condiciones
+                  Terms and Conditions
                 </a>
                 <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Política de Privacidad
+                  Privacy Policy
                 </a>
               </div>
             </div>

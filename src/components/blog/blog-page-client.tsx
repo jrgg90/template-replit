@@ -7,15 +7,21 @@ import { Suspense } from 'react'
 import { motion } from 'framer-motion'
 import Link from "next/link"
 import Image from "next/image"
+import { useTranslation } from 'react-i18next'
+import type { BlogPost } from '@/types/blog'
+import { Language } from "@/types"
 
 interface BlogPageClientProps {
-  initialPosts: any // Ajusta este tipo según la estructura de tus posts
+  initialPosts: BlogPost[]
+  lang: Language
 }
 
-export function BlogPageClient({ initialPosts }: BlogPageClientProps) {
+export function BlogPageClient({ initialPosts, lang }: BlogPageClientProps) {
+  const { t } = useTranslation('blog')
+
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader />
+      <MainHeader lang={lang} />
       
       {/* Hero Section */}
       <section className="relative pt-44 pb-8 overflow-hidden">
@@ -46,7 +52,7 @@ export function BlogPageClient({ initialPosts }: BlogPageClientProps) {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               Descubre las últimas tendencias, consejos y mejores prácticas para expandir 
-              tu negocio al mercado estadounidense.
+              tu negocio al mercado global.
             </motion.p>
           </div>
         </div>
@@ -55,9 +61,9 @@ export function BlogPageClient({ initialPosts }: BlogPageClientProps) {
       <div className="container mx-auto px-4 py-24">
         <div className="max-w-6xl mx-auto">
           {/* Search y Grid envueltos en Suspense */}
-          <Suspense fallback={<div>Cargando...</div>}>
-            <BlogSearch />
-            <BlogGrid initialPosts={initialPosts} />
+          <Suspense fallback={<div>{t('common.loading')}</div>}>
+            <BlogSearch lang={lang} />
+            <BlogGrid initialPosts={initialPosts} lang={lang} />
           </Suspense>
         </div>
       </div>

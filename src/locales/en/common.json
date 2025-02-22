@@ -1,0 +1,28 @@
+{
+  "header": {
+    "navigation": {
+      "blog": "Blog",
+      "useCases": "Use Cases",
+      "pricing": "Pricing",
+      "login": "Log in",
+      "requestInfo": "Request Information"
+    }
+  },
+  "common": {
+    "startToday": "Start today",
+    "learnMore": "Learn more",
+    "contact": "Contact",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "tryAgain": "Try again"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "continue": "Continue",
+    "back": "Back",
+    "close": "Close"
+  }
+} 

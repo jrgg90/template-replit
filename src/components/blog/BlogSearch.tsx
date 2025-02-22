@@ -4,20 +4,26 @@ import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@/lib/hooks/useDebounce'
+import { useTranslation } from 'react-i18next'
 
-export function BlogSearch() {
+interface BlogSearchProps {
+  lang: string
+}
+
+export function BlogSearch({ lang }: BlogSearchProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
   const debouncedSearch = useDebounce(searchTerm, 300)
+  const { t } = useTranslation('blog')
 
   useEffect(() => {
     if (debouncedSearch) {
-      router.push(`/blog?q=${encodeURIComponent(debouncedSearch)}`)
+      router.push(`/${lang}/blog?q=${encodeURIComponent(debouncedSearch)}`)
     } else {
-      router.push('/blog')
+      router.push(`/${lang}/blog`)
     }
-  }, [debouncedSearch, router])
+  }, [debouncedSearch, router, lang])
 
   return (
     <div className="relative w-full max-w-xl mx-auto mb-12">
@@ -28,7 +34,7 @@ export function BlogSearch() {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar artículos..."
+        placeholder={t('search.placeholder')}
         className="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 
           focus:border-[#131F42] focus:ring-1 focus:ring-[#131F42] 
           transition-colors text-base"

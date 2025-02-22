@@ -1,55 +1,45 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { languages } from './app/i18n/settings';
 
-// Lista de rutas públicas (accesibles para todos los usuarios)
-const publicRoutes = ['/blog', '/precios'];
-
-// Lista de rutas protegidas que requieren autenticación
-const protectedRoutes = ['/onboarding', '/main-dashboard'];
-
-// Rutas de desarrollo (solo accesibles en desarrollo)
-const devRoutes = ['/sandbox'];
+// Rutas protegidas que requieren autenticación
+const protectedRoutes = ['/onboarding', '/dashboard'];
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get('token');
   const { pathname } = request.nextUrl;
+  const token = request.cookies.get('token');
 
-  // Bloquear acceso a rutas de desarrollo en producción
-  if (devRoutes.some(route => pathname.startsWith(route))) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
-
-  // Verificar si es una ruta pública
-  if (publicRoutes.some(route => pathname.startsWith(route))) {
+  // Ignorar archivos estáticos y API
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.includes('.')
+  ) {
     return NextResponse.next();
   }
 
-  // Verificar si es una ruta protegida
-  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
-  
-  if (isProtectedRoute && !token) {
-    return NextResponse.redirect(new URL('/', request.url));
+  // Manejar rutas protegidas
+  if (protectedRoutes.some(route => pathname.startsWith(route))) {
+    if (!token) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    return NextResponse.next();
   }
 
-  // Redirigir a onboarding si está autenticado en la landing
-  if (pathname === '/' && token) {
-    return NextResponse.redirect(new URL('/onboarding', request.url));
+  // Si la ruta ya tiene un idioma válido, permitir la navegación (NO REDIRIGIR)
+  if (languages.some(lang => pathname.startsWith(`/${lang}`))) {
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  // Si la ruta es '/', redirigir a /es/home directamente
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/es/home', request.url));
+  }
+
+  // Si la ruta no tiene idioma, agregar /es al inicio
+  return NextResponse.redirect(new URL(`/es${pathname}`, request.url));
 }
 
-// Agregar configuración explícita de rutas
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * 1. /api routes
-     * 2. /_next (Next.js internals)
-     * 3. /fonts (inside /public)
-     * 4. /examples (inside /public)
-     * 5. all root files inside /public (e.g. /favicon.ico)
-     */
-    '/((?!api|_next|fonts|examples|[\\w-]+\\.\\w+).*)',
-  ],
-} 
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+};

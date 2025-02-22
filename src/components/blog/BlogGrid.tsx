@@ -4,14 +4,17 @@ import { BlogPost } from '@/types/blog'
 import { BlogCard } from './BlogCard'
 import { useSearchParams } from 'next/navigation'
 import { BlogPagination } from './BlogPagination'
+import { useTranslation } from 'react-i18next'
 
 const POSTS_PER_PAGE = 6
 
 interface BlogGridProps {
   initialPosts: BlogPost[]
+  lang: string
 }
 
-export function BlogGrid({ initialPosts }: BlogGridProps) {
+export function BlogGrid({ initialPosts, lang }: BlogGridProps) {
+  const { t } = useTranslation('blog')
   const searchParams = useSearchParams()
   const searchTerm = searchParams.get('q')?.toLowerCase()
   const currentPage = Number(searchParams.get('page')) || 1
@@ -34,7 +37,7 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-600 text-lg">
-          No se encontraron artículos que coincidan con tu búsqueda
+          {t('no_articles_found')}
         </p>
       </div>
     )

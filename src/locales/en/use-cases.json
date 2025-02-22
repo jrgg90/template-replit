@@ -1,0 +1,144 @@
+{
+  "title": "Use Cases",
+  "description": "Discover how Exbordia can help you expand globally",
+  "hero": {
+    "title": {
+      "prefix": "Automate your international expansion with",
+      "highlight": "intelligent workflows"
+    },
+    "subtitle": "Set up automated workflows to manage your international operations efficiently and scalably"
+  },
+  "useCases": {
+    "listingOptimization": {
+      "badge": "Listing Optimization",
+      "title": {
+        "prefix": "Translate and optimize my listings",
+        "highlight": "to sell more in other countries"
+      },
+      "description": "Adapt your listings to each international marketplace with professional translations and platform-specific SEO optimization",
+      "cta": "Start today"
+    },
+    "regulations": {
+      "badge": "Regulations and Certifications",
+      "title": {
+        "prefix": "Identify the requirements",
+        "highlight": "to sell in other countries"
+      },
+      "description": "Learn about the certifications, regulations, and documentation needed to sell your products in new markets",
+      "cta": "Start today"
+    },
+    "marketplaces": {
+      "badge": "Marketplaces",
+      "title": {
+        "prefix": "Research which marketplace",
+        "highlight": "I should sell on to succeed in Canada"
+      },
+      "description": "Analyze prices, strategies, and positioning of your competitors in each international marketplace",
+      "cta": "Start today"
+    },
+    "shopifyMarkets": {
+      "badge": "Shopify Markets",
+      "title": {
+        "prefix": "Set up your Shopify store",
+        "highlight": "to sell globally"
+      },
+      "description": "Expand your business internationally with Shopify Markets. Manage multiple markets from a single store",
+      "cta": "Start today"
+    },
+    "marketResearch": {
+      "badge": "Market Research",
+      "title": {
+        "prefix": "Research which countries have",
+        "highlight": "more demand for my products"
+      },
+      "description": "Discover which countries have more sales opportunities based on market data and global trends",
+      "cta": "Start today",
+      "table": {
+        "headers": {
+          "country": "Country",
+          "monthlySearches": "Monthly Searches",
+          "competitionLevel": "Competition Level",
+          "averageIncome": "Average Income (USD)"
+        },
+        "data": [
+          {
+            "country": "United States",
+            "searches": "21m searches/month",
+            "competition": "Medium",
+            "income": "$34.4k monthly"
+          },
+          {
+            "country": "Germany",
+            "searches": "13m searches/month",
+            "competition": "Medium",
+            "income": "$39.4k monthly"
+          },
+          {
+            "country": "Spain",
+            "searches": "12m searches/month",
+            "competition": "Very low",
+            "income": "$26.1k monthly"
+          }
+        ]
+      }
+    },
+    "amazonSeller": {
+      "badge": "Amazon",
+      "title": {
+        "prefix": "Set up my Amazon",
+        "highlight": "Seller Central account to sell in the USA"
+      },
+      "description": "Create, connect or configure your Amazon Seller Central account to sell in the USA",
+      "cta": "Start today",
+      "image": {
+        "src": "/logos-partners-png/amazonseller.png",
+        "alt": "Amazon Seller Central"
+      }
+    },
+    "customsAgents": {
+      "badge": "Customs Agents",
+      "title": {
+        "prefix": "Connect me with a",
+        "highlight": "Customs Agent in Mexico"
+      },
+      "description": "Take advantage of Exbordia's partnership network to identify and connect with reliable customs agents in Mexico",
+      "cta": "Start today",
+      "image": {
+        "src": "/logos-partners-png/agenteaduanal.png",
+        "alt": "Customs Agent"
+      }
+    }
+  },
+  "finalSection": {
+    "title": {
+      "prefix": "And many other",
+      "highlight": "automations"
+    },
+    "description": "If you have questions, contact us",
+    "cta": "Contact"
+  },
+  "footer": {
+    "platform": {
+      "title": "Platform",
+      "links": {
+        "login": "Log in"
+      }
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "links": {
+        "marketResearch": "Market Research",
+        "marketplaces": "Marketplaces",
+        "shopifyMarkets": "Shopify Markets"
+      }
+    },
+    "resources": {
+      "title": "Resources",
+      "links": {
+        "pricing": "Pricing",
+        "blog": "Blog",
+        "support": "Support"
+      }
+    }
+  }
+} 

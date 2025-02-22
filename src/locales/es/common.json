@@ -1,0 +1,27 @@
+{
+  "header": {
+    "navigation": {
+      "blog": "Blog",
+      "useCases": "Casos de uso",
+      "pricing": "Precios",
+      "requestInfo": "Solicitar Información"
+    }
+  },
+  "common": {
+    "startToday": "Empieza hoy",
+    "learnMore": "Saber más",
+    "contact": "Contacto",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "¡Éxito!",
+    "tryAgain": "Intentar de nuevo"
+  },
+  "buttons": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "continue": "Continuar",
+    "back": "Volver",
+    "close": "Cerrar"
+  }
+} 

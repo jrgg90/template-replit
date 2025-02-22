@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "title": {
+      "prefix": "Take your online store",
+      "highlight": "to new global markets"
+    },
+    "description": "With AI Agents that will sell your products worldwide. Easy!"
+  },
+  "workflows": {
+    "badge": "Workflows",
+    "title": {
+      "prefix": "A new member in",
+      "highlight": "your global trade team"
+    },
+    "description": "Tell Exbordia what to do and forget about manual tasks. Your international trade agent will take care of everything.",
+    "features": [
+      "Translate and optimize marketplace listings",
+      "Validate regulations and certifications",
+      "Connect with fulfillment partners"
+    ],
+    "cta": "View Workflows"
+  },
+  "marketFinder": {
+    "badge": "Market Finder",
+    "title": {
+      "prefix": "A market analyst",
+      "highlight": "that tells you where to sell"
+    },
+    "description": "Exbordia analyzes demand data, competition, and regulations to tell you where your products can sell most successfully",
+    "features": [
+      "Demand analysis by country and category",
+      "Competition and pricing evaluation",
+      "Data-based recommendations"
+    ],
+    "cta": "View Workflows"
+  },
+  "assistant": {
+    "badge": "24/7 Assistant",
+    "title": {
+      "prefix": "Your cross-border",
+      "highlight": "e-commerce expert always available"
+    },
+    "description": "Ask any question about international trade. Your Exbordia agent has the answers you need to expand your business.",
+    "chat": {
+      "userQuestion": "How do I set up taxes for international sales in my Shopify store?",
+      "assistantResponse": {
+        "intro": "I'll help you with that. For Shopify, you need to:",
+        "steps": [
+          "Set up tax nexus for each country",
+          "Establish tax rates by region",
+          "Enable automatic tax calculation"
+        ],
+        "conclusion": "Let's go to Shopify and set it up together."
+      },
+      "inputPlaceholder": "Ask anything...",
+      "sendButton": "Start now"
+    }
+  },
+  "partnerships": {
+    "title": {
+      "prefix": "Your assistant connects with all",
+      "highlight": "e-commerce platforms"
+    },
+    "description": "Easily integrate your online store and expand your business globally regardless of which platform you use",
+    "agentCapability": "The agent works with any platform",
+    "footer": "And many other platforms..."
+  },
+  "howItWorks": {
+    "title": {
+      "prefix": "How Does It",
+      "highlight": "Work?"
+    },
+    "description": "In just three steps you can start selling your products in international markets",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Connect your store",
+        "description": "Integrate your online store with the Exbordia Agent in minutes."
+      },
+      {
+        "number": "2",
+        "title": "Define your goals",
+        "description": "Tell your agent which markets interest you, what concerns you have, and which products you want to sell."
+      },
+      {
+        "number": "3",
+        "title": "Ready to sell!",
+        "description": "Your agent will automatically start working on your international expansion."
+      }
+    ]
+  },
+  "cta": {
+    "mainButton": {
+      "text": "Start Today",
+      "ariaLabel": "Start with Exbordia"
+    }
+  },
+  "faq": {
+    "title": {
+      "prefix": "Frequently Asked",
+      "highlight": "Questions"
+    },
+    "questions": [
+      {
+        "question": "Do I need international trade experience to use Exbordia?",
+        "answer": "No, Exbordia automates the entire process for you. You don't need prior knowledge or export experience."
+      },
+      {
+        "question": "In which countries does Exbordia work?",
+        "answer": "Exbordia helps you sell in the USA, Canada, LATAM, Europe, and other markets with demand for your product."
+      },
+      {
+        "question": "How long does it take to start selling with Exbordia?",
+        "answer": "You can start in minutes. Connect it to your store and Exbordia will start working immediately."
+      },
+      {
+        "question": "Do I need technical or coding knowledge to use Exbordia?",
+        "answer": "No, Exbordia is 100% plug & play. It integrates with your e-commerce without complicated configurations"
+      },
+      {
+        "question": "What makes Exbordia different from a marketing agency or consultancy?",
+        "answer": "Unlike agencies, Exbordia doesn't just advise, it acts in real-time. Thanks to its updated database and global partnerships, Exbordia identifies opportunities, optimizes listings, and manages regulations faster and with greater precision, allowing you to expand without friction."
+      }
+    ]
+  }
+} 
