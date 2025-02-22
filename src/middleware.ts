@@ -31,9 +31,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Si la ruta es '/', redirigir a /es/home directamente
+  // Si la ruta es '/', redirigir a /es/inicio por defecto
   if (pathname === '/') {
-    return NextResponse.redirect(new URL('/es/home', request.url));
+    return NextResponse.redirect(new URL('/es/inicio', request.url));
   }
 
   // Si la ruta no tiene idioma, agregar /es al inicio

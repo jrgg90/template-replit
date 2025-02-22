@@ -2,10 +2,11 @@
 
 import { MainHeader } from "@/components/layout/MainHeader"
 import { useTranslation } from "@/app/i18n/client"
+import { Language } from "@/types"
 
 interface BlogPageProps {
   params: {
-    lang: string
+    lang: Language
   }
 }
 

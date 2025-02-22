@@ -29,13 +29,17 @@ export function MainHeader({ lang }: MainHeaderProps) {
     return lang === 'es' ? '/es/precios' : '/en/pricing'
   }
 
+  const getHomePath = (lang: Language) => {
+    return lang === 'es' ? '/es/inicio' : '/en/home'
+  }
+
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href={`/${lang}`}>
+            <Link href={getHomePath(lang)}>
               <Image 
                 src="/exbordia-logo.png" 
                 alt="Exbordia Logo" 
