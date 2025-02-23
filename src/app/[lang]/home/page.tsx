@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { FAQSection } from "@/components/layout/faq-section"
 import { MainHeaderEN } from "@/components/layout/MainHeaderEN"
 import { motion } from "framer-motion"
-import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
-import { HowItWorksSection } from "@/components/ui/how-it-works-section"
 import { PartnersCarousel } from "@/components/ui/partners-carousel"
 import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
@@ -13,6 +11,7 @@ import { LocaleParams } from "@/types"
 import { FooterEN } from "@/components/layout/FooterEN"
 import { HeroSectionEN } from "@/components/layout/HeroSectionEN"
 import { routes } from "@/config/routes"
+import { FAQSectionEN } from "@/components/layout/faq-sectionEN"
 
 // Mantener solo las versiones dinámicas
 const AnimatedBackgroundWithNoSSR = dynamic(

@@ -30,12 +30,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Get and store the token
         const token = await user.getIdToken();
         document.cookie = `token=${token}; path=/`;
-        router.push('/onboarding');
       } else {
         setUser(null);
         // Clear the token
         document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-        router.push('/');
       }
       setLoading(false);
     });
@@ -58,7 +56,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       document.cookie = `token=${token}; path=/`;
-      // The redirect will be handled by onAuthStateChanged
     } catch (error: any) {
       console.error('Error signing in:', error);
       setError(error.message || 'Failed to sign in');
@@ -69,7 +66,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     try {
       await auth.signOut();
-      router.push('/');
     } catch (error) {
       console.error('Error signing out:', error);
       throw error;
