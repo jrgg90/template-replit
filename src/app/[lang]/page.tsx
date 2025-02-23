@@ -1,18 +1,21 @@
-import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Language } from "@/types"
 
-export default function Page() {
-  const headersList = headers()
-  const pathname = headersList.get('x-pathname') || ''
-  
-  // Si estamos en la raíz, redirigir según el idioma en la URL
-  if (pathname.includes('/en')) {
+interface PageProps {
+  params: {
+    lang: Language
+  }
+}
+
+export default function Page({ params }: PageProps) {
+  // Redirigir según el idioma
+  if (params.lang === 'en') {
     redirect('/en/home')
   }
   
-  redirect('/es/inicio')
+  // Para español, asegurarnos de que la redirección sea absoluta
+  return redirect('/es/inicio')
 }
 
-// Esto asegura que la página se renderice en el servidor
+// Desactivar la generación estática para esta página
 export const dynamic = 'force-dynamic' 

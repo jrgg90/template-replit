@@ -1,0 +1,11 @@
+{
+  "header": {
+    "navigation": {
+      "blog": "Blog",
+      "useCases": "Use Cases",
+      "pricing": "Pricing",
+      "login": "Login",
+      "requestInfo": "Request Information"
+    }
+  }
+} 

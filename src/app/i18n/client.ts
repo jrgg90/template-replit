@@ -10,30 +10,28 @@ import { languages } from './settings'
 const runsOnServerSide = typeof window === 'undefined'
 
 // Configuración básica para i18next
-const i18nConfig = {
-  supportedLngs: languages,
-  fallbackLng: 'es',
-  lng: undefined,
-  detection: {
-    order: ['path', 'htmlTag', 'cookie', 'navigator'],
-  },
-  preload: runsOnServerSide ? languages : []
-}
-
 i18next
   .use(initReactI18next)
   .use(LanguageDetector)
   .use(resourcesToBackend((language: string, namespace: string) => 
-    import(`@/locales/${language}/${namespace}.json`)))
-  .init(i18nConfig)
+    import(`./locales/${language}/${namespace}.json`)))
+  .init({
+    supportedLngs: languages,
+    fallbackLng: 'es',
+    lng: undefined,
+    detection: {
+      order: ['path', 'htmlTag', 'cookie', 'navigator'],
+    },
+    preload: runsOnServerSide ? languages : [],
+    interpolation: {
+      escapeValue: false
+    }
+  })
 
-export function useTranslation(namespace: string, options = {}) {
-  const [lng, setLng] = useState(i18next.language)
-
-  useEffect(() => {
-    if (!lng) return
-    i18next.changeLanguage(lng)
-  }, [lng])
-
-  return useTranslationOrg(namespace, options)
+export function useTranslation(ns: string, lng?: string) {
+  const ret = useTranslationOrg(ns)
+  if (lng && ret.i18n.language !== lng) {
+    ret.i18n.changeLanguage(lng)
+  }
+  return ret
 } 

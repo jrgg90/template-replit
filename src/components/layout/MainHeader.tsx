@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -14,7 +14,18 @@ interface MainHeaderProps {
 
 export function MainHeader({ lang }: MainHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { t } = useTranslation('common')
+  const { t, i18n } = useTranslation('common')
+  
+  // Asegurarnos que i18n use el idioma correcto
+  useEffect(() => {
+    if (i18n.language !== lang) {
+      i18n.changeLanguage(lang)
+    }
+  }, [lang, i18n])
+
+  // Agregar temporalmente para debug
+  console.log('MainHeader language:', lang)
+  console.log('Translation test:', t('header.navigation.blog'))
 
   // Definir las rutas directamente según el idioma
   const getBlogPath = (lang: Language) => {
@@ -79,7 +90,7 @@ export function MainHeader({ lang }: MainHeaderProps) {
                 {t('header.navigation.pricing')}
               </Link>
             </Button>
-            <LoginButton />
+            <LoginButton lang={lang} />
             <Link
               href="https://tally.so/r/mYx0b0"
               target="_blank"
@@ -135,7 +146,7 @@ export function MainHeader({ lang }: MainHeaderProps) {
             >
               {t('header.navigation.pricing')}
             </Link>
-            <LoginButton />
+            <LoginButton lang={lang} />
             <Link
               href="https://tally.so/r/mYx0b0"
               target="_blank"

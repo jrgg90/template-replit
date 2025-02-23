@@ -3,6 +3,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useTranslation } from "@/app/i18n/client"
+import { getLocalizedPath } from "@/config/routes"
+import { Language } from "@/types"
 
 interface FooterProps {
   lang: string
@@ -65,10 +67,10 @@ export function Footer({ lang }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <Link 
-                  href={`/${lang}/precios`}
+                  href={getLocalizedPath('/pricing', lang as Language)}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Precios
+                  {t('footer.resources.pricing')}
                 </Link>
               </li>
               <li>

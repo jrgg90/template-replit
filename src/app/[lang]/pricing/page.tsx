@@ -3,10 +3,13 @@
 import { MainHeader } from "@/components/layout/MainHeader"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { MarketOpportunitySection } from "@/components/pricing/market-opportunity-section"
+import { Footer } from "@/components/layout/Footer"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { Language } from "@/types"
+import { useEffect, useState } from "react"
+import { useRouter } from 'next/navigation'
 
 // Definimos los planes y precios
 const PAYMENT_FREQUENCIES = ["mensual", "anual"]
@@ -70,13 +73,77 @@ const PRICING_TIERS = [
   },
 ]
 
+// Mover FAQs fuera del componente
+const FAQS = [
+  {
+    question: "Can I change plans at any time?",
+    answer: "Yes, you can change from free to growth or scale at any time. Changes apply immediately and the charge is adjusted proportionally."
+  },
+  {
+    question: "Is there a long-term contract?",
+    answer: "Our plans are monthly and you can cancel at any time. Only commitment if you have an annual plan."
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards, PayPal and bank transfers for enterprise plans."
+  }
+]
+
 interface PricingProps {
   params: {
     lang: Language
   }
 }
 
+// Componente FAQ separado
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div className="bg-white border border-gray-100 rounded-lg hover:border-gray-200 transition-colors duration-200">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex justify-between items-center font-medium cursor-pointer p-6"
+      >
+        <span className="text-gray-900 text-lg">{question}</span>
+        <span className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+          <svg 
+            fill="none" 
+            height="24" 
+            width="24" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor" 
+            strokeWidth="1.5"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </span>
+      </button>
+      {isOpen && (
+        <p className="text-gray-600 px-6 pb-6 animate-fadeIn">
+          {answer}
+        </p>
+      )}
+    </div>
+  )
+}
+
 export default function Pricing({ params }: PricingProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Forzar la ruta correcta basada en el idioma
+    const correctPath = params.lang === 'es' ? '/es/precios' : '/en/pricing'
+    if (window.location.pathname !== correctPath) {
+      router.replace(correctPath)
+    }
+  }, [params.lang, router])
+
+  useEffect(() => {
+    console.log('Current language:', params.lang);
+    console.log('Current path:', window.location.pathname);
+  }, [params.lang]);
+
   return (
     <main className="min-h-screen bg-white">
       <MainHeader lang={params.lang} />
@@ -117,6 +184,7 @@ export default function Pricing({ params }: PricingProps) {
 
       {/* Pricing Section */}
       <PricingSection
+        lang={params.lang}
         title=""
         subtitle=""
         frequencies={PAYMENT_FREQUENCIES}
@@ -131,36 +199,12 @@ export default function Pricing({ params }: PricingProps) {
           </h2>
 
           <div className="space-y-3">
-            {[
-              {
-                question: "Can I change plans at any time?",
-                answer: "Yes, you can change from free to growth or scale at any time. Changes apply immediately and the charge is adjusted proportionally."
-              },
-              {
-                question: "Is there a long-term contract?",
-                answer: "Our plans are monthly and you can cancel at any time. Only commitment if you have an annual plan."
-              },
-              {
-                question: "What payment methods do you accept?",
-                answer: "We accept all major credit cards, PayPal and bank transfers for enterprise plans."
-              }
-            ].map((faq, index) => (
-              <div
+            {FAQS.map((faq, index) => (
+              <FAQItem 
                 key={index}
-                className="bg-white border border-gray-100 rounded-lg hover:border-gray-200 transition-colors duration-200"
-              >
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-6">
-                    <span className="text-gray-900 text-lg">{faq.question}</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                    </span>
-                  </summary>
-                  <p className="text-gray-600 mt-3 group-open:animate-fadeIn px-6 pb-6">
-                    {faq.answer}
-                  </p>
-                </details>
-              </div>
+                question={faq.question}
+                answer={faq.answer}
+              />
             ))}
           </div>
         </div>
@@ -170,114 +214,7 @@ export default function Pricing({ params }: PricingProps) {
       <MarketOpportunitySection />
 
       {/* Footer */}
-      <footer className="bg-[#131F42] text-white py-16">
-        <div className="container mx-auto px-4">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {/* Column 1 - Platform */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Platform</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
-                    Login
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2 - Use Cases */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Use Cases</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/use-cases" className="text-gray-300 hover:text-white transition-colors">
-                    Market Research
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/use-cases#marketplaces" className="text-gray-300 hover:text-white transition-colors">
-                    Marketplaces
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/casos-de-uso#shopify-markets" className="text-gray-300 hover:text-white transition-colors">
-                    Shopify Markets
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3 - Resources */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Resources</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="mailto: info@exbordia.com" className="text-gray-300 hover:text-white transition-colors">
-                    Support
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4 - Contact */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Contact</h3>
-              <div className="space-y-3">
-                <p className="text-gray-300">
-                  <a href="mailto:info@exbordia.com" className="hover:text-white transition-colors">
-                    info@exbordia.com
-                  </a>
-                </p>
-                <div className="flex space-x-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-white transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Logo and Copyright */}
-          <div className="border-t border-gray-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-8">
-                <Image 
-                  src="/exbordia-logo.png" 
-                  alt="Exbordia Logo" 
-                  width={140} 
-                  height={40}
-                  className="brightness-0 invert object-contain"
-                />
-                <p className="text-sm text-gray-300">
-                  © {new Date().getFullYear()} Exbordia. All rights reserved.
-                </p>
-              </div>
-              <div className="flex space-x-6">
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Terms and Conditions
-                </a>
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer lang={params.lang} />
     </main>
   )
 } 

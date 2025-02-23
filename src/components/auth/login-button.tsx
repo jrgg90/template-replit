@@ -2,10 +2,23 @@
 
 import { Button } from "@/components/ui/button"
 import { LoginDialog } from "@/components/auth/login-dialog"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useTranslation } from "@/app/i18n/client"
+import { Language } from "@/types"
 
-export function LoginButton() {
+interface LoginButtonProps {
+  lang: Language
+}
+
+export function LoginButton({ lang }: LoginButtonProps) {
   const [open, setOpen] = useState(false)
+  const { t, i18n } = useTranslation('common')
+
+  useEffect(() => {
+    if (i18n.language !== lang) {
+      i18n.changeLanguage(lang)
+    }
+  }, [lang, i18n])
 
   return (
     <>
@@ -14,9 +27,12 @@ export function LoginButton() {
         className="text-[#131F42] font-light"
         onClick={() => setOpen(true)}
       >
-        Iniciar Sesión
+        {t('header.navigation.login')}
       </Button>
-      <LoginDialog open={open} onOpenChange={setOpen} />
+      <LoginDialog 
+        open={open} 
+        onOpenChange={setOpen}
+      />
     </>
   )
 } 

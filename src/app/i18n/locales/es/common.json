@@ -1,0 +1,11 @@
+{
+  "header": {
+    "navigation": {
+      "blog": "Blog",
+      "useCases": "Casos de uso",
+      "pricing": "Precios",
+      "login": "Iniciar Sesión",
+      "requestInfo": "Solicitar Información"
+    }
+  }
+} 
