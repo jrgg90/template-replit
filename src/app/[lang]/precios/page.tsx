@@ -1,9 +1,9 @@
 "use client"
 
-import { MainHeader } from "@/components/layout/MainHeader"
+import { MainHeaderES } from "@/components/layout/MainHeaderES"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { MarketOpportunitySection } from "@/components/pricing/market-opportunity-section"
-import { Footer } from "@/components/layout/Footer"
+import { FooterES } from "@/components/layout/FooterES"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
@@ -131,7 +131,7 @@ const FAQS = [
 export default function PricingPage({ params }: PricingProps) {
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader lang={params.lang} />
+      <MainHeaderES />
       
       {/* Hero Section */}
       <section className="relative pt-44 pb-8 overflow-hidden">
@@ -199,7 +199,7 @@ export default function PricingPage({ params }: PricingProps) {
       <MarketOpportunitySection />
 
       {/* Footer con rutas localizadas */}
-      <Footer lang={params.lang} />
+      <FooterES lang={params.lang} />
     </main>
   )
 } 

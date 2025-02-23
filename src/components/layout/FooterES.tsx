@@ -2,16 +2,14 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useTranslation } from "@/app/i18n/client"
-import { getLocalizedPath } from "@/config/routes"
+import { routes } from "@/config/routes"
 import { Language } from "@/types"
 
 interface FooterProps {
-  lang: string
+  lang: Language
 }
 
-export function Footer({ lang }: FooterProps) {
-  const { t } = useTranslation('common')
+export function FooterES({ lang }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -36,7 +34,7 @@ export function Footer({ lang }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <Link 
-                  href={`/${lang}/casos-de-uso`}
+                  href={routes.es.useCases}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Investigación de mercados
@@ -44,7 +42,7 @@ export function Footer({ lang }: FooterProps) {
               </li>
               <li>
                 <Link 
-                  href={`/${lang}/casos-de-uso`}
+                  href={routes.es.useCases}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Marketplaces
@@ -52,7 +50,7 @@ export function Footer({ lang }: FooterProps) {
               </li>
               <li>
                 <Link 
-                  href={`/${lang}/casos-de-uso`}
+                  href={routes.es.useCases}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Shopify Markets
@@ -67,15 +65,15 @@ export function Footer({ lang }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <Link 
-                  href={getLocalizedPath('/pricing', lang as Language)}
+                  href={routes.es.pricing}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  {t('footer.resources.pricing')}
+                  Precios
                 </Link>
               </li>
               <li>
                 <Link 
-                  href={`/${lang}/blog-es`}
+                  href={routes.es.blog}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Blog

@@ -1,13 +1,13 @@
 "use client";
 
-import React, { createContext, useEffect, useState } from "react";
-import { User, signInWithEmailAndPassword } from "firebase/auth";
+import React, { createContext, useEffect, useState, useContext, ReactNode } from "react";
+import { User as FirebaseUser, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "../firebase/firebase";
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from "firebase/auth";
 
 interface AuthContextType {
-  user: User | null;
+  user: FirebaseUser | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
@@ -15,10 +15,10 @@ interface AuthContextType {
   error: string | null;
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -81,4 +81,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}

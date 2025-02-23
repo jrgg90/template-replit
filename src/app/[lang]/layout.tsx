@@ -1,9 +1,4 @@
-import { languages } from '../i18n/settings'
 import { Language } from "@/types"
-
-export async function generateStaticParams() {
-  return languages.map((lng) => ({ lang: lng }))
-}
 
 export default function RootLayout({
   children,
@@ -22,4 +17,9 @@ export default function RootLayout({
       </body>
     </html>
   )
+}
+
+// Generar los parámetros estáticos para las rutas
+export async function generateStaticParams() {
+  return [{ lang: 'es' }, { lang: 'en' }]
 } 

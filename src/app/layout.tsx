@@ -1,9 +1,8 @@
 import './globals.css'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Providers } from './providers'
+import { Providers } from "@/components/providers"
 import { Toaster } from 'sonner'
-import { languages } from './i18n/settings'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,25 +53,23 @@ export async function generateMetadata({ params: { lang } }: MetadataProps) {
 }
 
 export async function generateStaticParams() {
-  return languages.map((lang) => ({ lang }))
+  return [{ lang: 'es' }, { lang: 'en' }]
 }
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode
-  params?: { lang: string }
 }) {
   return (
-    <html lang={params?.lang || 'es'}>
+    <html>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <Providers>
           {children}
         </Providers>

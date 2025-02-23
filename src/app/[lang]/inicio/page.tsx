@@ -1,24 +1,13 @@
-"use client"
 import Image from 'next/image'
-import { Button } from "@/components/ui/button"
-import { Globe2, LayoutDashboard, BarChart3, DollarSign, Truck } from 'lucide-react'
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { ScrollRevealStat } from "@/components/ui/scroll-reveal-stat"
 import Link from 'next/link'
-import { useState } from "react"
-import { LoginDialog } from "@/components/auth/login-dialog"
-import { LoginButton } from "@/components/auth/login-button"
-import { CTA } from "@/components/layout/call-to-action"
 import { FAQSection } from "@/components/layout/faq-section"
-import { MainHeader } from "@/components/layout/MainHeader"
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
-import { HowItWorksSection } from "@/components/ui/how-it-works-section"
-import { PartnersCarousel } from "@/components/ui/partners-carousel"
+import { MainHeaderES } from "@/components/layout/MainHeaderES"
 import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
-import { Language } from "@/types"
+import { Language, LocaleParams } from "@/types"
+import { FooterES } from "@/components/layout/FooterES"
+import { routes } from "@/config/routes"
+import { HeroSectionES } from '@/components/layout/HeroSectionES'
 
 // Mantener solo las versiones dinámicas
 const AnimatedBackgroundWithNoSSR = dynamic(
@@ -51,16 +40,10 @@ const MarketFinderPreviewWithNoSSR = dynamic(
   }
 )
 
-interface HomeProps {
-  params: {
-    lang: Language
-  }
-}
-
-export default function Home({ params: { lang } }: HomeProps) {
-  // Solo redirigir en la ruta raíz
+export default function Home({ params: { lang } }: LocaleParams) {
+  // Solo redirigir si estamos en la página incorrecta
   if (lang === 'en') {
-    redirect(`/en/home`)
+    redirect(routes.home.en)
   }
 
   const steps = [
@@ -98,125 +81,8 @@ export default function Home({ params: { lang } }: HomeProps) {
 
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader lang={lang} />
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-start pt-44 overflow-hidden">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-white pointer-events-none" />
-        
-        <div className="container relative mx-auto px-4 pb-32">
-          {/* Text Content */}
-          <div className="text-center max-w-[720px] mx-auto mb-12">
-            <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="block text-[#1A1A2E] font-light tracking-tight">
-                Lleva tu tienda{' '}
-                <span className="md:inline hidden">online</span>
-                <span className="md:hidden inline">
-                  online
-                </span>
-              </span>
-              <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
-                font-medium tracking-tight pb-3">
-                a nuevos mercados globales
-              </span>
-            </motion.h1>
-
-            <motion.p 
-              className="text-xl md:text-2xl text-gray-600 max-w-[600px] mx-auto mb-12 leading-relaxed relative z-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Con los <span className="font-bold text-gray-900">Agentes de Inteligencia Artificial</span> que venderán tus productos en todo el mundo ¡Fácil!
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-                <Link 
-                href="https://tally.so/r/mYx0b0"
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                <button className="group relative inline-flex items-center justify-center px-12 py-4 text-lg
-                  bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300
-                  hover:shadow-[0_8px_40px_rgba(10,132,255,0.22)] hover:scale-105">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-500" />
-                    <span className="relative flex items-center gap-2">
-                    Comienza Hoy Mismo
-                    <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                  </button>
-                </Link>
-            </motion.div>
-          </div>
-
-          {/* Platform Image */}
-          <motion.div
-            className="relative max-w-[1200px] mx-auto"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <motion.div
-              animate={{ 
-                y: [0, 15, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut"
-              }}
-              className="relative z-20"
-            >
-              <Image
-                src="/asistente2.png"
-                alt="Exbordia Platform Interface"
-                width={1400}
-                height={900}
-                priority
-                className="w-full h-auto rounded-xl shadow-[0_20px_50px_rgba(8,112,184,0.12)]"
-              />
-            </motion.div>
-
-            {/* Decorative Elements */}
-            <div className="absolute -inset-[10%] -z-10">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full
-                bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
-            </div>
-          </motion.div>
-
-          {/* Partners Carousel */}
-          <div className="mt-8">
-            <motion.p 
-              className="text-center text-gray-500 text-lg mb-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              El agente trabaja con cualquier plataforma
-            </motion.p>
-            <PartnersCarousel />
-          </div>
-        </div>
-
-        {/* Decorative Circles */}
-        <div className="absolute top-40 left-20 w-72 h-72 bg-blue-100/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-40 right-20 w-72 h-72 bg-purple-100/10 rounded-full blur-[120px] pointer-events-none" />
-      </section>
-
+      <MainHeaderES />
+      <HeroSectionES />
       {/* Workflows Section */}
       <section className="pt-32 pb-32 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
@@ -271,11 +137,8 @@ export default function Home({ params: { lang } }: HomeProps) {
             {/* Right Column - Platform Preview */}
             <div className="flex-1">
               <div className="flex justify-start pt-16">
-                <motion.div
+                <div
                   className="relative max-w-[480px]"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.3 }}
                 >
                   <div className="relative z-20">
                     <div className="h-[400px] overflow-y-hidden w-[660px] -ml-[90px] relative">
@@ -291,7 +154,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full
                       bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -352,9 +215,7 @@ export default function Home({ params: { lang } }: HomeProps) {
             {/* Right Column - Platform Preview */}
             <div className="flex-1 flex items-center justify-center overflow-hidden">
               <div className="relative w-[220%] -mr-[2%] -ml-[2%]">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
+                <div
                   className="relative"
                 >
                   <div className="scale-[0.78] origin-center transform">
@@ -362,7 +223,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                   </div>
                   <div className="absolute top-0 right-0 h-full w-[15%] 
                     bg-gradient-to-r from-transparent via-[#FAFAFA]/50 to-[#FAFAFA]" />
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -380,39 +241,27 @@ export default function Home({ params: { lang } }: HomeProps) {
             {/* Left Column - Text Content */}
             <div className="flex-1">
               <div className="sticky top-24">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6"
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm mb-6"
                 >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
                   Asistente 24/7
-                </motion.div>
+                </div>
                 
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
+                <h2
                   className="text-4xl font-normal text-[#131F42] mb-6 tracking-tight"
                 >
                   Tu experto en cross-border
                   <span className="block font-medium">e-commerce siempre disponible</span>
-                </motion.h2>
+                </h2>
                 
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
+                <p
                   className="text-xl text-gray-600 mb-8"
                 >
                   Pregunta cualquier duda sobre comercio internacional. Tu agente Exbordia tiene las respuestas que necesitas para expandir tu negocio.
-                </motion.p>
+                </p>
 
                 <Link 
                   href="/casos-de-uso"
@@ -425,11 +274,7 @@ export default function Home({ params: { lang } }: HomeProps) {
             </div>
 
             {/* Right Column - Chat Interface con animaciones mejoradas */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
+            <div
               className="flex-1 flex items-center justify-center"
             >
               <div className="w-full max-w-xl relative">
@@ -439,11 +284,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                 
                 <div className="bg-white rounded-2xl shadow-[0_8px_32px_rgba(19,31,66,0.08)] p-8 md:p-10 space-y-8 relative">
                   {/* Chat Messages */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
+                  <div
                     className="space-y-6"
                   >
                     {/* Usuario */}
@@ -498,7 +339,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                     </div>
 
                     {/* ... resto de los mensajes con el mismo estilo ... */}
-                  </motion.div>
+                  </div>
 
                   {/* Input Area */}
                   <div className="mt-10 pt-8 border-t border-gray-200">
@@ -514,7 +355,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -573,10 +414,7 @@ export default function Home({ params: { lang } }: HomeProps) {
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div 
             className="text-center mb-24"
           >
             <h2 className="text-4xl font-normal text-[#131F42] mt-4 mb-6 tracking-tight">
@@ -585,7 +423,7 @@ export default function Home({ params: { lang } }: HomeProps) {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               En solo tres pasos podrás empezar a vender tus productos en mercados internacionales
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Línea conectora */}
@@ -593,12 +431,8 @@ export default function Home({ params: { lang } }: HomeProps) {
               -translate-y-1/2 hidden md:block" />
 
             {steps.map((step, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
                 className="relative group"
               >
                 <div className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(19,31,66,0.06)] hover:shadow-[0_8px_30px_rgba(19,31,66,0.12)] 
@@ -627,7 +461,7 @@ export default function Home({ params: { lang } }: HomeProps) {
                 {/* Decorative gradient */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#131F42]/5 to-[#2563eb]/5 rounded-2xl 
                   opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -637,116 +471,7 @@ export default function Home({ params: { lang } }: HomeProps) {
       <FAQSection />
 
       {/* Footer */}
-      <footer className="bg-[#131F42] text-white py-16">
-        <div className="container mx-auto px-4">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {/* Column 1 - Platform */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Platforma</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
-                    Iniciar sesión
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2 - Use Cases */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Casos de Uso</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/casos-de-uso" className="text-gray-300 hover:text-white transition-colors">
-                    Investigación de mercados
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/casos-de-uso#marketplaces" className="text-gray-300 hover:text-white transition-colors">
-                    Marketplaces
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/casos-de-uso#shopify-markets" className="text-gray-300 hover:text-white transition-colors">
-                    Shopify Markets
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3 - Resources */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Recursos</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link 
-                    href="/precios"  className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    Precios
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="mailto: info@exbordia.com" className="text-gray-300 hover:text-white transition-colors">
-                    Soporte
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4 - Contact */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium mb-4">Contacto</h3>
-              <div className="space-y-3">
-                <p className="text-gray-300">
-                  <a href="mailto:info@exbordia.com" className="hover:text-white transition-colors">
-                    info@exbordia.com
-                  </a>
-                </p>
-                <div className="flex space-x-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-white transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Logo and Copyright */}
-          <div className="border-t border-gray-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-8">
-                <Image 
-                  src="/exbordia-logo.png" 
-                  alt="Exbordia Logo" 
-                  width={140} 
-                  height={40}
-                  className="brightness-0 invert object-contain"
-                />
-                <p className="text-sm text-gray-300">
-                  © {new Date().getFullYear()} Exbordia. Todos los derechos reservados.
-                </p>
-              </div>
-              <div className="flex space-x-6">
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Términos y Condiciones
-                </a>
-                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-                  Política de Privacidad
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <FooterES lang={lang} />
     </main>
   )
 }

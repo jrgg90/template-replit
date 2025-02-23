@@ -1,48 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { LoginButton } from "@/components/auth/login-button"
-import { useTranslation } from "@/app/i18n/client"
-import { Language } from "@/types"
+import { routes } from "@/config/routes"
+import { useState } from "react"
 
-interface MainHeaderProps {
-  lang: Language
-}
-
-export function MainHeader({ lang }: MainHeaderProps) {
+export function MainHeaderEN() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { t, i18n } = useTranslation('common')
-  
-  // Asegurarnos que i18n use el idioma correcto
-  useEffect(() => {
-    if (i18n.language !== lang) {
-      i18n.changeLanguage(lang)
-    }
-  }, [lang, i18n])
-
-  // Agregar temporalmente para debug
-  console.log('MainHeader language:', lang)
-  console.log('Translation test:', t('header.navigation.blog'))
-
-  // Definir las rutas directamente según el idioma
-  const getBlogPath = (lang: Language) => {
-    return lang === 'es' ? '/es/blog-es' : '/en/blog-en'
-  }
-
-  const getUseCasesPath = (lang: Language) => {
-    return lang === 'es' ? '/es/casos-de-uso' : '/en/use-cases'
-  }
-
-  const getPricingPath = (lang: Language) => {
-    return lang === 'es' ? '/es/precios' : '/en/pricing'
-  }
-
-  const getHomePath = (lang: Language) => {
-    return lang === 'es' ? '/es/inicio' : '/en/home'
-  }
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
@@ -50,7 +16,7 @@ export function MainHeader({ lang }: MainHeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href={getHomePath(lang)}>
+            <Link href={routes.en.home}>
               <Image 
                 src="/exbordia-logo.png" 
                 alt="Exbordia Logo" 
@@ -68,8 +34,8 @@ export function MainHeader({ lang }: MainHeaderProps) {
               asChild
               className="text-[#131F42] font-light"
             >
-              <Link href={getBlogPath(lang)}>
-                {t('header.navigation.blog')}
+              <Link href={routes.en.blog}>
+                Blog
               </Link>
             </Button>
             <Button 
@@ -77,8 +43,8 @@ export function MainHeader({ lang }: MainHeaderProps) {
               asChild
               className="text-[#131F42] font-light"
             >
-              <Link href={getUseCasesPath(lang)}>
-                {t('header.navigation.useCases')}
+              <Link href={routes.en.useCases}>
+                Use Cases
               </Link>
             </Button>
             <Button 
@@ -86,18 +52,18 @@ export function MainHeader({ lang }: MainHeaderProps) {
               asChild
               className="text-[#131F42] font-light"
             >
-              <Link href={getPricingPath(lang)}>
-                {t('header.navigation.pricing')}
+              <Link href={routes.en.pricing}>
+                Pricing
               </Link>
             </Button>
-            <LoginButton lang={lang} />
+            <LoginButton lang="en" />
             <Link
               href="https://tally.so/r/mYx0b0"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
-                {t('header.navigation.requestInfo')}
+                Request Info
               </Button>
             </Link>
           </div>
@@ -126,27 +92,27 @@ export function MainHeader({ lang }: MainHeaderProps) {
         <div className="md:hidden bg-white border-b">
           <div className="container mx-auto px-4 py-4 space-y-4">
             <Link 
-              href={getBlogPath(lang)}
+              href={routes.en.blog}
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('header.navigation.blog')}
+              Blog
             </Link>
             <Link 
-              href={getUseCasesPath(lang)}
+              href={routes.en.useCases}
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('header.navigation.useCases')}
+              Use Cases
             </Link>
             <Link 
-              href={getPricingPath(lang)}
+              href={routes.en.pricing}
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('header.navigation.pricing')}
+              Pricing
             </Link>
-            <LoginButton lang={lang} />
+            <LoginButton lang="en" />
             <Link
               href="https://tally.so/r/mYx0b0"
               target="_blank"
@@ -155,7 +121,7 @@ export function MainHeader({ lang }: MainHeaderProps) {
               onClick={() => setIsMenuOpen(false)}
             >
               <Button className="w-full bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px]">
-                {t('header.navigation.requestInfo')}
+                Request Info
               </Button>
             </Link>
           </div>

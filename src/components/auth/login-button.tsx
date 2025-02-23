@@ -1,9 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { useState } from "react"
 import { LoginDialog } from "@/components/auth/login-dialog"
-import { useState, useEffect } from "react"
-import { useTranslation } from "@/app/i18n/client"
 import { Language } from "@/types"
 
 interface LoginButtonProps {
@@ -11,27 +9,21 @@ interface LoginButtonProps {
 }
 
 export function LoginButton({ lang }: LoginButtonProps) {
-  const [open, setOpen] = useState(false)
-  const { t, i18n } = useTranslation('common')
-
-  useEffect(() => {
-    if (i18n.language !== lang) {
-      i18n.changeLanguage(lang)
-    }
-  }, [lang, i18n])
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
-      <Button 
-        variant="ghost" 
-        className="text-[#131F42] font-light"
-        onClick={() => setOpen(true)}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="text-gray-600 hover:text-gray-900 transition-colors"
       >
-        {t('header.navigation.login')}
-      </Button>
+        {lang === 'es' ? 'Iniciar sesión' : 'Login'}
+      </button>
+
       <LoginDialog 
-        open={open} 
-        onOpenChange={setOpen}
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        lang={lang}
       />
     </>
   )

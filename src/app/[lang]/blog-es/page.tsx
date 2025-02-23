@@ -1,10 +1,10 @@
 "use client"
 
-import { MainHeader } from "@/components/layout/MainHeader"
+import { MainHeaderES } from "@/components/layout/MainHeaderES"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { Footer } from "@/components/layout/Footer"
+import { FooterES } from "@/components/layout/FooterES"
 import { Language } from "@/types"
 
 interface BlogEsProps {
@@ -16,7 +16,7 @@ interface BlogEsProps {
 export default function BlogEs({ params }: BlogEsProps) {
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader lang={params.lang} />
+      <MainHeaderES />
       
       {/* Hero Section */}
       <section className="relative pt-44 pb-8">
@@ -151,7 +151,7 @@ export default function BlogEs({ params }: BlogEsProps) {
       </section>
 
       {/* Footer */}
-      <Footer lang={params.lang} />
+      <FooterES lang={params.lang} />
     </main>
   )
 } 

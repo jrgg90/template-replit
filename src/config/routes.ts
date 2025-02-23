@@ -1,15 +1,10 @@
 export type Language = 'es' | 'en';
 
-type Routes = {
-  [key in Language]: {
-    home: string;
-    useCases: string;
-    pricing: string;
-    blog: string;
-  }
-}
-
-export const routes: Routes = {
+export const routes = {
+  home: {
+    es: '/inicio',
+    en: '/home'
+  },
   es: {
     home: '/es',
     useCases: '/es/casos-de-uso',
@@ -22,7 +17,9 @@ export const routes: Routes = {
     pricing: '/en/pricing',
     blog: '/en/blog-en'
   }
-}
+} as const;
+
+export type Routes = typeof routes;
 
 export const getHomeRoute = (lang: Language) => {
   return lang === 'en' ? routes.en.home : routes.es.home
