@@ -1,26 +1,27 @@
 'use client'
 
-import { BlogPost } from '@/types/blog'
 import { BlogCard } from './BlogCard'
 import { useSearchParams } from 'next/navigation'
+import type { BlogPost } from '@/types/blog'
 import { BlogPagination } from './BlogPagination'
 import { useTranslation } from 'react-i18next'
+import type { Language } from '@/types'
 
-const POSTS_PER_PAGE = 6
+const POSTS_PER_PAGE = 9
 
 interface BlogGridProps {
-  initialPosts: BlogPost[]
-  lang: string
+  posts: BlogPost[]
+  lang: Language
 }
 
-export function BlogGrid({ initialPosts, lang }: BlogGridProps) {
+export function BlogGrid({ posts, lang }: BlogGridProps) {
   const { t } = useTranslation('blog')
   const searchParams = useSearchParams()
   const searchTerm = searchParams.get('q')?.toLowerCase()
   const currentPage = Number(searchParams.get('page')) || 1
   
   // Filtrar posts
-  let filteredPosts = initialPosts
+  let filteredPosts = posts
 
   if (searchTerm) {
     filteredPosts = filteredPosts.filter(post => 
@@ -47,7 +48,11 @@ export function BlogGrid({ initialPosts, lang }: BlogGridProps) {
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {paginatedPosts.map((post) => (
-          <BlogCard key={post.id} post={post} />
+          <BlogCard 
+            key={post.id} 
+            post={post} 
+            lang={lang}
+          />
         ))}
       </div>
 

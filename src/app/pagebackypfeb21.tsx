@@ -10,7 +10,7 @@ import { LoginDialog } from "@/components/auth/login-dialog"
 import { LoginButton } from "@/components/auth/login-button"
 import { CTA } from "@/components/layout/call-to-action"
 import { FAQSection } from "@/components/layout/faq-section"
-import { MainHeader } from "@/components/layout/MainHeader"
+import { MainHeaderES } from "@/components/layout/MainHeaderES"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects"
@@ -85,7 +85,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <MainHeader />
+      <MainHeaderES />
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-start pt-44 overflow-hidden">
         {/* Background Gradient */}

@@ -1,16 +1,22 @@
-import { MainHeader } from '@/components/layout/MainHeader'
+import { MainHeaderES } from '@/components/layout/MainHeaderES'
 import { getPostBySlug } from '@/lib/blog'
 import { markdownToHtml } from '@/lib/markdown'
 import { BlogContent } from '@/components/blog/BlogContent'
+import { FooterES } from "@/components/layout/FooterES"
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { Language } from "@/types"
+import { Metadata } from 'next'
 
-export default async function BlogPostPage({
-  params
-}: {
-  params: { slug: string }
-}) {
+interface BlogPostPageProps {
+  params: {
+    slug: string
+    lang: Language
+  }
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getPostBySlug(params.slug)
   
   if (!post) {
@@ -20,35 +26,35 @@ export default async function BlogPostPage({
   const contentHtml = await markdownToHtml(post.content)
 
   return (
-    <div className="min-h-screen bg-white">
-      <MainHeader />
+    <main className="min-h-screen bg-white">
+      <MainHeaderES />
       
-      <main className="container mx-auto px-4 py-24">
-        <div className="max-w-3xl mx-auto">
-          <Link
-            href="/blog"
-            className="flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            <span>Volver al blog</span>
-          </Link>
+      <article className="container mx-auto px-4 py-24 max-w-3xl">
+        <Link
+          href={`/${params.lang}/blog-es`}
+          className="flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          <span>Volver al blog</span>
+        </Link>
 
-          <BlogContent post={{ ...post, contentHtml }} />
+        <BlogContent post={{ ...post, contentHtml }} />
+      </article>
 
-          {/* Newsletter Subscription */}
-          <section className="mt-16 bg-gradient-to-br from-[#131F42] to-[#1c2b5d] 
-            rounded-2xl p-8 lg:p-12 text-white">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-2xl font-medium mb-4">
-                ¿Te interesa exportar a Estados Unidos?
-              </h2>
-              <p className="text-gray-300">
-                Mándanos un correo electrónico a <a href="mailto:info@exbordia.com" className="text-white">info@exbordia.com</a>
-              </p>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
+      <FooterES lang={params.lang} />
+    </main>
   )
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const post = await getPostBySlug(params.slug)
+  
+  if (!post) {
+    return {}
+  }
+
+  return {
+    title: `${post.title} | Exbordia Blog`,
+    description: post.excerpt,
+  }
 } 

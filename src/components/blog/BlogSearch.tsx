@@ -34,7 +34,7 @@ export function BlogSearch({ lang }: BlogSearchProps) {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder={t('search.placeholder')}
+        placeholder={t('Search')}
         className="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 
           focus:border-[#131F42] focus:ring-1 focus:ring-[#131F42] 
           transition-colors text-base"

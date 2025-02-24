@@ -1,17 +1,21 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { BlogPost } from '@/types/blog'
+import Image from 'next/image'
 import { Clock } from 'lucide-react'
+import type { BlogPost } from '@/types/blog'
+import type { Language } from '@/types'
 
 interface BlogCardProps {
   post: BlogPost
+  lang: Language
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, lang }: BlogCardProps) {
+  const blogPath = lang === 'es' ? 'blog-es' : 'blog-en'
+  
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link href={`/${lang}/${blogPath}/${post.slug}`}>
       <article className="group h-[420px] flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
         {/* Image Container - Fixed Height */}
         <div className="relative h-48 w-full">
