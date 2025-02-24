@@ -12,6 +12,10 @@ interface FooterProps {
 export function FooterES({ lang }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
+  // Obtener la ruta actual y convertirla a la versión en inglés
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
+  const enPath = currentPath.replace('/es/', '/en/')
+
   return (
     <footer className="bg-[#131F42] text-white py-16">
       <div className="container mx-auto px-4">
@@ -107,6 +111,20 @@ export function FooterES({ lang }: FooterProps) {
                   </svg>
                 </a>
               </div>
+            </div>
+          </div>
+
+          {/* Agregar el selector de idioma al final de la última columna */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium mb-4">Idioma</h3>
+            <div className="flex items-center space-x-4">
+              <Link 
+                href={enPath}
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                EN
+              </Link>
+              <span className="text-white font-medium">ES</span>
             </div>
           </div>
         </div>
