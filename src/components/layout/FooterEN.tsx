@@ -5,6 +5,9 @@ import Image from "next/image"
 import { routes } from "@/config/routes"
 import { Language } from "@/types"
 import { usePathname } from 'next/navigation'
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { LoginModal } from "@/components/auth/LoginModal"
 
 interface FooterProps {
   lang: Language
@@ -13,6 +16,7 @@ interface FooterProps {
 export function FooterEN({ lang }: FooterProps) {
   const currentYear = new Date().getFullYear()
   const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
   
   // Mapear las rutas de inglés a español
   const getSpanishPath = () => {
@@ -34,9 +38,13 @@ export function FooterEN({ lang }: FooterProps) {
             <h3 className="text-lg font-medium mb-4">Platform</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
+                <Button 
+                  variant="ghost"
+                  onClick={() => setIsOpen(true)}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Login
-                </Link>
+                </Button>
               </li>
             </ul>
           </div>
@@ -164,6 +172,11 @@ export function FooterEN({ lang }: FooterProps) {
           </div>
         </div>
       </div>
+
+      <LoginModal 
+        open={isOpen} 
+        onClose={() => setIsOpen(false)}
+      />
     </footer>
   )
 } 

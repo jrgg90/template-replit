@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { User as FirebaseUser, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useRouter, usePathname } from 'next/navigation';
 
 interface AuthContextType {
   user: FirebaseUser | null;
@@ -18,18 +19,28 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
+      
+      // Si el usuario está autenticado y estamos en una ruta de login, redirigir
+      if (user && pathname?.includes('/login')) {
+        router.replace('/onboarding');
+      }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [router, pathname]);
 
   const signIn = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    if (userCredential.user) {
+      router.replace('/onboarding');
+    }
   };
 
   const signInWithGoogle = async () => {

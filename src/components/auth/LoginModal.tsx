@@ -16,17 +16,22 @@ interface LoginModalProps {
 export function LoginModal({ open, onClose }: LoginModalProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { signIn } = useAuth()
+  const { signIn, redirectToApp } = useAuth()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError('')
+    
     try {
       await signIn(email, password)
       onClose()
+      redirectToApp()
     } catch (error) {
       console.error('Error signing in:', error)
+      setError('Credenciales incorrectas. Por favor, verifica tus datos.')
     } finally {
       setLoading(false)
     }

@@ -4,6 +4,9 @@ import Link from "next/link"
 import Image from "next/image"
 import { routes } from "@/config/routes"
 import { Language } from "@/types"
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { LoginModal } from "@/components/auth/LoginModal"
 
 interface FooterProps {
   lang: Language
@@ -11,6 +14,7 @@ interface FooterProps {
 
 export function FooterES({ lang }: FooterProps) {
   const currentYear = new Date().getFullYear()
+  const [isOpen, setIsOpen] = useState(false)
 
   // Obtener la ruta actual y convertirla a la versión en inglés
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
@@ -25,9 +29,13 @@ export function FooterES({ lang }: FooterProps) {
             <h3 className="text-lg font-medium mb-4">Plataforma</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
-                  Iniciar sesión
-                </Link>
+                <Button 
+                  variant="ghost"
+                  onClick={() => setIsOpen(true)}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Iniciar Sesión
+                </Button>
               </li>
             </ul>
           </div>
@@ -155,6 +163,11 @@ export function FooterES({ lang }: FooterProps) {
           </div>
         </div>
       </div>
+
+      <LoginModal 
+        open={isOpen} 
+        onClose={() => setIsOpen(false)}
+      />
     </footer>
   )
 } 

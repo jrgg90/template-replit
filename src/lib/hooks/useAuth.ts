@@ -14,7 +14,7 @@ export function useAuth() {
 
   const redirectToApp = () => {
     console.log('Redirecting to onboarding...');
-    router.push('/onboarding');
+    router.replace('/onboarding');
   };
 
   return {
