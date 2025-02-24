@@ -1,160 +1,31 @@
-"use client"
-
-import { MainHeaderEN } from "@/components/layout/MainHeaderEN"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { FooterEN } from "@/components/layout/FooterEN"
+import { BlogPageClientEN } from "@/components/blog/blog-page-client-en"
+import { getAllPosts } from "@/lib/blog"
 import { Language } from "@/types"
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
-interface BlogEnProps {
+interface BlogPageProps {
   params: {
     lang: Language
   }
 }
 
-export default function BlogEn({ params }: BlogEnProps) {
-  const router = useRouter()
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  if (!isClient) {
-    return null // O un loading state
+export default async function BlogPage({ params }: BlogPageProps) {
+  // Remover el filtro de idioma para mostrar todos los posts
+  const posts = await getAllPosts()
+  
+  if (!posts || posts.length === 0) {
+    console.log('No posts found')
   }
 
   return (
-    <main className="min-h-screen bg-white">
-      <MainHeaderEN />
-      
-      {/* Hero Section */}
-      <section className="relative pt-44 pb-8">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-[800px] mx-auto mb-20">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]">
-              <span className="block text-[#1A1A2E] font-light tracking-tight">
-                Our
-              </span>
-              <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
-                font-medium tracking-tight pb-3">
-                Blog
-              </span>
-            </h1>
-
-            <p className="text-xl text-gray-600 max-w-[600px] mx-auto">
-              Discover the latest trends, tips and best practices
-              for expanding your business to the US market
-            </p>
-          </div>
-        </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-40 -left-20 w-72 h-72 bg-blue-100/10 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-0 -right-20 w-72 h-72 bg-purple-100/10 rounded-full blur-[120px] -z-10" />
-      </section>
-
-      {/* Blog Grid Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Article 1 */}
-            <motion.article 
-              className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Link href="/en/blog-en/export-guide-usa">
-                <Image
-                  src="/blog/export-guide.jpg"
-                  alt="Export Guide"
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold mb-3 text-[#1A1A2E]">
-                    Complete Guide: How to Export to the United States
-                  </h2>
-                  <p className="text-gray-600 mb-4">
-                    Everything you need to know to start exporting your products to the US market.
-                  </p>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span>10 min read</span>
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
-
-            {/* Article 2 */}
-            <motion.article 
-              className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <Link href="/en/blog-en/us-marketplaces">
-                <Image
-                  src="/blog/marketplaces.jpg"
-                  alt="US Marketplaces"
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold mb-3 text-[#1A1A2E]">
-                    The Best Marketplaces in the United States
-                  </h2>
-                  <p className="text-gray-600 mb-4">
-                    Comparative analysis of the main online selling platforms in the US.
-                  </p>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span>8 min read</span>
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
-
-            {/* Article 3 */}
-            <motion.article 
-              className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <Link href="/en/blog-en/customs-regulations">
-                <Image
-                  src="/blog/regulations.jpg"
-                  alt="Customs Regulations"
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold mb-3 text-[#1A1A2E]">
-                    Customs Regulations: What You Need to Know
-                  </h2>
-                  <p className="text-gray-600 mb-4">
-                    Practical guide on regulations and documentation needed for exporting.
-                  </p>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span>12 min read</span>
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <FooterEN lang={params.lang} />
-    </main>
+    <BlogPageClientEN
+      initialPosts={posts}
+      lang={params.lang}
+    />
   )
 }
+
+export const metadata = {
+  title: 'Blog | Exbordia',
+  description: 'Discover the latest trends, tips and best practices to expand your business to the global market.',
+} 

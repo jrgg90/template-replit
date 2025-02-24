@@ -45,9 +45,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/es/inicio', request.url));
   }
 
-  // Manejar la redirección específica del blog
+  // Manejar las redirecciones específicas del blog
   if (pathname === '/es/blog') {
     return NextResponse.redirect(new URL('/es/blog-es', request.url));
+  }
+  if (pathname === '/en/blog') {
+    return NextResponse.redirect(new URL('/en/blog-en', request.url));
   }
 
   // Si la ruta ya tiene un idioma válido, permitir la navegación
