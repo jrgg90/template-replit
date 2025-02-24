@@ -9,7 +9,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Language } from "@/types"
 import { getLocalizedPath } from "@/config/routes"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // Definimos los planes y precios
 const PAYMENT_FREQUENCIES = ["mensual", "anual"]
@@ -129,6 +129,16 @@ const FAQS = [
 ]
 
 export default function PricingPage({ params }: PricingProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
+
   return (
     <main className="min-h-screen bg-white">
       <MainHeaderES />

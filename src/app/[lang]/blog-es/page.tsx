@@ -1,6 +1,7 @@
 import { BlogPageClient } from "@/components/blog/blog-page-client"
 import { getAllPosts } from "@/lib/blog"
 import { Language } from "@/types"
+import { notFound } from 'next/navigation'
 
 interface BlogPageProps {
   params: {
@@ -9,8 +10,12 @@ interface BlogPageProps {
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  // Obtener todos los posts en español
+  // Verificar que estamos en la ruta correcta y que existen posts
   const posts = await getAllPosts('es')
+  
+  if (!posts || posts.length === 0) {
+    console.log('No se encontraron posts')
+  }
 
   return (
     <BlogPageClient 

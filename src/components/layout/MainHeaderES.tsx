@@ -34,7 +34,7 @@ export function MainHeaderES() {
               asChild
               className="text-[#131F42] font-light"
             >
-              <Link href={routes.es.blog}>
+              <Link href="/es/blog-es">
                 Blog
               </Link>
             </Button>
@@ -92,7 +92,7 @@ export function MainHeaderES() {
         <div className="md:hidden bg-white border-b">
           <div className="container mx-auto px-4 py-4 space-y-4">
             <Link 
-              href={routes.es.blog}
+              href="/es/blog-es"
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
               onClick={() => setIsMenuOpen(false)}
             >

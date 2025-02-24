@@ -27,8 +27,6 @@ export function middleware(request: NextRequest) {
 
   // Verificar si es una ruta protegida
   if (protectedRoutes.some(route => pathname.startsWith(route))) {
-    // Aquí iría la lógica de autenticación
-    // Por ahora solo redirigimos a login
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
@@ -42,13 +40,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Redirigir la raíz a /es/inicio
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/es/inicio', request.url));
+  }
+
+  // Manejar la redirección específica del blog
+  if (pathname === '/es/blog') {
+    return NextResponse.redirect(new URL('/es/blog-es', request.url));
+  }
+
   // Si la ruta ya tiene un idioma válido, permitir la navegación
   if (languages.some(lang => pathname.startsWith(`/${lang}`))) {
     return NextResponse.next();
   }
 
   // Si la ruta no tiene idioma, agregar el idioma preferido
-  const preferredLang = getPreferredLang(request)
+  const preferredLang = getPreferredLang(request);
   return NextResponse.redirect(new URL(`/${preferredLang}${pathname}`, request.url));
 }
 

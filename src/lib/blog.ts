@@ -14,36 +14,49 @@ export function getBlogImagePath(imageName: string) {
 }
 
 export async function getAllPosts(lang: string = 'es'): Promise<BlogPost[]> {
-  const fileNames = fs.readdirSync(postsDirectory)
-  
-  return fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map(fileName => {
-      const fullPath = path.join(postsDirectory, fileName)
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
-      
-      return {
-        id: fileName.replace(/\.md$/, ''),
-        slug: fileName.replace(/\.md$/, ''),
-        content,
-        title: data.title,
-        excerpt: data.excerpt,
-        coverImage: data.coverImage,
-        readingTime: data.readingTime,
-        tag: data.tag,
-        language: data.language || 'es',
-        date: data.date || '',
-        author: data.author || 'Equipo Exbordia',
-        metadata: {
+  try {
+    const fileNames = fs.readdirSync(postsDirectory)
+    console.log('Archivos encontrados:', fileNames)
+    
+    if (!fileNames.length) {
+      console.log('No se encontraron archivos en:', postsDirectory)
+      return []
+    }
+
+    const posts = fileNames
+      .filter(fileName => fileName.endsWith('.md'))
+      .map(fileName => {
+        const fullPath = path.join(postsDirectory, fileName)
+        const fileContents = fs.readFileSync(fullPath, 'utf8')
+        const { data, content } = matter(fileContents)
+        
+        return {
+          id: fileName.replace(/\.md$/, ''),
+          slug: fileName.replace(/\.md$/, ''),
+          content,
+          title: data.title || 'Sin título',
+          excerpt: data.excerpt || '',
+          coverImage: data.coverImage || '/default-cover.jpg',
+          readingTime: data.readingTime || '5 min',
+          tag: data.tag || 'General',
+          language: data.language || 'es',
+          date: data.date || new Date().toISOString(),
           author: data.author || 'Equipo Exbordia',
-          date: data.date || '',
-          tags: data.tags || []
-        },
-        translations: data.translations || {}
-      }
-    })
-    .filter(post => post.language === lang)
+          metadata: {
+            author: data.author || 'Equipo Exbordia',
+            date: data.date || new Date().toISOString(),
+            tags: data.tags || []
+          }
+        }
+      })
+      .filter(post => post.language === lang)
+
+    console.log(`Posts encontrados para idioma ${lang}:`, posts.length)
+    return posts
+  } catch (error) {
+    console.error('Error al obtener posts:', error)
+    return []
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
