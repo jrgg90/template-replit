@@ -8,6 +8,20 @@ type Language = typeof languages[number];
 // Rutas protegidas que requieren autenticación
 const protectedRoutes = ['/onboarding', '/dashboard'];
 
+// Función para obtener el idioma preferido del navegador
+const getPreferredLang = (request: NextRequest): Language => {
+  const acceptLanguage = request.headers.get('accept-language')
+  
+  if (acceptLanguage) {
+    // Si el header contiene 'es' o empieza con 'es-', usar español
+    if (acceptLanguage.includes('es') || acceptLanguage.startsWith('es-')) {
+      return 'es'
+    }
+  }
+  // Para cualquier otro caso, usar inglés
+  return 'en'
+}
+
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -33,8 +47,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Si la ruta no tiene idioma, agregar /es al inicio
-  return NextResponse.redirect(new URL(`/es${pathname}`, request.url));
+  // Si la ruta no tiene idioma, agregar el idioma preferido
+  const preferredLang = getPreferredLang(request)
+  return NextResponse.redirect(new URL(`/${preferredLang}${pathname}`, request.url));
 }
 
 export const config = {
