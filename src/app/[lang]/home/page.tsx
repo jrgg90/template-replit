@@ -1,27 +1,22 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
-import { FAQSectionEN } from "@/components/layout/faq-sectionEN"
-import { MainHeaderEN } from "@/components/layout/MainHeaderEN"
+import { Button } from "@/components/ui/button"
+import { LoginButton } from "@/components/auth/login-button"
 import { motion } from "framer-motion"
 import { PartnersCarousel } from "@/components/ui/partners-carousel"
 import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
 import { LocaleParams } from "@/types"
-import { FooterEN } from "@/components/layout/FooterEN"
-import { HeroSectionEN } from "@/components/layout/HeroSectionEN"
 import { routes } from "@/config/routes"
-
-// Mantener solo las versiones dinámicas
-const AnimatedBackgroundWithNoSSR = dynamic(
-  () => import('@/components/ui/animated-background').then(mod => mod.default),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-[120px] bg-gray-50 animate-pulse rounded-xl" />
-    )
-  }
-)
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 const WorkflowDiagramWithNoSSR = dynamic(
   () => import('@/components/workflows/workflow-diagram').then(mod => mod.default),
@@ -44,9 +39,19 @@ const MarketFinderPreviewWithNoSSR = dynamic(
 )
 
 export default function Home({ params: { lang } }: LocaleParams) {
-  // Solo redirigir si estamos en la página incorrecta
-  if (lang === 'es') {
-    redirect(routes.home.es)
+  const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (lang === 'es') {
+      router.replace(routes.home.es)
+    }
+    setIsClient(true)
+  }, [lang, router])
+
+  if (!isClient) {
+    return null // O un loading state
   }
 
   const steps = [
@@ -82,10 +87,332 @@ export default function Home({ params: { lang } }: LocaleParams) {
     }
   ];
 
+  const faqs = [
+    {
+      question: "¿Necesito experiencia en comercio internacional para usar Exbordia?",
+      answer: "No, Exbordia automatiza todo el proceso por ti. No necesitas conocimientos previos ni experiencia en exportación."
+    },
+    {
+      question: "¿En qué países funciona Exbordia?",
+      answer: "Exbordia te ayuda a vender en EE.UU., Canadá, LATAM, Europa y otros mercados con demanda para tu producto."
+    },
+    {
+      question: "¿Cuánto tiempo toma empezar a vender con Exbordia?",
+      answer: "Puedes empezar en minutos. Conéctalo a tu tienda y Exbordia comenzará a trabajar de inmediato."
+    },
+    {
+      question: "¿Necesito conocimientos técnicos o de código para usar Exbordia?",
+      answer: "No, Exbordia es 100% plug & play. Se integra con tu e-commerce sin configuraciones complicadas"
+    },
+    {
+      question: "¿Qué hace Exbordia diferente a una agencia de marketing o consultoría?",
+      answer: "A diferencia de las agencias, Exbordia no solo asesora, sino que actúa en tiempo real. Gracias a su base de datos actualizada y a sus partnerships globales, Exbordia identifica oportunidades, optimiza listings y gestiona regulaciones más rápido y con mayor precisión, permitiéndote expandirte sin fricción."
+    },
+  ]
+
   return (
     <main className="min-h-screen bg-white">
-      <MainHeaderEN />
-      <HeroSectionEN />
+      {/* Header */}
+      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
+        <nav className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <Link href={routes.en.home}>
+                <Image 
+                  src="/exbordia-logo.png" 
+                  alt="Exbordia Logo" 
+                  width={140} 
+                  height={40}
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                asChild
+                className="text-[#131F42] font-light"
+              >
+                <Link href={routes.en.blog}>
+                  Blog
+                </Link>
+              </Button>
+              <Button 
+                variant="ghost" 
+                asChild
+                className="text-[#131F42] font-light"
+              >
+                <Link href={routes.en.useCases}>
+                  Use Cases
+                </Link>
+              </Button>
+              <Button 
+                variant="ghost" 
+                asChild
+                className="text-[#131F42] font-light"
+              >
+                <Link href={routes.en.pricing}>
+                  Pricing
+                </Link>
+              </Button>
+              <LoginButton lang="en" />
+              <Link
+                href="https://tally.so/r/mYx0b0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px] px-8">
+                  Request Info
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span className="sr-only">Open menu</span>
+              {isMenuOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-b">
+            <div className="container mx-auto px-4 py-4 space-y-4">
+              <Link 
+                href={routes.en.blog}
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
+                href={routes.en.useCases}
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Use Cases
+              </Link>
+              <Link 
+                href={routes.en.pricing}
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <LoginButton lang="en" />
+              <Link
+                href="https://tally.so/r/mYx0b0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Button className="w-full bg-[#131F42] text-white hover:bg-[#1c2b5d] rounded-[50px]">
+                  Request Info
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex flex-col items-center justify-start pt-44 overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-white pointer-events-none" />
+        
+        <div className="container relative mx-auto px-4 pb-32">
+          {/* Text Content */}
+          <div className="text-center max-w-[720px] mx-auto mb-12">
+            {!isClient ? (
+              // Versión estática para SSR
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]">
+                <span className="block text-[#1A1A2E] font-light tracking-tight">
+                  Take your{' '}
+                  <span className="md:inline hidden">online</span>
+                  <span className="md:hidden inline">online</span>
+                </span>
+                <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
+                  font-medium tracking-tight pb-3">
+                  store to global markets
+                </span>
+              </h1>
+            ) : (
+              // Versión animada para cliente
+              <motion.h1 
+                className="text-5xl md:text-6xl lg:text-7xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <span className="block text-[#1A1A2E] font-light tracking-tight">
+                  Take your{' '}
+                  <span className="md:inline hidden">online</span>
+                  <span className="md:hidden inline">online</span>
+                </span>
+                <span className="bg-gradient-to-r from-[#0A84FF] via-[#2E5C9E] to-[#0A84FF] text-transparent bg-clip-text
+                  font-medium tracking-tight pb-3">
+                  store to global markets
+                </span>
+              </motion.h1>
+            )}
+
+            {!isClient ? (
+              <p className="text-xl md:text-2xl text-gray-600 max-w-[600px] mx-auto mb-12 leading-relaxed relative z-10">
+                With <span className="font-bold text-gray-900">AI Agents</span> that will sell your products worldwide. Easy!
+              </p>
+            ) : (
+              <motion.p 
+                className="text-xl md:text-2xl text-gray-600 max-w-[600px] mx-auto mb-12 leading-relaxed relative z-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                With <span className="font-bold text-gray-900">AI Agents</span> that will sell your products worldwide. Easy!
+              </motion.p>
+            )}
+
+            {!isClient ? (
+              <div>
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <button className="group relative inline-flex items-center justify-center px-12 py-4 text-lg
+                    bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300
+                    hover:shadow-[0_8px_40px_rgba(10,132,255,0.22)] hover:scale-105">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 
+                      group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="relative flex items-center gap-2">
+                      Start Today
+                      <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <Link 
+                  href="https://tally.so/r/mYx0b0"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <button className="group relative inline-flex items-center justify-center px-12 py-4 text-lg
+                    bg-[#131F42] text-white rounded-full overflow-hidden transition-all duration-300
+                    hover:shadow-[0_8px_40px_rgba(10,132,255,0.22)] hover:scale-105">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 
+                      group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="relative flex items-center gap-2">
+                      Start Today
+                      <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </button>
+                </Link>
+              </motion.div>
+            )}
+          </div>
+
+          {/* Platform Image */}
+          {!isClient ? (
+            <div className="relative max-w-[1200px] mx-auto">
+              <div className="relative z-20">
+                <Image
+                  src="/asistente2.png"
+                  alt="Exbordia Platform Interface"
+                  width={1400}
+                  height={900}
+                  priority
+                  className="w-full h-auto rounded-xl shadow-[0_20px_50px_rgba(8,112,184,0.12)]"
+                />
+              </div>
+            </div>
+          ) : (
+            <motion.div
+              className="relative max-w-[1200px] mx-auto"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <motion.div
+                animate={{ 
+                  y: [0, 15, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
+                className="relative z-20"
+              >
+                <Image
+                  src="/asistente2.png"
+                  alt="Exbordia Platform Interface"
+                  width={1400}
+                  height={900}
+                  priority
+                  className="w-full h-auto rounded-xl shadow-[0_20px_50px_rgba(8,112,184,0.12)]"
+                />
+              </motion.div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -inset-[10%] -z-10">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full
+                  bg-gradient-to-r from-blue-100/5 via-purple-100/10 to-blue-100/5 rounded-full blur-3xl" />
+              </div>
+            </motion.div>
+          )}
+
+          {/* Partners Carousel */}
+          <div className="mt-8">
+            {!isClient ? (
+              <p className="text-center text-gray-500 text-lg mb-6">
+                The agent works with any platform
+              </p>
+            ) : (
+              <motion.p 
+                className="text-center text-gray-500 text-lg mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                The agent works with any platform
+              </motion.p>
+            )}
+            <PartnersCarousel />
+          </div>
+        </div>
+
+        {/* Decorative Circles */}
+        <div className="absolute top-40 left-20 w-72 h-72 bg-blue-100/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-purple-100/10 rounded-full blur-[120px] pointer-events-none" />
+      </section>
 
       {/* Workflows Section */}
       <section className="pt-32 pb-32 bg-white">
@@ -504,10 +831,159 @@ export default function Home({ params: { lang } }: LocaleParams) {
       </section>
 
       {/* FAQ Section */}
-      <FAQSectionEN />
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-normal text-[#131F42] mb-6 tracking-tight">
+              Preguntas <span className="font-light">Frecuentes</span>
+            </h2>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            {faqs.map((faq, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`}
+                className="border rounded-lg px-6 bg-gray-50/50"
+              >
+                <AccordionTrigger className="text-left text-base font-medium text-[#131F42] py-6">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-600 pb-6">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
 
       {/* Footer */}
-      <FooterEN lang={lang} />
+      <footer className="bg-[#131F42] text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Column 1 - Platform */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium mb-4">Platform</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/login" className="text-gray-300 hover:text-white transition-colors">
+                    Login
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2 - Use Cases */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium mb-4">Use Cases</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link 
+                    href={routes.en.useCases}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Market Research
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href={routes.en.useCases}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Marketplaces
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href={routes.en.useCases}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Shopify Markets
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3 - Resources */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium mb-4">Resources</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link 
+                    href={routes.en.pricing}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href={routes.en.blog}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    href="mailto:info@exbordia.com"
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4 - Contact */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium mb-4">Contact</h3>
+              <div className="space-y-3">
+                <p className="text-gray-300">
+                  <a href="mailto:info@exbordia.com" className="hover:text-white transition-colors">
+                    info@exbordia.com
+                  </a>
+                </p>
+                <div className="flex space-x-4">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
+                    className="text-gray-300 hover:text-white transition-colors">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Logo and Copyright */}
+          <div className="border-t border-gray-700 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex items-center gap-8">
+                <Image 
+                  src="/exbordia-logo.png" 
+                  alt="Exbordia Logo" 
+                  width={140} 
+                  height={40}
+                  className="brightness-0 invert object-contain"
+                />
+                <p className="text-sm text-gray-300">
+                  © {new Date().getFullYear()} Exbordia. All rights reserved.
+                </p>
+              </div>
+              <div className="flex space-x-6">
+                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+                  Terms & Conditions
+                </a>
+                <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }

@@ -1,13 +1,16 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { FAQSection } from "@/components/layout/faq-section"
 import { MainHeaderES } from "@/components/layout/MainHeaderES"
 import dynamic from 'next/dynamic'
-import { redirect } from 'next/navigation'
-import { Language, LocaleParams } from "@/types"
+import { LocaleParams } from "@/types"
 import { FooterES } from "@/components/layout/FooterES"
 import { routes } from "@/config/routes"
 import { HeroSectionES } from '@/components/layout/HeroSectionES'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 // Mantener solo las versiones dinámicas
 const AnimatedBackgroundWithNoSSR = dynamic(
@@ -41,9 +44,18 @@ const MarketFinderPreviewWithNoSSR = dynamic(
 )
 
 export default function Home({ params: { lang } }: LocaleParams) {
-  // Solo redirigir si estamos en la página incorrecta
-  if (lang === 'en') {
-    redirect(routes.home.en)
+  const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    if (lang === 'en') {
+      router.replace(routes.home.en)
+    }
+    setIsClient(true)
+  }, [lang, router])
+
+  if (!isClient) {
+    return null // O un loading state
   }
 
   const steps = [
