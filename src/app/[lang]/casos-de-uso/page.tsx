@@ -11,14 +11,26 @@ import { MarketplacesAnalysis } from "@/components/sandbox/marketplaces/marketpl
 import { WorkflowDiagram } from "@/components/ui/workflow-diagram"
 import { Language } from "@/types"
 import { FooterES } from "@/components/layout/FooterES"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { routes } from "@/config/routes"
 
-interface UseCasesProps {
+interface CasosDeUsoProps {
   params: {
     lang: Language
   }
 }
 
-export default function CasosDeUso({ params }: UseCasesProps) {
+export default function CasosDeUso({ params }: CasosDeUsoProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Redirigir si estamos en el idioma incorrecto
+    if (params.lang !== 'es') {
+      router.push(routes.en.useCases)
+    }
+  }, [params.lang, router])
+
   return (
     <main className="min-h-screen bg-white">
       <MainHeaderES />

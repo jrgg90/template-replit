@@ -15,7 +15,7 @@ export function LoginButton({ lang }: LoginButtonProps) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-gray-600 hover:text-gray-900 transition-colors"
+        className="text-[#131F42] font-light hover:text-gray-900 transition-colors"
       >
         {lang === 'es' ? 'Iniciar sesión' : 'Login'}
       </button>

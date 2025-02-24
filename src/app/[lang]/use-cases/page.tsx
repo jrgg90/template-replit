@@ -34,12 +34,7 @@ export default function UseCases({ params }: UseCasesProps) {
       <section className="relative pt-44 pb-8">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-[800px] mx-auto mb-20">
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 relative z-10 flex flex-col gap-2 leading-[1.15]">
               <span className="block text-[#1A1A2E] font-light tracking-tight">
                 Automate your international expansion with
               </span>
@@ -47,16 +42,11 @@ export default function UseCases({ params }: UseCasesProps) {
                 font-medium tracking-tight pb-3">
                 intelligent workflows
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p 
-              className="text-xl text-gray-600 max-w-[600px] mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+            <p className="text-xl text-gray-600 max-w-[600px] mx-auto">
               Set up automated workflows to manage your international operations efficiently and scalably.
-            </motion.p>
+            </p>
           </div>
         </div>
 
@@ -68,14 +58,9 @@ export default function UseCases({ params }: UseCasesProps) {
       {/* Workflow Diagram Section */}
       <section className="hidden md:block py-8">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-7xl mx-auto"
-          >
+          <div className="max-w-7xl mx-auto">
             <WorkflowDiagram />
-          </motion.div>
+          </div>
         </div>
       </section>
 
