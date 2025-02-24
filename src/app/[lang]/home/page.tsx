@@ -89,24 +89,24 @@ export default function Home({ params: { lang } }: LocaleParams) {
 
   const faqs = [
     {
-      question: "¿Necesito experiencia en comercio internacional para usar Exbordia?",
-      answer: "No, Exbordia automatiza todo el proceso por ti. No necesitas conocimientos previos ni experiencia en exportación."
+      question: "Do I need experience in international trade to use Exbordia?",
+      answer: "No, Exbordia automates the entire process for you. You don't need previous knowledge or experience in export."
     },
     {
-      question: "¿En qué países funciona Exbordia?",
-      answer: "Exbordia te ayuda a vender en EE.UU., Canadá, LATAM, Europa y otros mercados con demanda para tu producto."
+      question: "What countries does Exbordia work in?",
+      answer: "Exbordia helps you sell in the U.S., Canada, LATAM, Europe, and other markets with demand for your product."
     },
     {
-      question: "¿Cuánto tiempo toma empezar a vender con Exbordia?",
-      answer: "Puedes empezar en minutos. Conéctalo a tu tienda y Exbordia comenzará a trabajar de inmediato."
+      question: "How long does it take to start selling with Exbordia?",
+      answer: "You can start in minutes. Connect it to your store and Exbordia will start working immediately."
     },
     {
-      question: "¿Necesito conocimientos técnicos o de código para usar Exbordia?",
-      answer: "No, Exbordia es 100% plug & play. Se integra con tu e-commerce sin configuraciones complicadas"
+      question: "Do I need technical or coding knowledge to use Exbordia?",
+      answer: "No, Exbordia is 100% plug & play. It integrates with your e-commerce without complicated configurations."
     },
     {
-      question: "¿Qué hace Exbordia diferente a una agencia de marketing o consultoría?",
-      answer: "A diferencia de las agencias, Exbordia no solo asesora, sino que actúa en tiempo real. Gracias a su base de datos actualizada y a sus partnerships globales, Exbordia identifica oportunidades, optimiza listings y gestiona regulaciones más rápido y con mayor precisión, permitiéndote expandirte sin fricción."
+      question: "What makes Exbordia different from a marketing agency or consultancy?",
+      answer: "Unlike agencies, Exbordia not only advises but also acts in real time. Thanks to its updated database and its global partnerships, Exbordia identifies opportunities, optimizes listings, and manages regulations faster and more accurately, allowing you to expand without friction."
     },
   ]
 
@@ -835,7 +835,7 @@ export default function Home({ params: { lang } }: LocaleParams) {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-normal text-[#131F42] mb-6 tracking-tight">
-              Preguntas <span className="font-light">Frecuentes</span>
+              Frequent <span className="font-light">Questions</span>
             </h2>
           </div>
 

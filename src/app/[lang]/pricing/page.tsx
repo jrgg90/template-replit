@@ -134,24 +134,17 @@ export default function Pricing({ params }: PricingProps) {
 
   useEffect(() => {
     setIsClient(true)
-  }, [])
-
-  if (!isClient) {
-    return null // O un loading state
-  }
-
-  useEffect(() => {
+    
     // Forzar la ruta correcta basada en el idioma
     const correctPath = params.lang === 'es' ? '/es/precios' : '/en/pricing'
-    if (window.location.pathname !== correctPath) {
+    if (typeof window !== 'undefined' && window.location.pathname !== correctPath) {
       router.replace(correctPath)
     }
   }, [params.lang, router])
 
-  useEffect(() => {
-    console.log('Current language:', params.lang);
-    console.log('Current path:', window.location.pathname);
-  }, [params.lang]);
+  if (!isClient) {
+    return null // O un loading state
+  }
 
   return (
     <main className="min-h-screen bg-white">

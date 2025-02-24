@@ -1,5 +1,31 @@
 import { Language } from "@/types"
 
+// Metadata estática en inglés
+const siteMetadata = {
+  title: 'Exbordia',
+  description: 'Your international trade assistant powered by AI. Expand your e-commerce globally with automated market research, product optimization, and regulatory compliance.',
+  keywords: 'export, ecommerce, United States, logistics, marketplaces, Artificial Intelligence, international trade, global markets',
+  openGraph: {
+    title: 'Exbordia - Expand your online store to new markets',
+    description: 'Connect with Exbordia and grow your e-commerce. Discover markets, position your products and start selling internationally today.',
+    url: 'https://www.exbordia.com',
+    siteName: 'Exbordia',
+    images: [
+      {
+        url: '/exbordia-logo-white.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Exbordia - AI-Powered International Trade',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  icons: {
+    icon: '/snippet.ico',
+  },
+}
+
 export default function RootLayout({
   children,
   params: { lang }
@@ -22,4 +48,9 @@ export default function RootLayout({
 // Generar los parámetros estáticos para las rutas
 export async function generateStaticParams() {
   return [{ lang: 'es' }, { lang: 'en' }]
+}
+
+// Generar metadata
+export async function generateMetadata() {
+  return siteMetadata
 } 

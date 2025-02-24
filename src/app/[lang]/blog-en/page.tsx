@@ -6,6 +6,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { FooterEN } from "@/components/layout/FooterEN"
 import { Language } from "@/types"
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface BlogEnProps {
   params: {
@@ -14,6 +16,17 @@ interface BlogEnProps {
 }
 
 export default function BlogEn({ params }: BlogEnProps) {
+  const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null // O un loading state
+  }
+
   return (
     <main className="min-h-screen bg-white">
       <MainHeaderEN />
