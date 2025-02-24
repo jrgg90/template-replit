@@ -112,7 +112,6 @@ export function MainHeaderES() {
             >
               Precios
             </Link>
-            <LoginButton lang="es" />
             <Link
               href="https://tally.so/r/mYx0b0"
               target="_blank"

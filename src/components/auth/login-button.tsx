@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { LoginDialog } from "@/components/auth/login-dialog"
 import { Language } from "@/types"
+import { Button } from "@/components/ui/button"
 
 interface LoginButtonProps {
   lang: Language
@@ -13,12 +14,13 @@ export function LoginButton({ lang }: LoginButtonProps) {
 
   return (
     <>
-      <button
+      <Button 
+        variant="ghost"
         onClick={() => setIsOpen(true)}
-        className="text-[#131F42] font-light hover:text-gray-900 transition-colors"
+        className="text-[#131F42] font-light"
       >
-        {lang === 'es' ? 'Iniciar sesión' : 'Login'}
-      </button>
+        {lang === 'es' ? 'Iniciar Sesión' : 'Login'}
+      </Button>
 
       <LoginDialog 
         isOpen={isOpen} 

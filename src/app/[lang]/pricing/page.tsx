@@ -130,6 +130,15 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function Pricing({ params }: PricingProps) {
   const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null // O un loading state
+  }
 
   useEffect(() => {
     // Forzar la ruta correcta basada en el idioma
