@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { PricingCard, type PricingTier } from "@/components/pricing/pricing-card"
-import { PricingTab } from "@/components/pricing/pricing-tab"
+import { PricingCard, type PricingTier } from "@/components/layout/pricing/pricing-card"
+import { PricingTab } from "@/components/layout/pricing/pricing-tab"
 import { Language } from "@/types"
 
 interface PricingSectionProps {

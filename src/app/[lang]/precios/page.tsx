@@ -1,8 +1,8 @@
 "use client"
 
 import { MainHeaderES } from "@/components/layout/MainHeaderES"
-import { PricingSection } from "@/components/pricing/pricing-section"
-import { MarketOpportunitySection } from "@/components/pricing/market-opportunity-section"
+import { PricingSection } from "@/components/layout/pricing/pricing-section"
+import { MarketOpportunitySection } from "@/components/layout/pricing/market-opportunity-section"
 import { FooterES } from "@/components/layout/FooterES"
 import { motion } from "framer-motion"
 import Link from "next/link"

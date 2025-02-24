@@ -1,8 +1,8 @@
 "use client"
 
 import { MainHeaderEN } from "@/components/layout/MainHeaderEN"
-import { PricingSection } from "@/components/pricing/pricing-section"
-import { MarketOpportunitySection } from "@/components/pricing/market-opportunity-section"
+import { PricingSection } from "@/components/layout/pricing/pricing-section"
+import { MarketOpportunitySectionEN } from "@/components/layout/pricing/market-opportunity-sectionEN"
 import { FooterEN } from "@/components/layout/FooterEN"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -211,7 +211,7 @@ export default function Pricing({ params }: PricingProps) {
       </section>
 
       {/* Market Opportunity Section */}
-      <MarketOpportunitySection />
+      <MarketOpportunitySectionEN />
 
       {/* Footer */}
       <FooterEN lang={params.lang} />
