@@ -59,6 +59,11 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
+            {error && (
+              <div className="p-4 text-sm text-red-600 bg-red-50 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="space-y-6">
               <Input
                 type="email"
