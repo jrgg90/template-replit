@@ -1,8 +1,9 @@
 import { Language } from "@/types"
+import { AuthProvider } from "@/lib/contexts/AuthContext"
 
 // Metadata estática en inglés
 const siteMetadata = {
-  title: 'Exbordia',
+  title: 'Exbordia - Your International Trade Assistant',
   description: 'Your international trade assistant powered by AI. Expand your e-commerce globally with automated market research, product optimization, and regulatory compliance.',
   keywords: 'export, ecommerce, United States, logistics, marketplaces, Artificial Intelligence, international trade, global markets',
   openGraph: {
@@ -39,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang={validLang}>
       <body>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

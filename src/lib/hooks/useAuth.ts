@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '../contexts/AuthContext';
 
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext);
   const router = useRouter();
 
@@ -21,4 +21,4 @@ export const useAuth = () => {
     ...context,
     redirectToApp,
   };
-};
+}

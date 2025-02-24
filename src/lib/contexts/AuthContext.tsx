@@ -1,88 +1,54 @@
 "use client";
 
-import React, { createContext, useEffect, useState, useContext, ReactNode } from "react";
+import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { User as FirebaseUser, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "../firebase/firebase";
-import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from "firebase/auth";
 
 interface AuthContextType {
   user: FirebaseUser | null;
   loading: boolean;
-  signInWithGoogle: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
-  error: string | null;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
-        // Get and store the token
-        const token = await user.getIdToken();
-        document.cookie = `token=${token}; path=/`;
-      } else {
-        setUser(null);
-        // Clear the token
-        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [router]);
-
-  const signInWithGoogle = async () => {
-    try {
-      await firebaseSignInWithGoogle();
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
-      throw error;
-    }
-  };
+  }, []);
 
   const signIn = async (email: string, password: string) => {
-    try {
-      setError(null);
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const token = await userCredential.user.getIdToken();
-      document.cookie = `token=${token}; path=/`;
-    } catch (error: any) {
-      console.error('Error signing in:', error);
-      setError(error.message || 'Failed to sign in');
-      throw error;
-    }
+    await signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signInWithGoogle = async () => {
+    await firebaseSignInWithGoogle();
   };
 
   const signOut = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-      throw error;
-    }
+    await auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signIn, signOut, error }}>
+    <AuthContext.Provider value={{
+      user,
+      loading,
+      signIn,
+      signInWithGoogle,
+      signOut,
+    }}>
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 }

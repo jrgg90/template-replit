@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { LoginDialog } from "@/components/auth/login-dialog"
+import { LoginModal } from "@/components/auth/LoginModal"
 import { Language } from "@/types"
 import { Button } from "@/components/ui/button"
 
@@ -22,10 +22,9 @@ export function LoginButton({ lang }: LoginButtonProps) {
         {lang === 'es' ? 'Iniciar Sesión' : 'Login'}
       </Button>
 
-      <LoginDialog 
-        isOpen={isOpen} 
+      <LoginModal 
+        open={isOpen} 
         onClose={() => setIsOpen(false)}
-        lang={lang}
       />
     </>
   )

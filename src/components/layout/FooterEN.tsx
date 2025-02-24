@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { routes } from "@/config/routes"
 import { Language } from "@/types"
+import { usePathname } from 'next/navigation'
 
 interface FooterProps {
   lang: Language
@@ -11,8 +12,18 @@ interface FooterProps {
 
 export function FooterEN({ lang }: FooterProps) {
   const currentYear = new Date().getFullYear()
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-  const esPath = currentPath.replace('/en/', '/es/')
+  const pathname = usePathname()
+  
+  // Mapear las rutas de inglés a español
+  const getSpanishPath = () => {
+    if (pathname.includes('/blog-en')) return '/es/blog-es'
+    if (pathname.includes('/home')) return '/es/inicio'
+    if (pathname.includes('/use-cases')) return '/es/casos-de-uso'
+    if (pathname.includes('/pricing')) return '/es/precios'
+    return '/es/inicio' // fallback a inicio
+  }
+
+  const esPath = getSpanishPath()
 
   return (
     <footer className="bg-[#131F42] text-white py-16">
@@ -112,7 +123,7 @@ export function FooterEN({ lang }: FooterProps) {
             </div>
           </div>
 
-          {/* Agregar el selector de idioma al final de la última columna */}
+          {/* Selector de idioma */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium mb-4">Language</h3>
             <div className="flex items-center space-x-4">

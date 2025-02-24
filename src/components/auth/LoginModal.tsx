@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { useAuth } from "@/lib/hooks/useAuth"
 import { Loader2 } from "lucide-react"
+import Image from "next/image"
 
 interface LoginModalProps {
   open: boolean
@@ -37,10 +38,12 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
         <div className="p-10 space-y-10">
           {/* Logo y Título */}
           <div className="text-center space-y-3">
-            <img 
-              src="/logo.svg" 
+            <Image 
+              src="/exbordia-logo.png" 
               alt="Exbordia" 
-              className="h-10 mx-auto mb-8"
+              width={140}
+              height={40}
+              className="mx-auto mb-8"
             />
             <h2 className="text-3xl font-light text-[#131F42]">
               Bienvenido a Exbordia
@@ -52,27 +55,23 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-6">
-              <div className="space-y-2">
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 text-base px-4 border-gray-200 rounded-lg"
-                  required
-                />
-              </div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-14 text-base px-4 border-gray-200 rounded-lg"
+                required
+              />
 
-              <div className="space-y-2">
-                <Input
-                  type="password"
-                  placeholder="Contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-14 text-base px-4 border-gray-200 rounded-lg"
-                  required
-                />
-              </div>
+              <Input
+                type="password"
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-14 text-base px-4 border-gray-200 rounded-lg"
+                required
+              />
             </div>
 
             <Button
@@ -96,11 +95,9 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
             <p className="text-gray-600 text-base">
               ¿No tienes acceso?{' '}
               <a 
-                href="#" 
-                onClick={(e) => {
-                  e.preventDefault()
-                  // Aquí puedes agregar la lógica para solicitar acceso
-                }}
+                href="https://tally.so/r/mYx0b0"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#131F42] hover:text-[#1c2b5d] font-medium"
               >
                 Solicitar acceso
