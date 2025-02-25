@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { db, storage } from '@/lib/firebase'
 import { doc, getDoc, deleteDoc, collection, getDocs } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
@@ -41,11 +41,7 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState<string | null>(null)
 
-  useEffect(() => {
-    loadFiles()
-  }, [userId])
-
-  const loadFiles = async () => {
+  const loadFiles = useCallback(async () => {
     try {
       const filesCollection = collection(db, "product_files", userId, "files")
       const filesSnapshot = await getDocs(filesCollection)
@@ -67,7 +63,11 @@ export function UploadedFiles({ userId, onReload }: UploadedFilesProps) {
       setLoading(false)
       onReload?.()
     }
-  }
+  }, [userId, onReload])
+
+  useEffect(() => {
+    loadFiles()
+  }, [loadFiles])
 
   const handleDelete = async (file: UploadedFile) => {
     console.log('Attempting to delete file:', {

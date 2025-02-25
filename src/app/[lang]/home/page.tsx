@@ -91,7 +91,7 @@ export default function Home({ params: { lang } }: LocaleParams) {
   const faqs = [
     {
       question: "Do I need experience in international trade to use Exbordia?",
-      answer: "No, Exbordia automates the entire process for you. You don't need previous knowledge or experience in export."
+      answer: "No, Exbordia automates the entire process for you. You don&apos;t need previous knowledge or experience in export."
     },
     {
       question: "What countries does Exbordia work in?",
@@ -675,7 +675,7 @@ export default function Home({ params: { lang } }: LocaleParams) {
                       </div>
                       <div className="flex-1">
                         <div className="bg-blue-50 rounded-2xl rounded-tl-none px-6 py-5 shadow-sm">
-                          <p className="text-gray-700 font-medium mb-3">I'll help you with that. For Shopify, you need to:</p>
+                          <p className="text-gray-700 font-medium mb-3">I&apos;ll help you with that. For Shopify, you need to:</p>
                           <ul className="space-y-3 text-gray-700">
                             <li className="flex items-start gap-3">
                               <span className="text-blue-600 mt-1.5 text-lg">•</span>
@@ -690,7 +690,7 @@ export default function Home({ params: { lang } }: LocaleParams) {
                               <span>Enable automatic tax calculation</span>
                             </li>
                           </ul>
-                          <p className="mt-4 text-gray-700">Let's go to Shopify and set it up together.</p>
+                          <p className="mt-4 text-gray-700">Let&apos;s go to Shopify and set it up together.</p>
                         </div>
                       </div>
                     </div>

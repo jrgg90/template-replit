@@ -130,7 +130,7 @@ export default function ProductListingsPage() {
           Tus Marketplaces y Product Listings
         </h1>
         <p className="text-lg text-gray-600 leading-relaxed">
-          Administra Tus marketplaces globales y optimiza tus productos para cada mercado.
+          Administra tus marketplaces globales y optimiza tus productos para cada mercado.
         </p>
       </div>
 

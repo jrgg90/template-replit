@@ -67,13 +67,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Si la ruta no tiene idioma y no está en la lista de exclusión, agregar el idioma preferido
-  const preferredLang = getPreferredLang(request);
-  const response = NextResponse.redirect(new URL(`/${preferredLang}${pathname}`, request.url));
-  
-  // Asegurar que la respuesta sea limpia
-  response.headers.set('x-middleware-cache', 'no-cache');
-  return response;
+  // Agregar un catch-all para rutas no encontradas
+  if (!hasValidLang && !pathname.startsWith('/api/')) {
+    const preferredLang = getPreferredLang(request);
+    return NextResponse.redirect(new URL(`/${preferredLang}${pathname}`, request.url));
+  }
 }
 
 export const config = {
