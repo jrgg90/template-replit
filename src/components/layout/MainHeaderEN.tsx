@@ -6,9 +6,24 @@ import { Button } from "@/components/ui/button"
 import { LoginButton } from "@/components/auth/login-button"
 import { routes } from "@/config/routes"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 
 export function MainHeaderEN() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  const getSpanishRoute = () => {
+    switch (pathname) {
+      case routes.en.blog:
+        return routes.es.blog
+      case routes.en.useCases:
+        return routes.es.useCases
+      case routes.en.pricing:
+        return routes.es.pricing
+      default:
+        return routes.es.home
+    }
+  }
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b">
@@ -29,6 +44,27 @@ export function MainHeaderEN() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-1 text-[#131F42] font-light">
+              <Button 
+                variant="ghost" 
+                asChild
+                className="text-[#131F42] font-bold"
+              >
+                <Link href={routes.en.home}>
+                  🇺🇸
+                </Link>
+              </Button>
+              <span>/</span>
+              <Button 
+                variant="ghost" 
+                asChild
+                className="text-[#131F42] font-light"
+              >
+                <Link href={getSpanishRoute()}>
+                  🇲🇽
+                </Link>
+              </Button>
+            </div>
             <Button 
               variant="ghost" 
               asChild
@@ -91,6 +127,23 @@ export function MainHeaderEN() {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b">
           <div className="container mx-auto px-4 py-4 space-y-4">
+            <div className="flex items-center gap-1 px-4 py-2">
+              <Link 
+                href={routes.en.home}
+                className="font-bold text-gray-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                🇺🇸
+              </Link>
+              <span>/</span>
+              <Link 
+                href={getSpanishRoute()}
+                className="text-gray-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                🇲🇽
+              </Link>
+            </div>
             <Link 
               href={routes.en.blog}
               className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
