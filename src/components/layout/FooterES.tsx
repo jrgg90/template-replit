@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { routes } from "@/config/routes"
+import { routes, getLocalizedPath } from "@/config/routes"
 import { Language } from "@/types"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -18,7 +18,14 @@ export function FooterES({ lang }: FooterProps) {
 
   // Obtener la ruta actual y convertirla a la versión en inglés
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-  const enPath = currentPath.replace('/es/', '/en/')
+  const pathWithoutLang = currentPath.replace('/es/', '/')
+  const enPath = getLocalizedPath(pathWithoutLang, 'en')
+
+  console.log({
+    currentPath,
+    pathWithoutLang,
+    enPath
+  });
 
   return (
     <footer className="bg-[#131F42] text-white py-16">
